@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yutzu Chen — Product Manager</title>
+  <meta name="description" content="Yutzu Chen — Product Manager with 5+ years across Taiwan and Germany. User research, data-driven decisions, AI workflows." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+  /* ─── Tokens ─────────────────────────────────────────────── */
+  :root {
+    --bg0:      #faf9f7;   /* hero */
+    --bg1:      #f6f2ec;   /* about */
+    --bg2:      #faf9f7;   /* work */
+    --bg3:      #f3efea;   /* experience */
+    --bg4:      #f7f4ef;   /* creator */
+    --bg5:      #f3efea;   /* contact */
+    --surface:  #ffffff;
+    --border:   #e6dfd5;
+    --border-l: #ede8e0;
+    --text:     #26211d;
+    --muted:    #7c7168;
+    --light:    #b2a89e;
+
+    --sage:     #7a9e8e;
+    --sage-l:   #cce0d8;
+    --sage-xl:  #edf5f2;
+    --rose:     #bc7e7e;
+    --rose-l:   #f0d5d5;
+    --rose-xl:  #fdf2f2;
+    --sand:     #c4a47a;
+    --sand-l:   #ecdcc4;
+    --sand-xl:  #fdf8f1;
+    --lav:      #9485c0;
+    --lav-l:    #d8d2f0;
+    --lav-xl:   #f5f3fc;
+
+    --ff-serif: 'Fraunces', Georgia, serif;
+    --ff-sans:  'Inter', system-ui, sans-serif;
+    --r-sm: 8px; --r-md: 16px; --r-lg: 24px; --r-xl: 40px;
+    --sh-sm: 0 1px 6px rgba(0,0,0,.05);
+    --sh-md: 0 4px 24px rgba(0,0,0,.08);
+    --sh-lg: 0 16px 56px rgba(0,0,0,.10);
+    --ease: 0.28s cubic-bezier(.4,0,.2,1);
+    --spring: 0.4s cubic-bezier(.34,1.56,.64,1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--ff-sans);
+    background: var(--bg0);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    cursor: none;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  button { cursor: none; font-family: inherit; border: none; background: none; }
+  section { padding: 100px 0; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+  h1,h2,h3,h4 { font-family: var(--ff-serif); font-weight: 400; line-height: 1.15; }
+  .label { font-size: 10.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .sec-title { font-size: clamp(28px,4vw,44px); margin-bottom: 14px; }
+  .sec-sub { font-size: 15px; color: var(--muted); max-width: 540px; line-height: 1.75; }
+
+  /* ─── Custom cursor ──────────────────────────────────────── */
+  #c-dot, #c-ring {
+    position: fixed; top: 0; left: 0; border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+  }
+  #c-dot  { width: 6px; height: 6px; background: var(--text); transition: background .2s; }
+  #c-ring { width: 36px; height: 36px; border: 1.5px solid rgba(38,33,29,.25); transition: width .3s, height .3s, border-color .3s; }
+  body.hov #c-ring { width: 52px; height: 52px; border-color: var(--sage); }
+  body.hov #c-dot  { background: var(--sage); }
+
+  /* Sparkle trail */
+  .sparkle {
+    position: fixed; pointer-events: none; z-index: 9998;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--sage-l); opacity: .7;
+    transform: translate(-50%,-50%);
+    animation: sparkFade .6s ease forwards;
+  }
+  @keyframes sparkFade { to { opacity: 0; transform: translate(-50%,-50%) scale(0); } }
+
+  /* ─── Scroll progress ────────────────────────────────────── */
+  #prog { position: fixed; top: 0; left: 0; height: 2px; background: var(--sage); z-index: 1001; width: 0%; }
+
+  /* ─── Nav ────────────────────────────────────────────────── */
+  #nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: 64px; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 28px;
+    transition: background var(--ease), box-shadow var(--ease);
+  }
+  #nav.on { background: rgba(250,249,247,.90); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--border); }
+  .nav-logo { font-family: var(--ff-serif); font-size: 20px; transition: transform var(--spring); }
+  .nav-logo:hover { transform: rotate(-3deg) scale(1.08); }
+  .nav-logo span { color: var(--sage); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--muted);
+    transition: color var(--ease); position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0;
+    width: 0; height: 1px; background: var(--text); transition: width var(--ease);
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    font-size: 13px; font-weight: 500; background: var(--text);
+    color: #fff !important; padding: 8px 20px; border-radius: 99px;
+    transition: opacity var(--ease) !important;
+  }
+  .nav-cta::after { display: none !important; }
+  .nav-cta:hover { opacity: .75; }
+  .nav-burger { display: none; flex-direction: column; gap: 5px; width: 28px; }
+  .nav-burger span { display: block; height: 2px; background: var(--text); border-radius: 2px; }
+  .nav-mobile {
+    display: none; position: fixed; inset: 0; z-index: 999; background: var(--bg0);
+    flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+  }
+  .nav-mobile.open { display: flex; }
+  .nav-mobile a { font-family: var(--ff-serif); font-size: 30px; color: var(--text); }
+  .nav-mobile-close { position: absolute; top: 20px; right: 24px; font-size: 28px; color: var(--muted); }
+
+  /* ─── Hero ───────────────────────────────────────────────── */
+  #hero {
+    min-height: 100svh; display: flex; flex-direction: column;
+    justify-content: center; padding: 100px 0 80px;
+    background: var(--bg0); position: relative; overflow: hidden;
+  }
+  .blob {
+    position: absolute; border-radius: 50%; filter: blur(72px);
+    opacity: .48; pointer-events: none; will-change: transform;
+  }
+  .blob1 { width: 520px; height: 520px; background: var(--sage-l);  top: -140px; right: -60px; }
+  .blob2 { width: 380px; height: 380px; background: var(--rose-l);  bottom: 40px; left: -120px; }
+  .blob3 { width: 280px; height: 280px; background: var(--sand-l);  top: 36%; right: 18%; }
+
+  .hero-inner {
+    position: relative; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--sage-xl); border: 1px solid var(--sage-l);
+    color: var(--sage); font-size: 11px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 99px; margin-bottom: 20px;
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); animation: blink 2.4s ease infinite; }
+  @keyframes blink { 0%,100%{opacity:1}50%{opacity:.2} }
+  .hero-role { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .hero-name { font-size: clamp(44px,6.5vw,76px); line-height: 1.02; letter-spacing: -.025em; margin-bottom: 24px; }
+  .hero-name em { font-style: italic; color: var(--sage); }
+  .hero-statement { font-size: clamp(16px,2vw,19px); color: var(--text); margin-bottom: 10px; line-height: 1.55; min-height: 2.8em; }
+  #typed-text { border-right: 2px solid var(--sage); padding-right: 2px; }
+  .hero-sub { font-size: 15px; color: var(--muted); max-width: 420px; line-height: 1.8; margin-bottom: 36px; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 26px; border-radius: 99px; font-size: 14px;
+    font-weight: 500; transition: all var(--ease); position: relative; overflow: hidden;
+  }
+  .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .btn-primary { background: var(--text); color: #fff; }
+  .btn-primary:hover { box-shadow: var(--sh-md); transform: translateY(-1px); }
+  .btn-outline { border: 1.5px solid var(--border); color: var(--text); background: var(--surface); }
+  .btn-outline:hover { border-color: var(--text); transform: translateY(-1px); box-shadow: var(--sh-sm); }
+  .btn-ghost { color: var(--muted); padding-left: 0; }
+  .btn-ghost:hover { color: var(--text); }
+
+  /* Hero interest card */
+  .hero-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r-lg); padding: 28px; box-shadow: var(--sh-lg);
+    transform-style: preserve-3d; transition: transform .1s ease;
+    will-change: transform;
+  }
+  .card-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .card-bar-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .live-dot { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--sage); font-weight: 600; }
+  .live-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--sage); animation: blink 2.4s ease infinite; }
+  .vgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 18px; }
+  .v-tab {
+    padding: 10px 12px; border-radius: var(--r-sm);
+    border: 1.5px solid var(--border); font-size: 11.5px; font-weight: 500;
+    text-align: left; transition: all var(--ease);
+    background: var(--bg0); color: var(--muted); line-height: 1.35;
+  }
+  .v-tab:hover { border-color: var(--sage); color: var(--text); }
+  .v-tab.active { border-color: var(--sage); background: var(--sage-xl); color: var(--text); }
+  .v-result {
+    background: var(--bg1); border-radius: var(--r-sm); padding: 14px;
+    font-size: 13px; color: var(--muted); line-height: 1.65;
+    min-height: 78px; border: 1px solid var(--border-l); transition: all .3s ease;
+  }
+  .v-result strong { color: var(--text); display: block; margin-bottom: 4px; }
+  .float-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+  .ftag {
+    font-size: 11px; font-weight: 500; padding: 4px 12px;
+    border-radius: 99px; background: var(--bg0); border: 1px solid var(--border);
+    color: var(--muted); animation: floatY 4s ease-in-out infinite;
+  }
+  .ftag:nth-child(2n) { animation-delay: .7s; }
+  .ftag:nth-child(3n) { animation-delay: 1.4s; }
+  .ftag:nth-child(4n) { animation-delay: 2.1s; }
+  @keyframes floatY { 0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)} }
+
+  /* ─── About ──────────────────────────────────────────────── */
+  #about { background: var(--bg1); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .about-text p { color: var(--muted); font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+  .about-text p strong { color: var(--text); font-weight: 600; }
+  .about-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .about-chip {
+    font-size: 12px; font-weight: 500; padding: 7px 16px; border-radius: 99px;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--muted); transition: all var(--spring);
+    display: flex; align-items: center; gap: 7px;
+  }
+  .about-chip svg { width: 13px; height: 13px; flex-shrink: 0; }
+  .about-chip:hover { transform: scale(1.06) rotate(-1deg); border-color: var(--sage); color: var(--text); }
+  .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .a-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r-md); padding: 22px;
+    transition: transform var(--spring), box-shadow var(--ease);
+    position: relative; overflow: hidden;
+  }
+  .a-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent, var(--sage)); }
+  .a-card:hover { transform: translateY(-4px) rotate(.4deg); box-shadow: var(--sh-md); }
+  .a-card.sage { --accent: var(--sage); }
+  .a-card.rose { --accent: var(--rose); }
+  .a-card.sand { --accent: var(--sand); }
+  .a-card.lav  { --accent: var(--lav);  }
+  .a-card-icon { margin-bottom: 12px; }
+  .a-card-icon svg { width: 20px; height: 20px; color: var(--accent, var(--sage)); }
+  .a-card h4 { font-family: var(--ff-sans); font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .a-card p  { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+  /* ─── How I Work + Case Studies ─────────────────────────── */
+  #work { background: var(--bg2); }
+  .work-approach {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 32px 0 48px;
+  }
+  .approach-card {
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: var(--r-md); padding: 20px; text-align: left;
+    transition: all var(--spring); position: relative;
+  }
+  .approach-card:hover { transform: translateY(-4px) rotate(-.5deg); box-shadow: var(--sh-md); }
+  .approach-card.active {
+    border-color: var(--sage); background: var(--sage-xl);
+    transform: translateY(-4px); box-shadow: var(--sh-md);
+  }
+  .approach-card svg { width: 18px; height: 18px; color: var(--sage); margin-bottom: 10px; display: block; }
+  .approach-card.active svg { color: var(--sage); }
+  .approach-card h4 { font-family: var(--ff-sans); font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .approach-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .approach-num {
+    position: absolute; top: 14px; right: 16px;
+    font-family: var(--ff-serif); font-size: 28px; color: var(--border); line-height: 1;
+    transition: color var(--ease);
+  }
+  .approach-card.active .approach-num { color: var(--sage-l); }
+
+  /* Filter */
+  .cases-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .f-btn {
+    padding: 7px 17px; border-radius: 99px; border: 1.5px solid var(--border);
+    font-size: 12px; font-weight: 500; color: var(--muted); background: var(--surface);
+    transition: all var(--ease); display: flex; align-items: center; gap: 6px;
+  }
+  .f-btn svg { width: 12px; height: 12px; }
+  .f-btn:hover { border-color: var(--text); color: var(--text); }
+  .f-btn.active { background: var(--text); border-color: var(--text); color: #fff; }
+
+  .cases-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(460px,1fr)); gap: 20px; }
+  .case-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r-lg); padding: 32px; box-shadow: var(--sh-sm);
+    transition: transform var(--ease), box-shadow var(--ease);
+    display: flex; flex-direction: column;
+    transform-style: preserve-3d;
+  }
+  .case-card:hover { transform: translateY(-5px); box-shadow: var(--sh-lg); }
+  .case-card.hidden { display: none; }
+  .case-cats { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .c-cat {
+    font-size: 10px; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 99px;
+  }
+  .c-cat.pm   { background:var(--sage-xl); color:var(--sage); }
+  .c-cat.ux   { background:var(--lav-xl);  color:var(--lav); }
+  .c-cat.data { background:var(--sand-xl); color:var(--sand); }
+  .c-cat.ai   { background:var(--rose-xl); color:var(--rose); }
+  .case-card h3 { font-size: 20px; margin-bottom: 14px; line-height: 1.2; }
+  .case-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .cf label { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--light); margin-bottom: 4px; }
+  .cf p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .case-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .c-tool { font-size: 11px; padding: 3px 10px; border-radius: 99px; background: var(--bg0); border: 1px solid var(--border); color: var(--muted); }
+  .case-impact { background: var(--bg1); border-radius: var(--r-sm); padding: 14px; margin-bottom: 20px; border: 1px solid var(--border-l); }
+  .case-impact label { font-size: 9.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--light); display: block; margin-bottom: 8px; }
+  .case-impact ul { display: flex; flex-direction: column; gap: 5px; }
+  .case-impact li { font-size: 13px; color: var(--muted); display: flex; gap: 10px; }
+  .case-impact li::before { content: '→'; color: var(--sage); flex-shrink: 0; }
+  .case-link { margin-top: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--muted); transition: color var(--ease); }
+  .case-link svg { width: 14px; height: 14px; transition: transform var(--ease); }
+  .case-card:hover .case-link { color: var(--text); }
+  .case-card:hover .case-link svg { transform: translateX(4px); }
+
+  /* Skill radar */
+  #radar-wrap { margin-top: 64px; text-align: center; }
+  #radar-wrap h3 { font-family: var(--ff-sans); font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 20px; }
+  #radar-canvas { max-width: 360px; margin: 0 auto; display: block; }
+
+  /* ─── Experience ─────────────────────────────────────────── */
+  #experience { background: var(--bg3); }
+  .exp-section-label {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted);
+    margin: 48px 0 24px; padding-left: 145px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .exp-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .exp-section-label:first-child { margin-top: 0; }
+  .tl-wrap { position: relative; max-width: 760px; }
+  .tl-line { position: absolute; left: 112px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .tl-item { display: flex; gap: 32px; margin-bottom: 40px; align-items: flex-start; }
+  .tl-year {
+    width: 80px; flex-shrink: 0; font-size: 11px; font-weight: 700;
+    color: var(--muted); letter-spacing: .06em; text-align: right; padding-top: 4px;
+  }
+  .tl-dot-wrap { width: 24px; flex-shrink: 0; display: flex; justify-content: center; padding-top: 5px; }
+  .tl-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--sage);
+    transition: all var(--spring); position: relative;
+  }
+  .tl-dot::after {
+    content: ''; position: absolute; inset: -4px;
+    border-radius: 50%; border: 1.5px solid var(--sage-l);
+    opacity: 0; transition: opacity var(--ease);
+  }
+  .tl-item:hover .tl-dot { background: var(--sage); transform: scale(1.3); }
+  .tl-item:hover .tl-dot::after { opacity: 1; }
+  .tl-body h4 { font-family: var(--ff-sans); font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+  .tl-co { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .tl-date { font-size: 11px; color: var(--light); margin-bottom: 10px; font-weight: 500; }
+  .tl-body ul { display: flex; flex-direction: column; gap: 5px; }
+  .tl-body li { font-size: 13px; color: var(--muted); line-height: 1.6; display: flex; gap: 8px; }
+  .tl-body li::before { content: '·'; color: var(--sage); flex-shrink: 0; font-size: 16px; line-height: 1.4; }
+  .tl-tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tl-tag { font-size: 11px; padding: 3px 10px; border-radius: 99px; background: var(--bg0); border: 1px solid var(--border); color: var(--muted); }
+  /* Education dots are lavender */
+  .tl-item.edu .tl-dot { border-color: var(--lav); }
+  .tl-item.edu:hover .tl-dot { background: var(--lav); }
+  .tl-item.edu .tl-dot::after { border-color: var(--lav-l); }
+  .tl-item.edu li::before { color: var(--lav); }
+
+  /* ─── Creator ────────────────────────────────────────────── */
+  #creator { background: var(--bg4); }
+  .creator-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .creator-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .cr-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r-md); padding: 22px; overflow: hidden;
+    position: relative; transition: transform var(--spring), box-shadow var(--ease);
+  }
+  .cr-card:hover { transform: translateY(-4px) rotate(.4deg); box-shadow: var(--sh-md); }
+  .cr-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent, var(--sand)); }
+  .cr-card.travel { --accent: var(--sand); }
+  .cr-card.video  { --accent: var(--rose); }
+  .cr-card.ig     { --accent: var(--lav);  }
+  .cr-card.thesis { --accent: var(--sage); }
+  .cr-card-icon { margin-bottom: 12px; }
+  .cr-card-icon svg { width: 20px; height: 20px; color: var(--accent, var(--sand)); }
+  .cr-card h4 { font-family: var(--ff-sans); font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .cr-card p  { font-size: 12px; color: var(--muted); line-height: 1.55; }
+  .ig-handle {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600; color: var(--lav);
+    margin-top: 6px; transition: opacity var(--ease);
+  }
+  .ig-handle:hover { opacity: .7; }
+  .ig-handle svg { width: 14px; height: 14px; }
+
+  /* ─── Contact ────────────────────────────────────────────── */
+  #contact { background: var(--bg5); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .contact-headline { font-size: clamp(28px,4vw,44px); margin-bottom: 16px; }
+  .contact-headline em { font-style: italic; color: var(--sage); }
+  .contact-sub { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 32px; }
+  .c-links { display: flex; flex-direction: column; gap: 14px; }
+  .c-link { display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--muted); transition: color var(--ease); }
+  .c-link:hover { color: var(--text); }
+  .c-link-icon {
+    width: 42px; height: 42px; border-radius: var(--r-sm);
+    background: var(--surface); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: border-color var(--ease), transform var(--spring);
+  }
+  .c-link:hover .c-link-icon { border-color: var(--sage); transform: rotate(-4deg) scale(1.06); }
+  .c-link-icon svg { width: 18px; height: 18px; }
+  .contact-widget { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px; box-shadow: var(--sh-md); }
+  .contact-widget h4 { font-family: var(--ff-sans); font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 16px; }
+  .c-opts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+  .c-opt {
+    padding: 12px 16px; border-radius: var(--r-sm); border: 1.5px solid var(--border);
+    font-size: 13px; font-weight: 500; text-align: left; color: var(--muted);
+    transition: all var(--ease); background: var(--bg0);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .c-opt svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .c-opt:hover { border-color: var(--sage); color: var(--text); background: var(--sage-xl); transform: translateX(3px); }
+  .c-opt.selected { border-color: var(--sage); background: var(--sage-xl); color: var(--text); }
+  .c-tpl { background: var(--bg1); border-radius: var(--r-sm); padding: 16px; font-size: 13px; color: var(--muted); line-height: 1.7; display: none; border: 1px solid var(--border-l); }
+  .c-tpl.vis { display: block; animation: fadeUp .3s ease; }
+  .c-tpl strong { color: var(--text); }
+  .copy-btn { margin-top: 12px; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--muted); transition: color var(--ease); }
+  .copy-btn svg { width: 13px; height: 13px; }
+  .copy-btn:hover { color: var(--text); }
+
+  /* ─── Footer ─────────────────────────────────────────────── */
+  footer { border-top: 1px solid var(--border); padding: 28px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--muted); flex-wrap: wrap; gap: 12px; }
+  footer a:hover { color: var(--text); }
+
+  /* ─── Reveal ─────────────────────────────────────────────── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+  .reveal.vis { opacity: 1; transform: none; }
+  .reveal-d1 { transition-delay: .1s; }
+  .reveal-d2 { transition-delay: .2s; }
+
+  /* ─── Animations ─────────────────────────────────────────── */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none} }
+
+  /* ─── Responsive ─────────────────────────────────────────── */
+  @media(max-width:900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-card-wrap { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .creator-grid { grid-template-columns: 1fr; gap: 40px; }
+    .cases-grid { grid-template-columns: 1fr; }
+    .work-approach { grid-template-columns: 1fr 1fr; }
+    .exp-section-label { padding-left: 24px; }
+  }
+  @media(max-width:680px) {
+    section { padding: 64px 0; }
+    .about-cards, .creator-cards { grid-template-columns: 1fr 1fr; }
+    .case-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .nav-burger { display: flex; }
+    .hero-ctas { flex-direction: column; }
+    .work-approach { grid-template-columns: 1fr; }
+    .tl-line { left: 88px; }
+    .tl-year { width: 56px; }
+    .exp-section-label { padding-left: 0; }
+  }
+  @media(max-width:400px) {
+    .about-cards, .creator-cards { grid-template-columns: 1fr; }
+  }
+  </style>
+</head>
+<body>
+
+<div id="c-dot"></div>
+<div id="c-ring"></div>
+<div id="prog"></div>
+
+<!-- Mobile nav -->
+<nav class="nav-mobile" id="mobileNav">
+  <button class="nav-mobile-close" id="mobileClose">✕</button>
+  <a href="#about"      onclick="closeMob()">About</a>
+  <a href="#work"       onclick="closeMob()">Work</a>
+  <a href="#experience" onclick="closeMob()">Experience</a>
+  <a href="#creator"    onclick="closeMob()">Life</a>
+  <a href="#contact"    onclick="closeMob()">Contact</a>
+</nav>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="nav-logo">Yutzu<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#creator">Life</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="nav-burger" id="burgerBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="blob blob1" data-speed=".25"></div>
+  <div class="blob blob2" data-speed=".18"></div>
+  <div class="blob blob3" data-speed=".32"></div>
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="hero-left" data-speed=".88">
+        <div class="hero-badge"><div class="badge-dot"></div>Open to opportunities · Munich</div>
+        <div class="hero-role">Product Manager</div>
+        <h1 class="hero-name">Yutzu<br/><em>Chen</em></h1>
+        <p class="hero-statement"><span id="typed-text"></span></p>
+        <p class="hero-sub">5+ years across Taiwan and Germany. I turn messy user and business problems into clear product decisions — with research, data, and just enough AI.</p>
+        <div class="hero-ctas">
+          <a href="#work" class="btn btn-primary mag-btn">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+            See my work
+          </a>
+          <a href="data/CV_PM_UX_AB_Yutzu_Chen.pdf" class="btn btn-outline mag-btn" download>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2v9M4 8l4 4 4-4M3 14h10"/></svg>
+            Download resume
+          </a>
+          <a href="#contact" class="btn btn-ghost mag-btn">
+            Contact me
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Interest card -->
+      <div class="hero-card-wrap" data-speed=".76">
+        <div class="hero-card" id="heroCard">
+          <div class="card-bar">
+            <span class="card-bar-title">What matters to you?</span>
+            <span class="live-dot">Live</span>
+          </div>
+          <p style="font-size:11.5px;color:var(--muted);margin-bottom:10px;">I'm most interested in…</p>
+          <div class="vgrid">
+            <button class="v-tab active" data-i="strategy">Product Strategy &amp; Research</button>
+            <button class="v-tab" data-i="ai">AI &amp; Automation</button>
+            <button class="v-tab" data-i="data">Data-driven PM</button>
+            <button class="v-tab" data-i="ux">UX &amp; Discovery</button>
+          </div>
+          <div class="v-result" id="vResult">
+            <strong>Product Strategy &amp; Research</strong>
+            Led LINE Invoice from zero to 700k+ users. Found 70% of the market had never tried any existing solution — the problem was adoption, not competition.
+          </div>
+          <div class="float-tags" id="fTags">
+            <span class="ftag">Roadmap</span>
+            <span class="ftag">User research</span>
+            <span class="ftag">Positioning</span>
+            <span class="ftag">Stakeholders</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ─────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="reveal">
+        <p class="label">About me</p>
+        <h2 class="sec-title">I connect users, data, and product</h2>
+        <p>I'm a Product Manager with end-to-end experience from discovery through launch and post-release iteration. I've worked across <strong>Taiwan and Germany</strong> — launching LINE Invoice and running experimentation at Holidu.</p>
+        <p>I reduced onboarding drop-off from <strong>64% to 20%</strong>, conducted <strong>50+ user interviews</strong>, and built AI workflows that analyzed <strong>20k+ customer reviews</strong>. I like building things that actually reduce someone's real problem.</p>
+        <p>Currently finishing my <strong>Masters at LMU Munich</strong> — and documenting travels on Instagram in between.</p>
+        <div class="about-chips">
+          <span class="about-chip">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6M5 5.5h6M5 10.5h4"/></svg>
+            End-to-end product ownership
+          </span>
+          <span class="about-chip">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12l3-3 3 3 3-5 3 2"/><path d="M2 2v12h12"/></svg>
+            Data-driven decisions
+          </span>
+          <span class="about-chip">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="2"/><path d="M8 2v2M8 12v2M2 8h2M12 8h2"/></svg>
+            AI workflow automation
+          </span>
+          <span class="about-chip">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-4 6-4s6 1 6 4"/></svg>
+            User research &amp; UX
+          </span>
+          <span class="about-chip">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h3l2-5 2 10 2-5h3"/></svg>
+            A/B testing &amp; experimentation
+          </span>
+          <span class="about-chip">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+            Cross-functional leadership
+          </span>
+        </div>
+      </div>
+
+      <div class="about-cards reveal reveal-d1">
+        <div class="a-card sage">
+          <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M8 8h8M8 16h5"/></svg></div>
+          <h4>Product Ownership</h4>
+          <p>Discovery to launch. Comfortable with ambiguity and clear on prioritization.</p>
+        </div>
+        <div class="a-card rose">
+          <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l4-4 4 4 4-6 4 2"/><path d="M3 3v18h18"/></svg></div>
+          <h4>Data-driven Decisions</h4>
+          <p>KPIs, dashboards, A/B testing, and focused analysis to guide product direction.</p>
+        </div>
+        <div class="a-card sand">
+          <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
+          <h4>AI Automation</h4>
+          <p>Building LLM pipelines that solve real repetitive problems, not demos.</p>
+        </div>
+        <div class="a-card lav">
+          <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
+          <h4>UX &amp; Experimentation</h4>
+          <p>User interviews, journey mapping, wireframes, hypothesis-driven experiments.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW I WORK + CASE STUDIES ─────────────────────────────── -->
+<section id="work">
+  <div class="container">
+    <div class="reveal">
+      <p class="label">How I work</p>
+      <h2 class="sec-title">Approach &amp; case studies</h2>
+      <p class="sec-sub">Four ways I think about product — each grounded in a real project.</p>
+    </div>
+
+    <!-- Approach cards — clicking filters case studies below -->
+    <div class="work-approach reveal reveal-d1">
+      <button class="approach-card active" data-approach="all">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <h4>All work</h4>
+        <p>Full picture — strategy, data, AI, and UX.</p>
+        <span class="approach-num">01</span>
+      </button>
+      <button class="approach-card" data-approach="pm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M8 8h8M8 16h5"/></svg>
+        <h4>Start with the problem</h4>
+        <p>Research the market before committing to a direction. Validate before building.</p>
+        <span class="approach-num">02</span>
+      </button>
+      <button class="approach-card" data-approach="data">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l4-4 4 4 4-6 4 2"/><path d="M3 3v18h18"/></svg>
+        <h4>Measure, then decide</h4>
+        <p>Data reduces gut-feel risk. I connect business goals to trackable product metrics.</p>
+        <span class="approach-num">03</span>
+      </button>
+      <button class="approach-card" data-approach="ai">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+        <h4>Automate the repetitive</h4>
+        <p>Find the workflows that shouldn't be manual. Build pipelines that give time back.</p>
+        <span class="approach-num">04</span>
+      </button>
+    </div>
+
+    <!-- Case study filter pills (secondary nav) -->
+    <div class="cases-filters reveal">
+      <button class="f-btn active" data-f="all">All</button>
+      <button class="f-btn" data-f="pm">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6M5 5.5h6"/></svg>
+        Product Management
+      </button>
+      <button class="f-btn" data-f="data">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12l3-3 3 3 3-5 3 2"/></svg>
+        Data-driven
+      </button>
+      <button class="f-btn" data-f="ai">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="2"/><path d="M8 2v2M8 12v2M2 8h2M12 8h2"/></svg>
+        AI &amp; Automation
+      </button>
+      <button class="f-btn" data-f="ux">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="7" r="3"/><path d="M2 14c0-3 2.7-4 6-4s6 1 6 4"/></svg>
+        UX
+      </button>
+    </div>
+
+    <div class="cases-grid">
+
+      <!-- Case 1: LINE Invoice -->
+      <div class="case-card reveal" data-cats="pm ux">
+        <div class="case-cats">
+          <span class="c-cat pm">Product Management</span>
+          <span class="c-cat ux">User Research</span>
+        </div>
+        <h3>Designing a Financial Tool Inside a Messaging App</h3>
+        <div class="case-row">
+          <div class="cf">
+            <label>Problem</label>
+            <p>Taiwan's digital invoice adoption was stuck at 30% despite years of government promotion — the UX was broken and most people didn't know how to start.</p>
+          </div>
+          <div class="cf">
+            <label>My role</label>
+            <p>PM end-to-end — market research, positioning, roadmap, launch, and post-release growth.</p>
+          </div>
+        </div>
+        <div class="cf" style="margin-bottom:14px;">
+          <label>What I did</label>
+          <p>Found 70% of potential users had never tried any existing solution — the problem was adoption, not competition. Built a two-track strategy: simplify onboarding for new users, add unique features for experienced ones. Coordinated 10+ cross-functional teams from strategy through launch.</p>
+        </div>
+        <div class="case-tools">
+          <span class="c-tool">Market research</span>
+          <span class="c-tool">50+ user interviews</span>
+          <span class="c-tool">Product positioning</span>
+          <span class="c-tool">Roadmap</span>
+          <span class="c-tool">Go-to-market</span>
+          <span class="c-tool">Google Analytics</span>
+          <span class="c-tool">Grafana</span>
+          <span class="c-tool">R</span>
+        </div>
+        <div class="case-impact">
+          <label>Impact</label>
+          <ul>
+            <li>0 → 700k+ users in one year</li>
+            <li>Onboarding drop-off: 64% → 20%</li>
+            <li>Coordinated 10+ cross-functional and international teams</li>
+            <li>Web-first approach removed the "extra app" barrier entirely</li>
+          </ul>
+        </div>
+        <a href="data/product_strategy.pdf" target="_blank" class="case-link">
+          Read full case study
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+        </a>
+      </div>
+
+      <!-- Case 2: VoC Platform -->
+      <div class="case-card reveal" data-cats="ai data">
+        <div class="case-cats">
+          <span class="c-cat ai">AI &amp; Automation</span>
+          <span class="c-cat data">Data-driven</span>
+        </div>
+        <h3>Voice of Customer Intelligence System</h3>
+        <div class="case-row">
+          <div class="cf">
+            <label>Problem</label>
+            <p>Hundreds of customer reviews arrived weekly across 4 platforms — multilingual, fragmented, and largely unread.</p>
+          </div>
+          <div class="cf">
+            <label>My role</label>
+            <p>Designed and built the system end-to-end, treating PMs as the primary users and designing for their real weekly workflow.</p>
+          </div>
+        </div>
+        <div class="cf" style="margin-bottom:14px;">
+          <label>What I did</label>
+          <p>Built an LLM pipeline that aggregates reviews from Trustpilot, Google Play, App Store, and NPS — auto-translates, detects themes, runs sentiment analysis, and generates a structured weekly report. Added a searchable database and an AI chat for deeper exploration.</p>
+        </div>
+        <div class="case-tools">
+          <span class="c-tool">Python</span>
+          <span class="c-tool">LLM / prompt design</span>
+          <span class="c-tool">Trustpilot API</span>
+          <span class="c-tool">App Store / Google Play</span>
+          <span class="c-tool">Dashboard building</span>
+          <span class="c-tool">Sentiment analysis</span>
+          <span class="c-tool">Theme detection</span>
+        </div>
+        <div class="case-impact">
+          <label>Impact</label>
+          <ul>
+            <li>20k+ multi-channel reviews analyzed in one unified system</li>
+            <li>Weekly reporting fully automated — no manual work</li>
+            <li>Surfaced recurring bugs teams couldn't see when reviews were scattered</li>
+            <li>Enabled faster, evidence-backed product prioritization</li>
+          </ul>
+        </div>
+        <a href="data/voc_platform.pdf" target="_blank" class="case-link">
+          Read full case study
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+        </a>
+      </div>
+
+      <!-- Case 3: Holidu A/B Testing -->
+      <div class="case-card reveal" data-cats="data ux">
+        <div class="case-cats">
+          <span class="c-cat data">Data-driven</span>
+          <span class="c-cat ux">UX</span>
+        </div>
+        <h3>Holidu: Conversion Uplift Through Experimentation</h3>
+        <div class="case-row">
+          <div class="cf">
+            <label>Problem</label>
+            <p>Funnel data showed friction — but root causes were unclear and stakeholder priorities were driven by intuition, not evidence.</p>
+          </div>
+          <div class="cf">
+            <label>My role</label>
+            <p>PM — hypothesis formation, experiment design, analysis, and iteration across customer-facing surfaces.</p>
+          </div>
+        </div>
+        <div class="cf" style="margin-bottom:14px;">
+          <label>What I did</label>
+          <p>Analyzed 2k+ daily user logs to identify friction. Formed hypotheses, designed A/B tests, iterated based on results. Built an LLM evaluation framework to systematically score and optimize AI feature outputs. Shipped dashboards to share findings across teams.</p>
+        </div>
+        <div class="case-tools">
+          <span class="c-tool">A/B testing</span>
+          <span class="c-tool">Looker</span>
+          <span class="c-tool">Google Analytics</span>
+          <span class="c-tool">Funnel analysis</span>
+          <span class="c-tool">LLM evaluation</span>
+          <span class="c-tool">Dashboard building</span>
+          <span class="c-tool">Python</span>
+          <span class="c-tool">SQL</span>
+        </div>
+        <div class="case-impact">
+          <label>Impact</label>
+          <ul>
+            <li>&gt;7% conversion uplift across multiple feature iterations</li>
+            <li>2k+ daily user logs analyzed to pinpoint friction</li>
+            <li>LLM evaluation framework replaced manual QA — significantly faster</li>
+            <li>Built UX research tester pipeline — gained 300+ real users for validation</li>
+          </ul>
+        </div>
+        <a href="#contact" class="case-link">
+          Case study — ask me
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+        </a>
+      </div>
+
+      <!-- Case 4: Operations Automation -->
+      <div class="case-card reveal" data-cats="ai">
+        <div class="case-cats">
+          <span class="c-cat ai">AI &amp; Automation</span>
+          <span class="c-cat pm">Product Ops</span>
+        </div>
+        <h3>Scaling Product Operations with Automation</h3>
+        <div class="case-row">
+          <div class="cf">
+            <label>Problem</label>
+            <p>Translation coordination, A/B test documentation, and Jira backlog noise consumed PM and engineering time that should have gone to actual product work.</p>
+          </div>
+          <div class="cf">
+            <label>My role</label>
+            <p>Designed and built all four automation pipelines — from identifying the problem through implementation and rollout.</p>
+          </div>
+        </div>
+        <div class="cf" style="margin-bottom:14px;">
+          <label>What I did</label>
+          <p>Built 4 automation systems: (1) OpenAI API → auto-upload translation pipeline, (2) Jira automation creating structured experiment docs on ticket status change, (3) Slack announcements on experiment launch, (4) lifecycle automation that closes stale tickets with no response.</p>
+        </div>
+        <div class="case-tools">
+          <span class="c-tool">Jira Automation</span>
+          <span class="c-tool">OpenAI API</span>
+          <span class="c-tool">n8n</span>
+          <span class="c-tool">Slack API</span>
+          <span class="c-tool">Workflow design</span>
+          <span class="c-tool">Process improvement</span>
+        </div>
+        <div class="case-impact">
+          <label>Impact</label>
+          <ul>
+            <li>~80% reduction in translation processing time</li>
+            <li>Every experiment now has a structured, auto-generated record</li>
+            <li>Cleaner backlog — stale tickets no longer clog prioritization</li>
+            <li>Reduced repetitive support load for the whole team</li>
+          </ul>
+        </div>
+        <a href="data/automation.pdf" target="_blank" class="case-link">
+          Read full case study
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Skill radar -->
+    <div id="radar-wrap" class="reveal">
+      <h3>Skill depth — hover the dots</h3>
+      <canvas id="radar-canvas" width="380" height="380"></canvas>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ─────────────────────────────────────────────── -->
+<section id="experience">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:48px;">
+      <p class="label">How I got here</p>
+      <h2 class="sec-title">Experience &amp; education</h2>
+    </div>
+
+    <div class="tl-wrap reveal">
+      <div class="tl-line"></div>
+
+      <!-- Work -->
+      <div class="exp-section-label">Work</div>
+
+      <div class="tl-item">
+        <div class="tl-year">2024–26</div>
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-body">
+          <h4>Product Manager <span style="font-weight:400;color:var(--muted);font-size:13px">· Part-time</span></h4>
+          <div class="tl-co">Holidu · Munich, Germany · Hybrid</div>
+          <div class="tl-date">Mar 2024 – Feb 2026 · 2 years</div>
+          <ul>
+            <li>Delivered multiple features driving &gt;7% conversion uplift — translated user insights into requirements, validated via A/B testing.</li>
+            <li>Built an LLM-based customer feedback platform analyzing 20k+ multi-channel reviews and automating weekly reporting.</li>
+            <li>Developed LLM evaluation framework to systematically score model outputs, improving QA efficiency significantly.</li>
+            <li>Built automated translation workflow integrating OpenAI APIs — reduced manual effort by ~80%.</li>
+            <li>Implemented a UX research tester acquisition pipeline; gained 300+ real users for usability testing.</li>
+          </ul>
+          <div class="tl-tag-row">
+            <span class="tl-tag">A/B Testing</span><span class="tl-tag">Looker</span><span class="tl-tag">LLM Evaluation</span><span class="tl-tag">Python</span><span class="tl-tag">Workflow Automation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2021–23</div>
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-body">
+          <h4>Product Manager</h4>
+          <div class="tl-co">LINE Corp · Taipei, Taiwan · Full-time</div>
+          <div class="tl-date">Apr 2021 – Oct 2023 · 2 yrs 7 mos</div>
+          <ul>
+            <li>Led LINE Invoice launch — defined positioning and GTM strategy, scaled to 700k+ users in 1 year.</li>
+            <li>Defined product roadmap with stakeholders; collaborated with 10+ cross-functional and international teams.</li>
+            <li>Conducted 50+ user interviews; reduced onboarding drop-off from 64% to 20% via data-driven changes.</li>
+            <li>Maintained Grafana dashboards, wrote SQL queries to analyze usage and support decisions.</li>
+            <li>Led AI projects improving image recognition models to &gt;90% accuracy.</li>
+          </ul>
+          <div class="tl-tag-row">
+            <span class="tl-tag">Product Strategy</span><span class="tl-tag">User Research</span><span class="tl-tag">Grafana</span><span class="tl-tag">SQL</span><span class="tl-tag">R</span><span class="tl-tag">Figma</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2020–23</div>
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-body">
+          <h4>Product Manager — ML Model Enhancement</h4>
+          <div class="tl-co">LINE Corp · Taipei, Taiwan</div>
+          <div class="tl-date">Jun 2020 – Oct 2023 · 3 yrs 5 mos</div>
+          <ul>
+            <li>Led central AI enhancement team supporting search, recommendation, and ML models across News, eCommerce, and Customer Service.</li>
+            <li>Increased news tagging model precision by 204% through structured testing and error analysis.</li>
+            <li>Improved AI chat answer accuracy by 31% via categorization system improvements.</li>
+            <li>Improved VOC AI filter accuracy by 22.5% — helped CS team identify urgent daily cases.</li>
+            <li>Established search quality testing SOP and reporting structure.</li>
+          </ul>
+          <div class="tl-tag-row">
+            <span class="tl-tag">ML Evaluation</span><span class="tl-tag">Search Quality</span><span class="tl-tag">A/B Testing</span><span class="tl-tag">Data Analysis</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2019–20</div>
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-body">
+          <h4>Business Development &amp; Marketing Intern</h4>
+          <div class="tl-co">Kdan Mobile · Taipei, Taiwan</div>
+          <div class="tl-date">Jun 2019 – Feb 2020 · 9 months</div>
+          <ul>
+            <li>Initiated partnerships with foreign e-commerce companies; designed auto-reply email flows with UX thinking.</li>
+            <li>Built keyword lists with Ahrefs; developed advertising strategies for Chinese, English, and Japanese markets.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="exp-section-label" style="margin-top:56px;">Education</div>
+
+      <div class="tl-item edu">
+        <div class="tl-year">2023–26</div>
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-body">
+          <h4>MSc Management &amp; Digital Technologies</h4>
+          <div class="tl-co">Ludwig-Maximilians-Universität München (LMU)</div>
+          <div class="tl-date">Oct 2023 – Present · Grade 1.8</div>
+          <ul>
+            <li>Thesis: <em>Mapping AI agents — a systematic review using LLM-based extraction.</em></li>
+          </ul>
+          <div class="tl-tag-row">
+            <span class="tl-tag">AI Research</span><span class="tl-tag">Data Analysis</span><span class="tl-tag">Scrum</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item edu">
+        <div class="tl-year">2016–20</div>
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-body">
+          <h4>Bachelor's, International Business</h4>
+          <div class="tl-co">National Chengchi University · Taipei, Taiwan</div>
+          <div class="tl-date">2016 – 2020 · Grade 3.87/4.3</div>
+        </div>
+      </div>
+
+      <div class="tl-item edu">
+        <div class="tl-year">2020</div>
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-body">
+          <h4>Exchange Student — Faculty of Management, Economics &amp; Social Sciences</h4>
+          <div class="tl-co">University of Cologne · Germany</div>
+          <div class="tl-date">2020</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CREATOR ────────────────────────────────────────────────── -->
+<section id="creator">
+  <div class="container">
+    <div class="creator-grid">
+      <div class="reveal">
+        <p class="label">Beyond the PM</p>
+        <h2 class="sec-title">I make things — <em style="font-style:italic;color:var(--sand)">and I film them</em></h2>
+        <p style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:20px;">When I'm not thinking about product, I'm traveling — and documenting what I find. I make short travel videos and share slices of daily life, curiosity, and new places on Instagram.</p>
+        <p style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:28px;">It started as a creative outlet but turned into a practice in visual storytelling — noticing details, framing moments, editing with intention. Skills that feel surprisingly close to product thinking.</p>
+        <a href="https://www.instagram.com/yutzu.journal" target="_blank" rel="noopener" class="ig-handle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @yutzu.journal
+        </a>
+      </div>
+      <div class="creator-cards reveal reveal-d1">
+        <div class="cr-card travel">
+          <div class="cr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0-4 4-4 9s4 9 4 9"/><path d="M12 3c0 0 4 4 4 9s-4 9-4 9"/><path d="M3 12h18"/></svg></div>
+          <h4>Travel</h4>
+          <p>Exploring across Europe, Asia, and beyond. Always looking for spots that don't make it into guides.</p>
+        </div>
+        <div class="cr-card video">
+          <div class="cr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 9l5-3v12l-5-3"/></svg></div>
+          <h4>Video Making</h4>
+          <p>Short-form travel and daily-life videos. Filming, editing, finding the story in the footage.</p>
+        </div>
+        <div class="cr-card ig">
+          <div class="cr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
+          <h4>@yutzu.journal</h4>
+          <p>Travel videos, everyday moments, and curiosity about the world. Come say hi.</p>
+        </div>
+        <div class="cr-card thesis">
+          <div class="cr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V6a2 2 0 0 1 2-2h13"/><path d="M4 19a2 2 0 0 0 2 2h13V8H6a2 2 0 0 0-2 2"/><path d="M9 12h6M9 16h4"/></svg></div>
+          <h4>AI Research</h4>
+          <p>LMU Munich thesis mapping AI agents through systematic LLM-based extraction.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="label">Contact</p>
+        <h2 class="contact-headline">Let's build something <em>worth using</em></h2>
+        <p class="contact-sub">Looking for a PM who connects user needs, business goals, data, UX, and AI? Let's talk.</p>
+        <div class="c-links">
+          <a href="mailto:yutzu.yt.chen@gmail.com" class="c-link">
+            <span class="c-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg></span>
+            yutzu.yt.chen@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/yutzuchen" target="_blank" rel="noopener" class="c-link">
+            <span class="c-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M7 10v7M7 7v.5M12 10v7M12 13c0-1.7 1.3-3 3-3s3 1.3 3 3v4"/></svg></span>
+            linkedin.com/in/yutzuchen
+          </a>
+          <a href="https://www.instagram.com/yutzu.journal" target="_blank" rel="noopener" class="c-link">
+            <span class="c-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+            @yutzu.journal
+          </a>
+          <!-- Replace with Calendly link -->
+          <a href="#" target="_blank" rel="noopener" class="c-link">
+            <span class="c-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+            Book a 30-min call
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-widget reveal reveal-d1">
+        <h4>I want to contact Yutzu about…</h4>
+        <div class="c-opts">
+          <button class="c-opt" data-m="fulltime">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M5 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/></svg>
+            Full-time Product Manager role
+          </button>
+          <button class="c-opt" data-m="freelance">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="5"/><path d="M8 5v3l2 2"/></svg>
+            Freelance UX / Product project
+          </button>
+          <button class="c-opt" data-m="ai">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="2"/><path d="M8 2v2M8 12v2M2 8h2M12 8h2"/></svg>
+            AI workflow automation
+          </button>
+          <button class="c-opt" data-m="collab">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 13c0-2.2 2-4 4-4h4c2 0 4 1.8 4 4"/><circle cx="8" cy="6" r="3"/></svg>
+            Speaking / collaboration
+          </button>
+        </div>
+        <div class="c-tpl" id="cTpl">
+          <div id="tplText"></div>
+          <button class="copy-btn" id="copyBtn">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="9" height="9" rx="1"/><path d="M5 5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2"/></svg>
+            Copy message
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <div>© 2025 Yutzu Chen · Product Manager</div>
+  <div style="display:flex;gap:20px;">
+    <a href="mailto:yutzu.yt.chen@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/yutzuchen" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/yutzu.journal" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</footer>
+
+<!-- ── SCRIPTS ────────────────────────────────────────────────── -->
+<script>
+/* ─── Custom cursor + sparkle trail ───────────────────────── */
+const cDot = document.getElementById('c-dot');
+const cRing = document.getElementById('c-ring');
+let mx=-100,my=-100,rx=-100,ry=-100;
+let lastSpark = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  const now = Date.now();
+  if (now - lastSpark > 80) {
+    lastSpark = now;
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.style.left = mx + 'px';
+    s.style.top  = my + 'px';
+    s.style.width = s.style.height = (3 + Math.random()*4) + 'px';
+    s.style.background = ['var(--sage-l)','var(--sand-l)','var(--rose-l)','var(--lav-l)'][Math.floor(Math.random()*4)];
+    s.style.marginLeft = (Math.random()*16-8) + 'px';
+    s.style.marginTop  = (Math.random()*16-8) + 'px';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 600);
+  }
+});
+(function animC() {
+  rx += (mx-rx)*.14; ry += (my-ry)*.14;
+  cDot.style.transform  = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+  cRing.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+  requestAnimationFrame(animC);
+})();
+document.querySelectorAll('a,button,.v-tab,.f-btn,.approach-card,.c-opt,.mag-btn,.about-chip,.a-card,.cr-card,.case-card').forEach(el=>{
+  el.addEventListener('mouseenter', ()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave', ()=>document.body.classList.remove('hov'));
+});
+
+/* ─── Scroll progress ──────────────────────────────────────── */
+const prog = document.getElementById('prog');
+function onScroll() {
+  prog.style.width = (window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+  document.getElementById('nav').classList.toggle('on', window.scrollY>24);
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+
+/* ─── Parallax ─────────────────────────────────────────────── */
+const pxEls = document.querySelectorAll('[data-speed]');
+function doParallax() {
+  const sy = window.scrollY;
+  pxEls.forEach(el => {
+    const speed = parseFloat(el.dataset.speed);
+    const offset = sy * (1 - speed);
+    el.style.transform = `translateY(${offset}px)`;
+  });
+}
+window.addEventListener('scroll', doParallax, {passive:true});
+
+/* ─── Hero card tilt ───────────────────────────────────────── */
+const hc = document.getElementById('heroCard');
+if(hc){
+  hc.addEventListener('mousemove', e=>{
+    const r=hc.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
+    const dx=(e.clientX-cx)/(r.width/2), dy=(e.clientY-cy)/(r.height/2);
+    hc.style.transform=`perspective(800px) rotateY(${dx*6}deg) rotateX(${-dy*6}deg)`;
+  });
+  hc.addEventListener('mouseleave',()=>{ hc.style.transform=''; });
+}
+
+/* ─── Typewriter ───────────────────────────────────────────── */
+const phrases=['Building user-centered digital products.','Making data-driven decisions.','Designing AI-powered workflows.','Turning messy problems into clear roadmaps.'];
+let pi=0,ci=0,del=false;
+const typed=document.getElementById('typed-text');
+function typeStep(){
+  const p=phrases[pi];
+  if(!del){
+    typed.textContent=p.slice(0,++ci);
+    if(ci===p.length){del=true;setTimeout(typeStep,2000);return;}
+    setTimeout(typeStep,48);
+  }else{
+    typed.textContent=p.slice(0,--ci);
+    if(ci===0){del=false;pi=(pi+1)%phrases.length;setTimeout(typeStep,300);return;}
+    setTimeout(typeStep,22);
+  }
+}
+typeStep();
+
+/* ─── Hero interest card ───────────────────────────────────── */
+const iData={
+  strategy:{text:'<strong>Product Strategy &amp; Research</strong>Led LINE Invoice from 0 to 700k+ users. Found 70% of potential users had never tried any existing solution — the problem was adoption, not competition.',tags:['Roadmap','User research','Positioning','Stakeholders']},
+  ai:{text:'<strong>AI &amp; Workflow Automation</strong>Built LLM pipelines for Voice of Customer analysis (20k+ reviews) and ~80% translation time savings. Experienced in prompt engineering, workflow design, and evaluation frameworks.',tags:['LLM prompting','VoC analysis','Automation','Prompt design']},
+  data:{text:'<strong>Data-driven PM</strong>Reduced onboarding drop-off from 64% to 20% through data analysis and user interviews. Uses A/B testing, Looker, Grafana, and Python to guide decisions.',tags:['A/B testing','Looker','Funnel analysis','Dashboards']},
+  ux:{text:'<strong>UX &amp; Product Discovery</strong>Conducted 50+ user interviews. Combines journey mapping, wireframes, and structured discovery to solve the right problem before building.',tags:['User interviews','Journey mapping','Wireframes','Discovery']}
+};
+document.querySelectorAll('.v-tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.v-tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const d=iData[t.dataset.i];
+    document.getElementById('vResult').innerHTML=d.text;
+    document.getElementById('fTags').innerHTML=d.tags.map(x=>`<span class="ftag">${x}</span>`).join('');
+  });
+});
+
+/* ─── Approach cards sync with case filter ─────────────────── */
+function applyFilter(f){
+  document.querySelectorAll('.f-btn').forEach(b=>b.classList.toggle('active', b.dataset.f===f));
+  document.querySelectorAll('.case-card').forEach(c=>{
+    const cats=c.dataset.cats?c.dataset.cats.split(' '):[];
+    c.classList.toggle('hidden', f!=='all' && !cats.includes(f));
+  });
+  document.querySelectorAll('.approach-card').forEach(c=>c.classList.toggle('active', c.dataset.approach===f));
+}
+document.querySelectorAll('.approach-card').forEach(c=>{
+  c.addEventListener('click',()=>{ applyFilter(c.dataset.approach); });
+});
+document.querySelectorAll('.f-btn').forEach(b=>{
+  b.addEventListener('click',()=>{ applyFilter(b.dataset.f); });
+});
+
+/* ─── Magnetic buttons ─────────────────────────────────────── */
+document.querySelectorAll('.mag-btn').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const dx=e.clientX-(r.left+r.width/2), dy=e.clientY-(r.top+r.height/2);
+    btn.style.transform=`translate(${dx*.22}px,${dy*.22}px)`;
+  });
+  btn.addEventListener('mouseleave',()=>{ btn.style.transform=''; });
+});
+
+/* ─── Contact templates ────────────────────────────────────── */
+const tpls={
+  fulltime:`Subject: PM Role Inquiry\n\nHi Yutzu,\n\nI came across your portfolio and I'd love to discuss a Product Manager opportunity at [Company]. Your experience in [product launch / data-driven PM / AI workflows] looks like a great fit.\n\nWould you be open to a quick call this week?`,
+  freelance:`Subject: Freelance Project\n\nHi Yutzu,\n\nI'm working on [project] and looking for help with [UX discovery / product strategy / user research]. Based on your portfolio, I think your approach fits well.\n\nDo you have bandwidth for freelance work?`,
+  ai:`Subject: AI Workflow Project\n\nHi Yutzu,\n\nI need help building an AI workflow for [use case — e.g. customer feedback analysis, report automation]. Your VoC project is exactly the kind of thinking I'm looking for.\n\nCan we talk?`,
+  collab:`Subject: Speaking / Collaboration\n\nHi Yutzu,\n\nI'd love to explore a collaboration around [topic]. I think your perspective would be valuable for [event / project].\n\nWould you be open to a quick chat?`
+};
+document.querySelectorAll('.c-opt').forEach(o=>{
+  o.addEventListener('click',()=>{
+    document.querySelectorAll('.c-opt').forEach(x=>x.classList.remove('selected'));
+    o.classList.add('selected');
+    document.getElementById('tplText').innerHTML=tpls[o.dataset.m].replace(/\n/g,'<br/>');
+    document.getElementById('cTpl').classList.add('vis');
+  });
+});
+document.getElementById('copyBtn').addEventListener('click',()=>{
+  const sel=document.querySelector('.c-opt.selected');
+  if(!sel)return;
+  navigator.clipboard.writeText(tpls[sel.dataset.m]).then(()=>{
+    const b=document.getElementById('copyBtn');
+    b.innerHTML='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8l3 3 7-7"/></svg> Copied!';
+    setTimeout(()=>{ b.innerHTML='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="9" height="9" rx="1"/><path d="M5 5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2"/></svg> Copy message'; },2000);
+  });
+});
+
+/* ─── Scroll reveal ────────────────────────────────────────── */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* ─── Radar chart ──────────────────────────────────────────── */
+(function(){
+  const canvas=document.getElementById('radar-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=W*.38;
+  const skills=[
+    {label:'Product Strategy',val:.92},
+    {label:'User Research',val:.85},
+    {label:'A/B Testing',val:.88},
+    {label:'AI Workflows',val:.80},
+    {label:'Data Analysis',val:.87},
+    {label:'Roadmap & Prio',val:.90},
+  ];
+  const N=skills.length, step=(Math.PI*2)/N;
+  function pt(i,r){const a=i*step-Math.PI/2;return[cx+Math.cos(a)*r,cy+Math.sin(a)*r];}
+  let hov=-1, prog=0;
+  function draw(p){
+    ctx.clearRect(0,0,W,H);
+    for(let ring=1;ring<=4;ring++){
+      const r=R*ring/4;
+      ctx.beginPath();
+      for(let i=0;i<N;i++){const[px,py]=pt(i,r);i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);}
+      ctx.closePath();ctx.strokeStyle='#e6dfd5';ctx.lineWidth=1;ctx.stroke();
+    }
+    for(let i=0;i<N;i++){
+      const[px,py]=pt(i,R);
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(px,py);
+      ctx.strokeStyle='#e6dfd5';ctx.lineWidth=1;ctx.stroke();
+    }
+    ctx.beginPath();
+    for(let i=0;i<N;i++){const[px,py]=pt(i,R*skills[i].val*p);i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);}
+    ctx.closePath();ctx.fillStyle='rgba(122,158,142,.15)';ctx.fill();
+    ctx.strokeStyle='#7a9e8e';ctx.lineWidth=2;ctx.stroke();
+    for(let i=0;i<N;i++){
+      const[px,py]=pt(i,R*skills[i].val*p);
+      const isH=i===hov;
+      ctx.beginPath();ctx.arc(px,py,isH?7:4,0,Math.PI*2);
+      ctx.fillStyle=isH?'#7a9e8e':'#fff';ctx.fill();
+      ctx.strokeStyle='#7a9e8e';ctx.lineWidth=2;ctx.stroke();
+      if(isH){
+        ctx.fillStyle='#26211d';ctx.font='600 12px Inter,system-ui';ctx.textAlign='center';
+        ctx.fillText(skills[i].label,px,py-14);
+        ctx.fillStyle='#7a9e8e';ctx.font='500 11px Inter,system-ui';
+        ctx.fillText(Math.round(skills[i].val*100)+'%',px,py-2);
+      }
+    }
+    for(let i=0;i<N;i++){
+      const[px,py]=pt(i,R+26);
+      ctx.fillStyle=i===hov?'#26211d':'#7c7168';
+      ctx.font=i===hov?'600 11px Inter':'500 11px Inter';
+      ctx.textAlign='center';ctx.fillText(skills[i].label,px,py+4);
+    }
+  }
+  const radarObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        prog=0;
+        (function anim(){if(prog<1){prog=Math.min(prog+.025,1);draw(prog);requestAnimationFrame(anim);}else draw(1);})();
+        radarObs.unobserve(e.target);
+      }
+    });
+  },{threshold:.3});
+  radarObs.observe(canvas);
+  draw(0);
+  canvas.addEventListener('mousemove',e=>{
+    const r=canvas.getBoundingClientRect();
+    const mx=(e.clientX-r.left)*(W/r.width),my=(e.clientY-r.top)*(H/r.height);
+    let f=-1;
+    for(let i=0;i<N;i++){const[px,py]=pt(i,R*skills[i].val);if(Math.hypot(mx-px,my-py)<16){f=i;break;}}
+    if(f!==hov){hov=f;draw(1);}
+  });
+  canvas.addEventListener('mouseleave',()=>{hov=-1;draw(1);});
+})();
+
+/* ─── Mobile nav ───────────────────────────────────────────── */
+document.getElementById('burgerBtn').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('open'));
+document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open'));
+function closeMob(){document.getElementById('mobileNav').classList.remove('open');}
+
+/* ─── Cute: nav logo wiggle on click ──────────────────────── */
+document.querySelector('.nav-logo').addEventListener('click',function(){
+  this.style.transition='transform .5s cubic-bezier(.34,1.56,.64,1)';
+  this.style.transform='rotate(-15deg) scale(1.15)';
+  setTimeout(()=>{this.style.transform='';},500);
+});
+</script>
+</body>
+</html>
