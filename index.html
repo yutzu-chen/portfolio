@@ -220,6 +220,18 @@
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
   .about-text p { color: var(--muted); font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
   .about-text p strong { color: var(--text); font-weight: 600; }
+
+  /* heading + photo inline */
+  .about-heading-row { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
+  .about-avatar {
+    width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
+    object-fit: cover; object-position: center top;
+    border: 2px solid var(--surface);
+    box-shadow: 0 0 0 4px var(--sage-xl);
+    transition: transform var(--spring);
+  }
+  .about-avatar:hover { transform: rotate(-4deg) scale(1.08); }
+
   .about-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
   .about-chip {
     font-size: 12px; font-weight: 500; padding: 7px 16px; border-radius: 99px;
@@ -229,22 +241,41 @@
   }
   .about-chip svg { width: 13px; height: 13px; flex-shrink: 0; }
   .about-chip:hover { transform: scale(1.06) rotate(-1deg); border-color: var(--sage); color: var(--text); }
-  .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .a-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--r-md); padding: 22px;
-    transition: transform var(--spring), box-shadow var(--ease);
-    position: relative; overflow: hidden;
+
+  /* editorial sticker cards */
+  .about-cards {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
-  .a-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent, var(--sage)); }
-  .a-card:hover { transform: translateY(-4px) rotate(.4deg); box-shadow: var(--sh-md); }
-  .a-card.sage { --accent: var(--sage); }
-  .a-card.rose { --accent: var(--rose); }
-  .a-card.sand { --accent: var(--sand); }
-  .a-card.lav  { --accent: var(--lav);  }
-  .a-card-icon { margin-bottom: 12px; }
-  .a-card-icon svg { width: 20px; height: 20px; color: var(--accent, var(--sage)); }
-  .a-card h4 { font-family: var(--ff-sans); font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .a-card {
+    border-radius: var(--r-lg); padding: 22px 20px 20px;
+    transition: transform var(--spring), box-shadow var(--ease);
+    position: relative; overflow: hidden; cursor: default;
+  }
+  .a-card.sage { background: var(--sage-xl);  transform: rotate(-1.5deg); }
+  .a-card.rose { background: var(--rose-xl);  transform: rotate(1.2deg); }
+  .a-card.sand { background: var(--sand-xl);  transform: rotate(-0.8deg); }
+  .a-card.lav  { background: var(--lav-xl);   transform: rotate(1.8deg); }
+  .a-card:hover { transform: rotate(0) translateY(-5px) scale(1.02); box-shadow: var(--sh-lg); z-index: 2; }
+  /* big ghost number */
+  .a-card::after {
+    content: attr(data-n);
+    position: absolute; bottom: -8px; right: 10px;
+    font-family: var(--ff-serif); font-size: 72px; line-height: 1;
+    color: var(--accent-ghost, rgba(122,158,142,.12));
+    pointer-events: none; user-select: none;
+  }
+  .a-card.sage { --accent-ghost: rgba(122,158,142,.14); }
+  .a-card.rose { --accent-ghost: rgba(188,126,126,.12); }
+  .a-card.sand { --accent-ghost: rgba(196,164,122,.13); }
+  .a-card.lav  { --accent-ghost: rgba(148,133,192,.12); }
+  .a-card-icon { margin-bottom: 10px; }
+  .a-card-icon svg { width: 18px; height: 18px; color: var(--accent-c, var(--sage)); }
+  .a-card.sage .a-card-icon svg { color: var(--sage); }
+  .a-card.rose .a-card-icon svg { color: var(--rose); }
+  .a-card.sand .a-card-icon svg { color: var(--sand); }
+  .a-card.lav  .a-card-icon svg { color: var(--lav);  }
+  .a-card h4 { font-family: var(--ff-serif); font-size: 15px; font-weight: 400; margin-bottom: 6px; }
   .a-card p  { font-size: 12px; color: var(--muted); line-height: 1.55; }
 
   /* ─── How I Work + Case Studies ─────────────────────────── */
@@ -397,7 +428,7 @@
 
   /* ─── Contact ────────────────────────────────────────────── */
   #contact { background: var(--bg5); }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
   .contact-headline { font-size: clamp(28px,4vw,44px); margin-bottom: 16px; }
   .contact-headline em { font-style: italic; color: var(--sage); }
   .contact-sub { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 32px; }
@@ -444,18 +475,7 @@
   /* ─── Animations ─────────────────────────────────────────── */
   @keyframes fadeUp { from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none} }
 
-  /* ─── Photo ─────────────────────────────────────────────── */
-  .about-photo-wrap {
-    display: flex; justify-content: center; margin-bottom: 20px;
-  }
-  .about-photo {
-    width: 120px; height: 120px; border-radius: 50%;
-    object-fit: cover; object-position: center top;
-    border: 3px solid var(--surface);
-    box-shadow: 0 0 0 6px var(--sage-xl), var(--sh-md);
-    transition: transform var(--spring), box-shadow var(--ease);
-  }
-  .about-photo:hover { transform: scale(1.05) rotate(-2deg); box-shadow: 0 0 0 8px var(--sage-l), var(--sh-lg); }
+  /* ─── (photo now inline via .about-avatar) ───────────────── */
 
   /* ─── Experience filter chips ──────────────────────────── */
   .exp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
@@ -635,7 +655,10 @@
 
       <div class="reveal">
         <p class="label">About me</p>
-        <h2 class="sec-title">I connect users, data, and product</h2>
+        <div class="about-heading-row">
+          <img src="img/Photo_YutzuChen.jpg" alt="Yutzu Chen" class="about-avatar" />
+          <h2 class="sec-title" style="margin-bottom:0;">I connect users, data, and product</h2>
+        </div>
         <p>I'm a Product Manager with end-to-end experience from discovery through launch and post-release iteration. I've worked across <strong>Taiwan and Germany</strong> — launching LINE Invoice and running experimentation at Holidu.</p>
         <p>I reduced onboarding drop-off from <strong>64% to 20%</strong>, conducted <strong>50+ user interviews</strong>, and built AI workflows that analyzed <strong>20k+ customer reviews</strong>. I like building things that actually reduce someone's real problem.</p>
         <div class="about-chips">
@@ -667,31 +690,28 @@
       </div>
 
       <div class="reveal reveal-d1">
-        <div class="about-photo-wrap">
-          <img src="img/Photo_YutzuChen.jpg" alt="Yutzu Chen" class="about-photo" />
-        </div>
         <div class="about-cards">
-        <div class="a-card sage">
-          <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M8 8h8M8 16h5"/></svg></div>
-          <h4>Product Ownership</h4>
-          <p>Discovery to launch. Comfortable with ambiguity and clear on prioritization.</p>
+          <div class="a-card sage" data-n="01">
+            <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M8 8h8M8 16h5"/></svg></div>
+            <h4>Product Ownership</h4>
+            <p>0 to launch and beyond. I hold the thread between strategy, teams, and shipping.</p>
+          </div>
+          <div class="a-card rose" data-n="02">
+            <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l4-4 4 4 4-6 4 2"/><path d="M3 3v18h18"/></svg></div>
+            <h4>Data &amp; Decisions</h4>
+            <p>A/B tests, funnels, dashboards. Numbers that explain behaviour, not just measure it.</p>
+          </div>
+          <div class="a-card sand" data-n="03">
+            <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
+            <h4>AI &amp; Automation</h4>
+            <p>LLM pipelines that give time back. Built for real teams, not for demos.</p>
+          </div>
+          <div class="a-card lav" data-n="04">
+            <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
+            <h4>UX &amp; Research</h4>
+            <p>50+ interviews, journey maps, wireframes. Solving the right problem first.</p>
+          </div>
         </div>
-        <div class="a-card rose">
-          <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l4-4 4 4 4-6 4 2"/><path d="M3 3v18h18"/></svg></div>
-          <h4>Data-driven Decisions</h4>
-          <p>KPIs, dashboards, A/B testing, and focused analysis to guide product direction.</p>
-        </div>
-        <div class="a-card sand">
-          <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
-          <h4>AI Automation</h4>
-          <p>Building LLM pipelines that solve real repetitive problems, not demos.</p>
-        </div>
-        <div class="a-card lav">
-          <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
-          <h4>UX &amp; Experimentation</h4>
-          <p>User interviews, journey mapping, wireframes, hypothesis-driven experiments.</p>
-        </div>
-        </div><!-- /about-cards -->
       </div>
     </div>
   </div>
@@ -954,13 +974,8 @@
     <!-- Filter chips -->
     <div class="exp-chips reveal">
       <button class="exp-chip active" data-tl="all">All</button>
-      <button class="exp-chip" data-tl="holidu">Holidu</button>
-      <button class="exp-chip" data-tl="line-pm">LINE — Product</button>
-      <button class="exp-chip" data-tl="line-ml">LINE — AI &amp; ML</button>
-      <button class="exp-chip" data-tl="kdan">Kdan Mobile</button>
-      <button class="exp-chip edu-chip" data-tl="lmu">LMU Munich</button>
-      <button class="exp-chip edu-chip" data-tl="nccu">NCCU</button>
-      <button class="exp-chip edu-chip" data-tl="cologne">Cologne</button>
+      <button class="exp-chip" data-tl="work">Work</button>
+      <button class="exp-chip edu-chip" data-tl="edu">Education</button>
     </div>
 
     <div class="tl-wrap reveal">
@@ -1190,33 +1205,13 @@
         </div>
       </div>
 
-      <div class="contact-widget reveal reveal-d1">
-        <h4>I want to contact Yutzu about…</h4>
-        <div class="c-opts">
-          <button class="c-opt" data-m="fulltime">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M5 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/></svg>
-            Full-time Product Manager role
-          </button>
-          <button class="c-opt" data-m="freelance">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="5"/><path d="M8 5v3l2 2"/></svg>
-            Freelance UX / Product project
-          </button>
-          <button class="c-opt" data-m="ai">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="2"/><path d="M8 2v2M8 12v2M2 8h2M12 8h2"/></svg>
-            AI workflow automation
-          </button>
-          <button class="c-opt" data-m="collab">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 13c0-2.2 2-4 4-4h4c2 0 4 1.8 4 4"/><circle cx="8" cy="6" r="3"/></svg>
-            Speaking / collaboration
-          </button>
-        </div>
-        <div class="c-tpl" id="cTpl">
-          <div id="tplText"></div>
-          <button class="copy-btn" id="copyBtn">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="9" height="9" rx="1"/><path d="M5 5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2"/></svg>
-            Copy message
-          </button>
-        </div>
+      <!-- Available from August 2026 -->
+      <div class="reveal reveal-d1" style="padding-top:8px;">
+        <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px;">Available from <strong style="color:var(--text)">August 2026</strong>. Happy to chat before then about full-time roles, freelance projects, or anything at the intersection of product, AI, and UX.</p>
+        <a href="mailto:yutzu.yt.chen@gmail.com" class="btn btn-primary mag-btn" style="display:inline-flex;">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M1 5l7 5 7-5"/></svg>
+          Send me an email
+        </a>
       </div>
     </div>
   </div>
@@ -1391,21 +1386,25 @@ const ro=new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
 /* ─── Experience chip filter ────────────────────────────────── */
+const workIds = ['holidu','line-pm','line-ml','kdan'];
+const eduIds  = ['lmu','nccu','cologne'];
 document.querySelectorAll('.exp-chip').forEach(chip => {
   chip.addEventListener('click', () => {
     document.querySelectorAll('.exp-chip').forEach(c => c.classList.remove('active'));
     chip.classList.add('active');
     const target = chip.dataset.tl;
     document.querySelectorAll('.tl-item').forEach(item => {
+      const id = item.dataset.tl;
       if (target === 'all') {
         item.classList.remove('dimmed');
-      } else {
-        item.classList.toggle('dimmed', item.dataset.tl !== target);
+      } else if (target === 'work') {
+        item.classList.toggle('dimmed', !workIds.includes(id));
+      } else if (target === 'edu') {
+        item.classList.toggle('dimmed', !eduIds.includes(id));
       }
     });
-    // also dim the divider labels when filtering
     document.querySelectorAll('.exp-section-label').forEach(label => {
-      label.style.opacity = target === 'all' ? '1' : '.35';
+      label.style.opacity = target === 'all' ? '1' : '.3';
     });
   });
 });
