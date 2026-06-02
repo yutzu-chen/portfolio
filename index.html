@@ -419,13 +419,19 @@
   .case-card-main {
     min-width: 0;
   }
+  .case-summary-mobile {
+    display: none;
+  }
   .case-card.has-preview .case-preview {
-    order: 2;
     margin-bottom: 0;
     align-self: stretch;
   }
+  .case-card.has-preview:nth-of-type(even) .case-card-main {
+    grid-column: 2;
+  }
   .case-card.has-preview:nth-of-type(even) .case-preview {
-    order: 0;
+    grid-column: 1;
+    grid-row: 1;
   }
   .case-cats { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
   .c-cat {
@@ -437,6 +443,14 @@
   .c-cat.data { background:var(--sand-xl); color:var(--sand); }
   .c-cat.ai   { background:var(--rose-xl); color:var(--rose); }
   .case-card h3 { font-size: 20px; margin-bottom: 14px; line-height: 1.2; }
+  .case-title-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--ease);
+  }
+  .case-title-link:hover {
+    color: var(--sage);
+  }
   .case-preview {
     position: relative;
     margin-bottom: 20px;
@@ -477,6 +491,10 @@
     justify-content: space-between;
     gap: 14px;
     margin-bottom: 16px;
+  }
+  .case-preview-copy {
+    text-align: right;
+    margin-left: auto;
   }
   .case-preview-kicker {
     font-size: 10px;
@@ -601,6 +619,12 @@
   .case-link svg { width: 14px; height: 14px; transition: transform var(--ease); }
   .case-card:hover .case-link { color: var(--text); }
   .case-card:hover .case-link svg { transform: translateX(4px); }
+  .case-card-footer {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-start;
+    order: 3;
+  }
 
   /* Skill radar */
   #radar-wrap { margin-top: 64px; text-align: center; }
@@ -827,39 +851,60 @@
   @media(max-width:680px) {
     section { padding: 64px 0; }
     .about-cards, .creator-cards { grid-template-columns: 1fr; }
+    .cases-grid { display: block; }
+    .cases-grid .case-card + .case-card {
+      margin-top: 20px;
+    }
     .case-row { grid-template-columns: 1fr; }
     .nav-links { display: none; }
     .nav-burger { display: flex; }
     .hero-ctas { flex-direction: column; }
     .work-approach { grid-template-columns: 1fr; }
+    .case-card {
+      padding: 26px 22px;
+    }
     .case-preview {
       padding: 14px;
+      margin-bottom: 12px;
     }
     .case-card.has-preview {
-      grid-template-columns: 1fr;
-      gap: 18px;
+      display: block;
     }
-    .case-card.has-preview .case-preview,
-    .case-card.has-preview:nth-of-type(even) .case-preview {
-      order: 0;
+    .case-summary-mobile {
+      display: none !important;
     }
     .case-preview-head {
       align-items: flex-start;
+      justify-content: space-between;
+    }
+    .case-preview-copy {
+      text-align: right;
+    }
+    .case-preview-caption {
+      margin-top: 8px;
+      font-size: 11px;
     }
     .case-phone {
-      width: min(100%, 204px);
-      max-height: 470px;
+      width: min(100%, 172px);
+      max-height: 398px;
     }
     .case-phone-stage {
-      min-height: 380px;
+      min-height: 306px;
+      margin-bottom: 0;
     }
     .case-preview.is-expanded .case-phone {
-      width: min(100%, 226px);
-      max-height: 520px;
-      transform: translateY(-14px) scale(1.02) rotate(0deg);
+      width: min(100%, 188px);
+      max-height: 430px;
+      transform: translateY(-10px) scale(1.01) rotate(0deg);
     }
     .case-preview.is-expanded .case-phone-stage {
-      min-height: 418px;
+      min-height: 320px;
+    }
+    .case-card-footer {
+      margin-top: 14px;
+    }
+    .c-tool {
+      padding: 3px 8px;
     }
     .tl-line { left: 88px; }
     .tl-year { width: 56px; }
@@ -867,16 +912,16 @@
     .about-cards {
       display: block;
       position: relative;
-      padding: 6px 0 28px;
+      padding: 6px 0 40px;
     }
     .a-card {
       position: sticky;
       top: 88px;
       min-height: 220px;
       margin-bottom: 18px;
-      transform: scale(.94);
+      transform: none;
       box-shadow: 0 12px 28px rgba(38,33,29,.08);
-      transition: transform .3s ease, box-shadow .3s ease, opacity .3s ease;
+      transition: box-shadow .25s ease, opacity .25s ease, border-color .25s ease;
     }
     .a-card:nth-child(1) { z-index: 1; }
     .a-card:nth-child(2) { z-index: 2; }
@@ -891,7 +936,6 @@
       max-height: 0;
     }
     .a-card.active {
-      transform: scale(1);
       box-shadow: 0 18px 36px rgba(38,33,29,.12);
       opacity: 1;
     }
@@ -1055,7 +1099,7 @@
           <div class="a-card lav" data-n="04" tabindex="0">
             <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
             <h4>User Experience &amp; UX</h4>
-            <p>50+ interviews, user journey maps, and wireframe/prototype building. Solving the right problem first.</p>
+            <p>50+ interviews, customer journey maps, and wireframe/prototype building. Solving the right problem first.</p>
             <div class="a-card-skills">
               <span class="a-skill">User research</span>
               <span class="a-skill">Prototyping</span>
@@ -1087,7 +1131,7 @@
       <button class="approach-card" data-approach="ux">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M8 8h8M8 16h5"/></svg>
         <h4>Talk to users</h4>
-        <p>Use interviews and user experience research to find the real need.</p>
+        <p>Use interviews and UX research to find the real need.</p>
         <span class="approach-num">02</span>
       </button>
       <button class="approach-card" data-approach="data">
@@ -1134,7 +1178,7 @@
             <span class="c-cat pm">Product Management</span>
             <span class="c-cat ux">User Research</span>
           </div>
-          <h3>Designing a Financial Tool Inside a Messaging App</h3>
+          <h3><a href="case-studies/line-invoice/" class="case-title-link">Designing a Financial Tool Inside a Messaging App</a></h3>
           <div class="case-row vertical">
             <div class="cf">
               <label>Problem</label>
@@ -1148,17 +1192,18 @@
           <div class="cf" style="margin-bottom:14px;">
             <label>What I did</label>
             <ul>
-              <li>Found 70% of potential users had never tried any existing solution — the problem was adoption, not competition.</li>
+              <li>Found 70% of potential users had never tried any existing solution. The problem was adoption, not competition.</li>
               <li>Built a two-track strategy: simplify onboarding for new users, add unique features for experienced ones.</li>
               <li>Coordinated 10+ cross-functional teams from strategy through launch.</li>
             </ul>
           </div>
           <div class="case-tools">
             <span class="c-tool">Market research</span>
-            <span class="c-tool">50+ user interviews</span>
+            <span class="c-tool">Competitive analysis</span>
             <span class="c-tool">Product positioning</span>
-            <span class="c-tool">Roadmap</span>
+            <span class="c-tool">Product strategy</span>
             <span class="c-tool">Go-to-market</span>
+            <span class="c-tool">Roadmap</span>
             <span class="c-tool">Google Analytics</span>
             <span class="c-tool">Grafana</span>
             <span class="c-tool">R</span>
@@ -1167,19 +1212,15 @@
             <label>Impact</label>
             <ul>
               <li>0 → 700k+ users in one year</li>
-              <li>Onboarding drop-off: 64% → 20%</li>
-              <li>Coordinated 10+ cross-functional and international teams</li>
-              <li>Web-first approach removed the "extra app" barrier entirely</li>
+              <li>2022 Top 5 users' favorite app in LINE app</li>
+              <li>Won 2022 LINE Taiwan Project Award</li>
+              <li>Onboarding experience: reduced drop-off from 64% to 20%</li>
             </ul>
           </div>
-          <a href="case-studies/line-invoice/" class="case-link">
-            Read full case study
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
-          </a>
         </div>
         <div class="case-preview" id="invoicePreview">
           <div class="case-preview-head">
-            <div>
+            <div class="case-preview-copy">
               <div class="case-preview-kicker">Product glimpse</div>
               <div class="case-preview-title">A few key LINE Invoice screens from the shipped experience</div>
             </div>
@@ -1208,6 +1249,38 @@
             </div>
           </div>
         </div>
+        <div class="case-summary-mobile" aria-hidden="true">
+          <div class="case-cats">
+            <span class="c-cat pm">Product Management</span>
+            <span class="c-cat ux">User Research</span>
+          </div>
+          <div class="case-tools">
+            <span class="c-tool">Market research</span>
+            <span class="c-tool">Competitive analysis</span>
+            <span class="c-tool">Product positioning</span>
+            <span class="c-tool">Product strategy</span>
+            <span class="c-tool">Go-to-market</span>
+            <span class="c-tool">Roadmap</span>
+            <span class="c-tool">Google Analytics</span>
+            <span class="c-tool">Grafana</span>
+            <span class="c-tool">R</span>
+          </div>
+          <div class="case-impact">
+            <label>Impact</label>
+            <ul>
+              <li>0 → 700k+ users in one year</li>
+              <li>2022 Top 5 users' favorite app in LINE app</li>
+              <li>Won 2022 LINE Taiwan Project Award</li>
+              <li>Onboarding experience: reduced drop-off from 64% to 20%</li>
+            </ul>
+          </div>
+        </div>
+        <div class="case-card-footer">
+          <a href="case-studies/line-invoice/" class="case-link">
+            Read full case study
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+          </a>
+        </div>
       </div>
 
       <!-- Case 2: VoC Platform -->
@@ -1216,11 +1289,11 @@
           <span class="c-cat ai">AI &amp; Automation</span>
           <span class="c-cat data">Data-driven</span>
         </div>
-        <h3>Voice of Customer Intelligence System</h3>
+        <h3><a href="data/voc_platform.pdf" target="_blank" class="case-title-link">Voice of Customer Intelligence System</a></h3>
         <div class="case-row vertical">
           <div class="cf">
             <label>Problem</label>
-            <p>Hundreds of customer reviews arrived weekly across 4 platforms — multilingual, fragmented, and largely unread.</p>
+            <p>Hundreds of customer reviews arrived weekly across multiple platforms - multilingual, fragmented, and largely unread.</p>
           </div>
           <div class="cf">
             <label>My role</label>
@@ -1229,7 +1302,11 @@
         </div>
         <div class="cf" style="margin-bottom:14px;">
           <label>What I did</label>
-          <p>Built an LLM pipeline that aggregates reviews from Trustpilot, Google Play, App Store, and NPS — auto-translates, detects themes, runs sentiment analysis, and generates a structured weekly report. Added a searchable database and an AI chat for deeper exploration.</p>
+          <ul>
+            <li>Built an LLM pipeline that aggregates reviews from different soruces. </li>
+            <li>The system auto-translates, detects themes, and runs sentiment analysis.</li>
+            <li>Added a searchable database and an AI chat for deeper exploration.</li>
+          </ul>
         </div>
         <div class="case-tools">
           <span class="c-tool">Python</span>
@@ -1244,8 +1321,8 @@
           <label>Impact</label>
           <ul>
             <li>20k+ multi-channel reviews analyzed in one unified system</li>
-            <li>Weekly reporting fully automated — no manual work</li>
-            <li>Surfaced recurring bugs teams couldn't see when reviews were scattered</li>
+            <li>Weekly reporting fully automated - no manual work</li>
+            <li>Surfaced recurring bugs teams couldn't see before</li>
             <li>Enabled faster, evidence-backed product prioritization</li>
           </ul>
         </div>
@@ -1261,7 +1338,7 @@
           <span class="c-cat data">Data-driven</span>
           <span class="c-cat ux">UX</span>
         </div>
-        <h3>Holidu: Conversion Uplift Through Experimentation</h3>
+        <h3><a href="#contact" class="case-title-link">Holidu: Conversion Uplift Through Experimentation</a></h3>
         <div class="case-row vertical">
           <div class="cf">
             <label>Problem</label>
@@ -1307,7 +1384,7 @@
           <span class="c-cat ai">AI &amp; Automation</span>
           <span class="c-cat pm">Product Ops</span>
         </div>
-        <h3>Scaling Product Operations with Automation</h3>
+        <h3><a href="data/automation.pdf" target="_blank" class="case-title-link">Scaling Product Operations with Automation</a></h3>
         <div class="case-row vertical">
           <div class="cf">
             <label>Problem</label>
@@ -1315,12 +1392,17 @@
           </div>
           <div class="cf">
             <label>My role</label>
-            <p>Designed and built all four automation pipelines — from identifying the problem through implementation and rollout.</p>
+            <p>Designed and built all four automation pipelines: from identifying the problem through implementation and rollout.</p>
           </div>
         </div>
         <div class="cf" style="margin-bottom:14px;">
           <label>What I did</label>
-          <p>Built 4 automation systems: (1) OpenAI API → auto-upload translation pipeline, (2) Jira automation creating structured experiment docs on ticket status change, (3) Slack announcements on experiment launch, (4) lifecycle automation that closes stale tickets with no response.</p>
+          <ul>
+            <li>OpenAI API → auto-upload translation pipeline</li>
+            <li>Jira automation creating structured experiment docs on ticket status change</li>
+            <li>Slack announcements on experiment launch</li>
+            <li>Lifecycle automation that closes stale tickets with no response</li>
+          </ul>
         </div>
         <div class="case-tools">
           <span class="c-tool">Jira Automation</span>
