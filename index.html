@@ -444,16 +444,80 @@
   /* ─── Animations ─────────────────────────────────────────── */
   @keyframes fadeUp { from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none} }
 
+  /* ─── Photo ─────────────────────────────────────────────── */
+  .about-photo-wrap {
+    display: flex; justify-content: center; margin-bottom: 20px;
+  }
+  .about-photo {
+    width: 120px; height: 120px; border-radius: 50%;
+    object-fit: cover; object-position: center top;
+    border: 3px solid var(--surface);
+    box-shadow: 0 0 0 6px var(--sage-xl), var(--sh-md);
+    transition: transform var(--spring), box-shadow var(--ease);
+  }
+  .about-photo:hover { transform: scale(1.05) rotate(-2deg); box-shadow: 0 0 0 8px var(--sage-l), var(--sh-lg); }
+
+  /* ─── Experience filter chips ──────────────────────────── */
+  .exp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+  .exp-chip {
+    padding: 7px 16px; border-radius: 99px;
+    border: 1.5px solid var(--border); font-size: 12px; font-weight: 500;
+    color: var(--muted); background: var(--surface);
+    transition: all var(--ease);
+  }
+  .exp-chip:hover { border-color: var(--text); color: var(--text); }
+  .exp-chip.active { background: var(--text); border-color: var(--text); color: #fff; }
+  .exp-chip.edu-chip.active { background: var(--lav); border-color: var(--lav); color: #fff; }
+  .tl-item { transition: opacity .3s ease; }
+  .tl-item.dimmed { opacity: .2; }
+
+  /* ─── Album board ───────────────────────────────────────── */
+  .album-board {
+    position: relative; width: 100%; height: 400px;
+    border-radius: var(--r-lg); overflow: hidden;
+    background: var(--bg0); cursor: default;
+    user-select: none;
+  }
+  .album-card {
+    position: absolute; width: 170px;
+    border-radius: var(--r-md); overflow: hidden;
+    box-shadow: var(--sh-lg); cursor: grab;
+    transition: box-shadow .2s ease;
+    transform-origin: center;
+    will-change: transform;
+  }
+  .album-card:active { cursor: grabbing; box-shadow: 0 24px 64px rgba(0,0,0,.18); }
+  .album-card img {
+    width: 100%; height: 170px;
+    object-fit: cover; display: block;
+    pointer-events: none;
+  }
+  .album-card-body {
+    background: var(--surface); padding: 12px 14px 14px;
+  }
+  .album-card-tag {
+    font-size: 9px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
+  }
+  .album-card-title { font-family: var(--ff-serif); font-size: 14px; line-height: 1.3; }
+  .album-board-hint {
+    position: absolute; bottom: 14px; right: 18px;
+    font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 6px;
+    pointer-events: none;
+  }
+  .album-board-hint svg { width: 12px; height: 12px; }
+
   /* ─── Responsive ─────────────────────────────────────────── */
   @media(max-width:900px) {
     .hero-inner { grid-template-columns: 1fr; }
     .hero-card-wrap { display: none; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
     .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-    .creator-grid { grid-template-columns: 1fr; gap: 40px; }
+    .creator-outer { grid-template-columns: 1fr !important; gap: 40px; }
     .cases-grid { grid-template-columns: 1fr; }
     .work-approach { grid-template-columns: 1fr 1fr; }
     .exp-section-label { padding-left: 24px; }
+    .album-board { height: 320px; }
   }
   @media(max-width:680px) {
     section { padding: 64px 0; }
@@ -574,7 +638,6 @@
         <h2 class="sec-title">I connect users, data, and product</h2>
         <p>I'm a Product Manager with end-to-end experience from discovery through launch and post-release iteration. I've worked across <strong>Taiwan and Germany</strong> — launching LINE Invoice and running experimentation at Holidu.</p>
         <p>I reduced onboarding drop-off from <strong>64% to 20%</strong>, conducted <strong>50+ user interviews</strong>, and built AI workflows that analyzed <strong>20k+ customer reviews</strong>. I like building things that actually reduce someone's real problem.</p>
-        <p>Currently finishing my <strong>Masters at LMU Munich</strong> — and documenting travels on Instagram in between.</p>
         <div class="about-chips">
           <span class="about-chip">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6M5 5.5h6M5 10.5h4"/></svg>
@@ -603,7 +666,11 @@
         </div>
       </div>
 
-      <div class="about-cards reveal reveal-d1">
+      <div class="reveal reveal-d1">
+        <div class="about-photo-wrap">
+          <img src="img/Photo_YutzuChen.jpg" alt="Yutzu Chen" class="about-photo" />
+        </div>
+        <div class="about-cards">
         <div class="a-card sage">
           <div class="a-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M8 8h8M8 16h5"/></svg></div>
           <h4>Product Ownership</h4>
@@ -624,6 +691,7 @@
           <h4>UX &amp; Experimentation</h4>
           <p>User interviews, journey mapping, wireframes, hypothesis-driven experiments.</p>
         </div>
+        </div><!-- /about-cards -->
       </div>
     </div>
   </div>
@@ -872,12 +940,6 @@
 
     </div>
 
-    <!-- Skill radar -->
-    <div id="radar-wrap" class="reveal">
-      <h3>Skill depth — hover the dots</h3>
-      <canvas id="radar-canvas" width="380" height="380"></canvas>
-    </div>
-
   </div>
 </section>
 
@@ -889,13 +951,25 @@
       <h2 class="sec-title">Experience &amp; education</h2>
     </div>
 
+    <!-- Filter chips -->
+    <div class="exp-chips reveal">
+      <button class="exp-chip active" data-tl="all">All</button>
+      <button class="exp-chip" data-tl="holidu">Holidu</button>
+      <button class="exp-chip" data-tl="line-pm">LINE — Product</button>
+      <button class="exp-chip" data-tl="line-ml">LINE — AI &amp; ML</button>
+      <button class="exp-chip" data-tl="kdan">Kdan Mobile</button>
+      <button class="exp-chip edu-chip" data-tl="lmu">LMU Munich</button>
+      <button class="exp-chip edu-chip" data-tl="nccu">NCCU</button>
+      <button class="exp-chip edu-chip" data-tl="cologne">Cologne</button>
+    </div>
+
     <div class="tl-wrap reveal">
       <div class="tl-line"></div>
 
       <!-- Work -->
       <div class="exp-section-label">Work</div>
 
-      <div class="tl-item">
+      <div class="tl-item" data-tl="holidu">
         <div class="tl-year">2024–26</div>
         <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
         <div class="tl-body">
@@ -915,7 +989,7 @@
         </div>
       </div>
 
-      <div class="tl-item">
+      <div class="tl-item" data-tl="line-pm">
         <div class="tl-year">2021–23</div>
         <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
         <div class="tl-body">
@@ -935,7 +1009,7 @@
         </div>
       </div>
 
-      <div class="tl-item">
+      <div class="tl-item" data-tl="line-ml">
         <div class="tl-year">2020–23</div>
         <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
         <div class="tl-body">
@@ -955,7 +1029,7 @@
         </div>
       </div>
 
-      <div class="tl-item">
+      <div class="tl-item" data-tl="kdan">
         <div class="tl-year">2019–20</div>
         <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
         <div class="tl-body">
@@ -972,7 +1046,7 @@
       <!-- Education -->
       <div class="exp-section-label" style="margin-top:56px;">Education</div>
 
-      <div class="tl-item edu">
+      <div class="tl-item edu" data-tl="lmu">
         <div class="tl-year">2023–26</div>
         <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
         <div class="tl-body">
@@ -988,7 +1062,7 @@
         </div>
       </div>
 
-      <div class="tl-item edu">
+      <div class="tl-item edu" data-tl="nccu">
         <div class="tl-year">2016–20</div>
         <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
         <div class="tl-body">
@@ -998,7 +1072,7 @@
         </div>
       </div>
 
-      <div class="tl-item edu">
+      <div class="tl-item edu" data-tl="cologne">
         <div class="tl-year">2020</div>
         <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
         <div class="tl-body">
@@ -1015,39 +1089,74 @@
 <!-- ── CREATOR ────────────────────────────────────────────────── -->
 <section id="creator">
   <div class="container">
-    <div class="creator-grid">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;" class="creator-outer">
+
       <div class="reveal">
         <p class="label">Beyond the PM</p>
-        <h2 class="sec-title">I make things — <em style="font-style:italic;color:var(--sand)">and I film them</em></h2>
-        <p style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:20px;">When I'm not thinking about product, I'm traveling — and documenting what I find. I make short travel videos and share slices of daily life, curiosity, and new places on Instagram.</p>
-        <p style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:28px;">It started as a creative outlet but turned into a practice in visual storytelling — noticing details, framing moments, editing with intention. Skills that feel surprisingly close to product thinking.</p>
+        <h2 class="sec-title">I document what I find — <em style="font-style:italic;color:var(--sand)">and share it</em></h2>
+        <p style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:16px;">
+          On Instagram I write and film at the intersection of PM thinking, life between Taiwan and Europe, and the quieter questions of career and growth. Warm but structured. Real, not performative.
+        </p>
+        <p style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:28px;">
+          I travel, notice things, build systems, and try to share them in a way that's actually useful — not just content for content's sake.
+        </p>
         <a href="https://www.instagram.com/yutzu.journal" target="_blank" rel="noopener" class="ig-handle">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
           @yutzu.journal
         </a>
       </div>
-      <div class="creator-cards reveal reveal-d1">
-        <div class="cr-card travel">
-          <div class="cr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0-4 4-4 9s4 9 4 9"/><path d="M12 3c0 0 4 4 4 9s-4 9-4 9"/><path d="M3 12h18"/></svg></div>
-          <h4>Travel</h4>
-          <p>Exploring across Europe, Asia, and beyond. Always looking for spots that don't make it into guides.</p>
-        </div>
-        <div class="cr-card video">
-          <div class="cr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 9l5-3v12l-5-3"/></svg></div>
-          <h4>Video Making</h4>
-          <p>Short-form travel and daily-life videos. Filming, editing, finding the story in the footage.</p>
-        </div>
-        <div class="cr-card ig">
-          <div class="cr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
-          <h4>@yutzu.journal</h4>
-          <p>Travel videos, everyday moments, and curiosity about the world. Come say hi.</p>
-        </div>
-        <div class="cr-card thesis">
-          <div class="cr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V6a2 2 0 0 1 2-2h13"/><path d="M4 19a2 2 0 0 0 2 2h13V8H6a2 2 0 0 0-2 2"/><path d="M9 12h6M9 16h4"/></svg></div>
-          <h4>AI Research</h4>
-          <p>LMU Munich thesis mapping AI agents through systematic LLM-based extraction.</p>
+
+      <!-- Draggable album board -->
+      <div class="reveal reveal-d1">
+        <div class="album-board" id="albumBoard">
+
+          <div class="album-card" style="left:20px;top:30px;transform:rotate(-3deg);">
+            <div style="height:140px;background:linear-gradient(135deg,#cce0d8,#7a9e8e);display:flex;align-items:center;justify-content:center;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" opacity=".7"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M8 8h8M8 16h5"/></svg>
+            </div>
+            <div class="album-card-body">
+              <div class="album-card-tag">PM × AI × UX</div>
+              <div class="album-card-title">Systems thinking in product</div>
+            </div>
+          </div>
+
+          <div class="album-card" style="left:210px;top:10px;transform:rotate(2.5deg);">
+            <div style="height:140px;background:linear-gradient(135deg,#ecdcc4,#c4a47a);display:flex;align-items:center;justify-content:center;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" opacity=".7"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0-4 4-4 9s4 9 4 9"/><path d="M3 12h18"/></svg>
+            </div>
+            <div class="album-card-body">
+              <div class="album-card-tag">Taiwan × Germany</div>
+              <div class="album-card-title">Living between two worlds</div>
+            </div>
+          </div>
+
+          <div class="album-card" style="left:40px;top:215px;transform:rotate(1.5deg);">
+            <div style="height:140px;background:linear-gradient(135deg,#f0d5d5,#bc7e7e);display:flex;align-items:center;justify-content:center;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" opacity=".7"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            </div>
+            <div class="album-card-body">
+              <div class="album-card-tag">Career &amp; Growth</div>
+              <div class="album-card-title">Navigating transitions with clarity</div>
+            </div>
+          </div>
+
+          <div class="album-card" style="left:225px;top:200px;transform:rotate(-2deg);">
+            <div style="height:140px;background:linear-gradient(135deg,#d8d2f0,#9485c0);display:flex;align-items:center;justify-content:center;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" opacity=".7"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 9l5-3v12l-5-3"/></svg>
+            </div>
+            <div class="album-card-body">
+              <div class="album-card-tag">Travel &amp; Video</div>
+              <div class="album-card-title">Filming what I find</div>
+            </div>
+          </div>
+
+          <div class="album-board-hint">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2C5.4 2 5 2.4 5 3v1H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-1V3c0-.6-.4-1-1-1H6zm0 1h4v1H6V3z"/></svg>
+            Drag the cards
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1281,79 +1390,122 @@ const ro=new IntersectionObserver(entries=>{
 },{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-/* ─── Radar chart ──────────────────────────────────────────── */
-(function(){
-  const canvas=document.getElementById('radar-canvas');
-  if(!canvas)return;
-  const ctx=canvas.getContext('2d');
-  const W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=W*.38;
-  const skills=[
-    {label:'Product Strategy',val:.92},
-    {label:'User Research',val:.85},
-    {label:'A/B Testing',val:.88},
-    {label:'AI Workflows',val:.80},
-    {label:'Data Analysis',val:.87},
-    {label:'Roadmap & Prio',val:.90},
-  ];
-  const N=skills.length, step=(Math.PI*2)/N;
-  function pt(i,r){const a=i*step-Math.PI/2;return[cx+Math.cos(a)*r,cy+Math.sin(a)*r];}
-  let hov=-1, prog=0;
-  function draw(p){
-    ctx.clearRect(0,0,W,H);
-    for(let ring=1;ring<=4;ring++){
-      const r=R*ring/4;
-      ctx.beginPath();
-      for(let i=0;i<N;i++){const[px,py]=pt(i,r);i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);}
-      ctx.closePath();ctx.strokeStyle='#e6dfd5';ctx.lineWidth=1;ctx.stroke();
-    }
-    for(let i=0;i<N;i++){
-      const[px,py]=pt(i,R);
-      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(px,py);
-      ctx.strokeStyle='#e6dfd5';ctx.lineWidth=1;ctx.stroke();
-    }
-    ctx.beginPath();
-    for(let i=0;i<N;i++){const[px,py]=pt(i,R*skills[i].val*p);i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);}
-    ctx.closePath();ctx.fillStyle='rgba(122,158,142,.15)';ctx.fill();
-    ctx.strokeStyle='#7a9e8e';ctx.lineWidth=2;ctx.stroke();
-    for(let i=0;i<N;i++){
-      const[px,py]=pt(i,R*skills[i].val*p);
-      const isH=i===hov;
-      ctx.beginPath();ctx.arc(px,py,isH?7:4,0,Math.PI*2);
-      ctx.fillStyle=isH?'#7a9e8e':'#fff';ctx.fill();
-      ctx.strokeStyle='#7a9e8e';ctx.lineWidth=2;ctx.stroke();
-      if(isH){
-        ctx.fillStyle='#26211d';ctx.font='600 12px Inter,system-ui';ctx.textAlign='center';
-        ctx.fillText(skills[i].label,px,py-14);
-        ctx.fillStyle='#7a9e8e';ctx.font='500 11px Inter,system-ui';
-        ctx.fillText(Math.round(skills[i].val*100)+'%',px,py-2);
-      }
-    }
-    for(let i=0;i<N;i++){
-      const[px,py]=pt(i,R+26);
-      ctx.fillStyle=i===hov?'#26211d':'#7c7168';
-      ctx.font=i===hov?'600 11px Inter':'500 11px Inter';
-      ctx.textAlign='center';ctx.fillText(skills[i].label,px,py+4);
-    }
-  }
-  const radarObs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        prog=0;
-        (function anim(){if(prog<1){prog=Math.min(prog+.025,1);draw(prog);requestAnimationFrame(anim);}else draw(1);})();
-        radarObs.unobserve(e.target);
+/* ─── Experience chip filter ────────────────────────────────── */
+document.querySelectorAll('.exp-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.exp-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    const target = chip.dataset.tl;
+    document.querySelectorAll('.tl-item').forEach(item => {
+      if (target === 'all') {
+        item.classList.remove('dimmed');
+      } else {
+        item.classList.toggle('dimmed', item.dataset.tl !== target);
       }
     });
-  },{threshold:.3});
-  radarObs.observe(canvas);
-  draw(0);
-  canvas.addEventListener('mousemove',e=>{
-    const r=canvas.getBoundingClientRect();
-    const mx=(e.clientX-r.left)*(W/r.width),my=(e.clientY-r.top)*(H/r.height);
-    let f=-1;
-    for(let i=0;i<N;i++){const[px,py]=pt(i,R*skills[i].val);if(Math.hypot(mx-px,my-py)<16){f=i;break;}}
-    if(f!==hov){hov=f;draw(1);}
+    // also dim the divider labels when filtering
+    document.querySelectorAll('.exp-section-label').forEach(label => {
+      label.style.opacity = target === 'all' ? '1' : '.35';
+    });
   });
-  canvas.addEventListener('mouseleave',()=>{hov=-1;draw(1);});
+});
+
+/* ─── Album board drag ──────────────────────────────────────── */
+(function() {
+  const board = document.getElementById('albumBoard');
+  if (!board) return;
+  const cards = board.querySelectorAll('.album-card');
+
+  cards.forEach(card => {
+    let dragging = false, ox = 0, oy = 0, startX = 0, startY = 0;
+    let baseLeft = parseInt(card.style.left);
+    let baseTop  = parseInt(card.style.top);
+    let baseRot  = parseFloat((card.style.transform.match(/-?\d+\.?\d*/) || [0])[0]);
+
+    card.addEventListener('mousedown', e => {
+      e.preventDefault();
+      dragging = true;
+      startX = e.clientX; startY = e.clientY;
+      ox = parseInt(card.style.left); oy = parseInt(card.style.top);
+      card.style.zIndex = '10';
+      card.style.transition = 'none';
+      document.body.style.userSelect = 'none';
+    });
+
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      const dx = e.clientX - startX, dy = e.clientY - startY;
+      const boardRect = board.getBoundingClientRect();
+      const newLeft = Math.max(0, Math.min(boardRect.width - card.offsetWidth, ox + dx));
+      const newTop  = Math.max(0, Math.min(boardRect.height - card.offsetHeight, oy + dy));
+      card.style.left = newLeft + 'px';
+      card.style.top  = newTop  + 'px';
+      // slight tilt while dragging
+      const tilt = Math.max(-12, Math.min(12, dx * 0.08));
+      card.style.transform = `rotate(${baseRot + tilt}deg) scale(1.04)`;
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (!dragging) return;
+      dragging = false;
+      card.style.zIndex = '';
+      card.style.transition = 'transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .2s';
+      card.style.transform = `rotate(${baseRot}deg)`;
+      document.body.style.userSelect = '';
+      baseLeft = parseInt(card.style.left);
+      baseTop  = parseInt(card.style.top);
+    });
+
+    // Touch support
+    card.addEventListener('touchstart', e => {
+      const t = e.touches[0];
+      dragging = true;
+      startX = t.clientX; startY = t.clientY;
+      ox = parseInt(card.style.left); oy = parseInt(card.style.top);
+      card.style.zIndex = '10';
+    }, {passive:true});
+
+    document.addEventListener('touchmove', e => {
+      if (!dragging) return;
+      const t = e.touches[0];
+      const dx = t.clientX - startX, dy = t.clientY - startY;
+      const boardRect = board.getBoundingClientRect();
+      card.style.left = Math.max(0, Math.min(boardRect.width - card.offsetWidth, ox + dx)) + 'px';
+      card.style.top  = Math.max(0, Math.min(boardRect.height - card.offsetHeight, oy + dy)) + 'px';
+    }, {passive:true});
+
+    document.addEventListener('touchend', () => {
+      dragging = false; card.style.zIndex = '';
+    });
+  });
+
+  // Cursor proximity: nearby cards gently shift
+  board.addEventListener('mousemove', e => {
+    const boardRect = board.getBoundingClientRect();
+    const mx = e.clientX - boardRect.left, my = e.clientY - boardRect.top;
+    cards.forEach(card => {
+      if (parseInt(card.style.zIndex) === 10) return; // skip if being dragged
+      const cx = parseInt(card.style.left) + card.offsetWidth/2;
+      const cy2 = parseInt(card.style.top) + card.offsetHeight/2;
+      const dist = Math.hypot(mx - cx, my - cy2);
+      if (dist < 120) {
+        const angle = Math.atan2(my - cy2, mx - cx);
+        const push = (120 - dist) / 120 * 8;
+        const rot = parseFloat((card.style.transform.match(/-?\d+\.?\d*/) || [0])[0]);
+        card.style.transform = `rotate(${rot}deg) translate(${-Math.cos(angle)*push}px,${-Math.sin(angle)*push}px)`;
+      } else {
+        const rot = parseFloat((card.style.transform.match(/-?\d+\.?\d*/) || [0])[0]);
+        card.style.transform = `rotate(${rot}deg)`;
+      }
+    });
+  });
+
+  board.addEventListener('mouseleave', () => {
+    cards.forEach(card => {
+      const rot = parseFloat((card.style.transform.match(/-?\d+\.?\d*/) || [0])[0]);
+      card.style.transform = `rotate(${rot}deg)`;
+    });
+  });
 })();
 
 /* ─── Mobile nav ───────────────────────────────────────────── */
