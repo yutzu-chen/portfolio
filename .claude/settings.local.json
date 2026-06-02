@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /Users/yutzuchen/Code/portfolio/.claude)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}
