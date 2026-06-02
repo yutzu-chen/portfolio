@@ -1205,13 +1205,20 @@
         </div>
       </div>
 
-      <!-- Available from August 2026 -->
+      <!-- CTA column -->
       <div class="reveal reveal-d1" style="padding-top:8px;">
-        <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px;">Available from <strong style="color:var(--text)">August 2026</strong>. Happy to chat before then about full-time roles, freelance projects, or anything at the intersection of product, AI, and UX.</p>
-        <a href="mailto:yutzu.yt.chen@gmail.com" class="btn btn-primary mag-btn" style="display:inline-flex;">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M1 5l7 5 7-5"/></svg>
-          Send me an email
-        </a>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;">Available from <strong style="color:var(--text)">August 2026</strong>. Happy to chat before then about full-time roles, freelance projects, or anything at the intersection of product, AI, and UX.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start;">
+          <!-- Replace href with your Calendly link -->
+          <a href="#" target="_blank" rel="noopener" class="btn btn-primary mag-btn">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M11 1v3M5 1v3M2 6h12"/></svg>
+            Book a 30-min call
+          </a>
+          <a href="mailto:yutzu.yt.chen@gmail.com" class="btn btn-outline mag-btn">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M1 5l7 5 7-5"/></svg>
+            Send an email
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -1271,16 +1278,74 @@ function onScroll() {
 window.addEventListener('scroll', onScroll, {passive:true});
 
 /* ─── Parallax ─────────────────────────────────────────────── */
-const pxEls = document.querySelectorAll('[data-speed]');
+// Hero blobs — free-floating, mouse-driven above; scroll-driven below
+const pxBlobs = document.querySelectorAll('.blob[data-speed]');
+// Section parallax layers — background moves slower than text
+// Each section gets:
+//   layer A (decorative circle behind): ~0.08× scroll delta
+//   content (.container): ~0.97× — barely noticeable but creates depth
+const parallaxSections = document.querySelectorAll('section:not(#hero)');
+
+// Inject a lightweight decorative circle into each non-hero section
+parallaxSections.forEach((sec, i) => {
+  const dot = document.createElement('div');
+  // alternate position left/right, gentle size variation
+  const side  = i % 2 === 0 ? '-80px' : 'auto';
+  const side2 = i % 2 === 0 ? 'auto'  : '-80px';
+  const size  = 280 + (i % 3) * 60;
+  const colors = [
+    'rgba(122,158,142,.07)',  // sage
+    'rgba(196,164,122,.07)',  // sand
+    'rgba(148,133,192,.06)',  // lav
+    'rgba(188,126,126,.06)',  // rose
+  ];
+  dot.style.cssText = `
+    position:absolute; border-radius:50%; pointer-events:none; z-index:0;
+    width:${size}px; height:${size}px;
+    background:${colors[i % colors.length]};
+    left:${side}; right:${side2};
+    top:${20 + (i % 4) * 15}%;
+    filter:blur(48px); will-change:transform;
+  `;
+  dot.classList.add('sec-bg-dot');
+  // make sure section is positioned
+  if (getComputedStyle(sec).position === 'static') sec.style.position = 'relative';
+  sec.style.overflow = 'hidden';
+  sec.insertBefore(dot, sec.firstChild);
+});
+
+let rafId = null;
 function doParallax() {
   const sy = window.scrollY;
-  pxEls.forEach(el => {
+  const vh = window.innerHeight;
+
+  // Hero blobs — scroll offset
+  pxBlobs.forEach(el => {
     const speed = parseFloat(el.dataset.speed);
-    const offset = sy * (1 - speed);
-    el.style.transform = `translateY(${offset}px)`;
+    el.style.transform = `translateY(${sy * (1 - speed)}px)`;
   });
+
+  // Per-section: background dot moves slower, text barely drifts
+  parallaxSections.forEach(sec => {
+    const rect   = sec.getBoundingClientRect();
+    const center = rect.top + rect.height / 2 - vh / 2;   // px from viewport center
+
+    // Background decorative dot — moves at 0.08× center offset
+    const bgDot = sec.querySelector('.sec-bg-dot');
+    if (bgDot) bgDot.style.transform = `translateY(${center * 0.08}px)`;
+
+    // Section heading — moves 3% slower than body text (barely visible)
+    const heading = sec.querySelector('.sec-title, .contact-headline');
+    if (heading) heading.style.transform = `translateY(${center * 0.03}px)`;
+  });
+
+  rafId = null;
 }
-window.addEventListener('scroll', doParallax, {passive:true});
+
+window.addEventListener('scroll', () => {
+  if (!rafId) rafId = requestAnimationFrame(doParallax);
+}, {passive: true});
+doParallax(); // run once on load
 
 /* ─── Hero card tilt ───────────────────────────────────────── */
 const hc = document.getElementById('heroCard');
