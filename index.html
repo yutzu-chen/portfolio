@@ -1290,28 +1290,25 @@ const parallaxSections = document.querySelectorAll('section:not(#hero)');
 parallaxSections.forEach((sec, i) => {
   const dot = document.createElement('div');
   // alternate position left/right, gentle size variation
-  const side  = i % 2 === 0 ? '-80px' : 'auto';
-  const side2 = i % 2 === 0 ? 'auto'  : '-80px';
+  const side  = i % 2 === 0 ? '-120px' : 'auto';
+  const side2 = i % 2 === 0 ? 'auto'  : '-120px';
   const size  = 280 + (i % 3) * 60;
   const colors = [
-    'rgba(122,158,142,.07)',  // sage
-    'rgba(196,164,122,.07)',  // sand
-    'rgba(148,133,192,.06)',  // lav
-    'rgba(188,126,126,.06)',  // rose
+    'rgba(122,158,142,.05)',  // sage
+    'rgba(196,164,122,.05)',  // sand
+    'rgba(148,133,192,.04)',  // lav
+    'rgba(188,126,126,.04)',  // rose
   ];
   dot.style.cssText = `
-    position:absolute; border-radius:50%; pointer-events:none; z-index:0;
+    position:fixed; border-radius:50%; pointer-events:none; z-index:-1;
     width:${size}px; height:${size}px;
     background:${colors[i % colors.length]};
     left:${side}; right:${side2};
-    top:${20 + (i % 4) * 15}%;
-    filter:blur(48px); will-change:transform;
+    top:${sec.offsetTop + sec.offsetHeight / 2 - size / 2}px;
+    filter:blur(64px); will-change:none;
   `;
   dot.classList.add('sec-bg-dot');
-  // make sure section is positioned
-  if (getComputedStyle(sec).position === 'static') sec.style.position = 'relative';
-  sec.style.overflow = 'hidden';
-  sec.insertBefore(dot, sec.firstChild);
+  document.body.appendChild(dot);
 });
 
 let rafId = null;
