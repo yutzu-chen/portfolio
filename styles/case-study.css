@@ -1129,15 +1129,14 @@ body:not(.cs-animate) .cs-reveal  { opacity: 1; transform: none; transition: non
 
 /* ── Impact metric pop animation ────────────────────── */
 @keyframes metricPop {
-  0%   { opacity: 0; transform: scale(0.82) translateY(12px); }
-  70%  { transform: scale(1.04) translateY(-2px); }
-  100% { opacity: 1; transform: none; }
+  0%   { transform: scale(0.88) translateY(10px); }
+  70%  { transform: scale(1.03) translateY(-2px); }
+  100% { transform: none; }
 }
+/* Cards are always visible; pop adds a spring entrance on scroll */
 .impact-metric.cs-popped {
-  animation: metricPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation: metricPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
-.impact-metric.cs-delay-1 { animation-delay: 0.08s; }
-.impact-metric.cs-delay-2 { animation-delay: 0.18s; }
 .impact-metric.cs-delay-3 { animation-delay: 0.28s; }
 
 /* ── Gallery crossfade ──────────────────────────────── */

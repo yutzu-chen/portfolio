@@ -134,7 +134,7 @@ function initScrollReveal() {
     ".section",
     ".fact",
     ".step",
-    ".impact-metric",
+    // .impact-metric excluded — handled by initImpactMetrics with its own animation
     ".pull-quote",
     ".case-gallery",
     ".case-chip-list",
@@ -182,18 +182,19 @@ function initImpactMetrics() {
             ?.querySelectorAll(".impact-metric");
           if (cards) {
             cards.forEach((card, i) => {
-              card.style.opacity = "0";
-              card.classList.add(
-                "cs-popped",
-                i === 0 ? "" : i === 1 ? "cs-delay-1" : "cs-delay-2"
-              );
+              // Don't set inline opacity — let the animation handle it
+              setTimeout(() => {
+                card.classList.add("cs-popped");
+                if (i === 1) card.classList.add("cs-delay-1");
+                if (i === 2) card.classList.add("cs-delay-2");
+              }, i * 80);
             });
           }
           obs.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.3 }
+    { threshold: 0.1 }
   );
 
   if (metrics[0]) obs.observe(metrics[0]);
