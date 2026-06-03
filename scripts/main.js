@@ -488,52 +488,43 @@ function initExperienceAccordion() {
   const items = qsa('.tl-item');
   if (!items.length) return;
 
-  const mobileQuery = window.matchMedia('(max-width: 680px)');
-
   function setToggleState(item, button, isOpen) {
     item.classList.toggle('is-open', isOpen);
     button.setAttribute('aria-expanded', String(isOpen));
     button.textContent = isOpen ? 'Show less' : 'Show more';
   }
 
-  function syncAccordion() {
-    items.forEach((item) => {
-      item.classList.remove('mobile-collapsible', 'is-open');
-      const existingToggle = item.querySelector('.tl-toggle');
-      if (existingToggle) existingToggle.remove();
+  items.forEach((item) => {
+    const body = item.querySelector('.tl-body');
+    const summary = body ? body.querySelector('.tl-summary') : null;
+    const list = body ? body.querySelector('ul') : null;
+    const tags = body ? body.querySelector('.tl-tag-row') : null;
+    const hasList = !!list && list.children.length > 0;
+    const hasTagRow = !!tags && tags.children.length > 0;
 
-      if (!mobileQuery.matches) return;
+    if (!body || (!hasList && !hasTagRow)) return;
 
-      const body = item.querySelector('.tl-body');
-      const list = body ? body.querySelector('ul') : null;
-      const tags = body ? body.querySelector('.tl-tag-row') : null;
-      const hasExtraListItems = !!list && list.children.length > 1;
-      const hasTagRow = !!tags && tags.children.length > 0;
+    item.classList.add('collapsible');
 
-      if (!body || (!hasExtraListItems && !hasTagRow)) return;
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'tl-toggle';
+    setToggleState(item, toggle, false);
+    toggle.addEventListener('click', () => {
+      const shouldOpen = !item.classList.contains('is-open');
+      setToggleState(item, toggle, shouldOpen);
+    });
 
-      item.classList.add('mobile-collapsible');
-
-      const toggle = document.createElement('button');
-      toggle.type = 'button';
-      toggle.className = 'tl-toggle';
-      setToggleState(item, toggle, false);
-      toggle.addEventListener('click', () => {
+    [summary, tags].forEach((element) => {
+      if (!element) return;
+      element.addEventListener('click', () => {
         const shouldOpen = !item.classList.contains('is-open');
         setToggleState(item, toggle, shouldOpen);
       });
-
-      body.appendChild(toggle);
     });
-  }
 
-  syncAccordion();
-
-  if (typeof mobileQuery.addEventListener === 'function') {
-    mobileQuery.addEventListener('change', syncAccordion);
-  } else if (typeof mobileQuery.addListener === 'function') {
-    mobileQuery.addListener(syncAccordion);
-  }
+    body.appendChild(toggle);
+  });
 }
 
 function initAlbumBoard() {

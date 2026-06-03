@@ -104,6 +104,12 @@ body.case-study-page {
   border-color: var(--case-text);
 }
 
+.top-actions .btn-primary,
+.top-actions .btn-primary:visited,
+.top-actions .btn-primary:hover {
+  color: #fff;
+}
+
 .hero {
   padding: 28px 0 18px;
   margin-bottom: 34px;
