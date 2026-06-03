@@ -709,9 +709,15 @@ h1 {
     --case-page-pad-x: 14px;
   }
 
-  /* Steps: slim down on mobile */
+  /* Steps: slim down on mobile — center the line in the 40px column */
   .steps::before {
-    left: 19px;
+    left: 20px;
+  }
+
+  .step-no {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
   }
 
   /* Impact: 2-col on medium-small */
@@ -742,7 +748,9 @@ h1 {
   }
 
   .step {
-    grid-template-columns: 1fr;
+    /* Keep two-column layout — step-no beside step-body */
+    grid-template-columns: 40px 1fr;
+    gap: 14px;
   }
 
   .case-gallery-head {
