@@ -266,6 +266,33 @@ function initToc() {
   }, { passive: true });
 }
 
+/* ─── 3D tilt on impact metrics ────────────────────────── */
+function initMetricTilt() {
+  document.querySelectorAll('.impact-metric').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale(1.04)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
+
+/* ─── Wiggle on fact cards ──────────────────────────────── */
+function initFactWiggle() {
+  document.querySelectorAll('.fact').forEach(card => {
+    card.addEventListener('click', () => {
+      card.style.animation = 'none';
+      void card.offsetWidth; // reflow
+      card.style.animation = 'factWiggle 0.4s cubic-bezier(0.36,0.07,0.19,0.97)';
+      setTimeout(() => { card.style.animation = ''; }, 400);
+    });
+  });
+}
+
 /* ─── Back button magnetic hover ───────────────────────── */
 function initMagneticBack() {
   const btn = document.querySelector(".back-link");
@@ -288,3 +315,5 @@ initScrollReveal();
 initImpactMetrics();
 initToc();
 initMagneticBack();
+initMetricTilt();
+initFactWiggle();

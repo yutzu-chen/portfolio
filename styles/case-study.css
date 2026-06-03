@@ -260,31 +260,86 @@ h1 {
   margin-top: 14px;
 }
 
+/* ── Fact sticker cards ─────────────────────────────── */
 .facts {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 14px;
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 .fact {
-  border-left: 3px solid var(--case-sage);
-  padding-left: 14px;
+  flex: 1 1 220px;
+  padding: 22px 20px 20px;
+  border-radius: 18px;
+  border: none;
+  border-left: none;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1),
+              box-shadow 0.3s ease;
 }
 
+.fact:nth-child(1) {
+  background: var(--case-sage-soft);
+  transform: rotate(-2deg);
+}
+.fact:nth-child(2) {
+  background: rgba(188, 126, 126, 0.12);
+  transform: rotate(1.5deg);
+}
+
+.fact:hover {
+  transform: rotate(0deg) scale(1.04) translateY(-5px) !important;
+  box-shadow: 0 20px 48px rgba(38,33,29,0.12);
+  z-index: 2;
+}
+
+/* Ghost big text behind each card */
+.fact::after {
+  content: '';
+  position: absolute;
+  bottom: -14px; right: 12px;
+  font-family: var(--case-ff-serif);
+  font-size: 80px;
+  opacity: 0.06;
+  line-height: 1;
+  pointer-events: none;
+  color: var(--case-text);
+}
+.fact:nth-child(1)::after { content: '70%'; }
+.fact:nth-child(2)::after { content: '↗'; }
+
 .fact span {
-  display: block;
-  font-size: 10px;
-  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--case-muted);
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+.fact:nth-child(1) span {
+  background: rgba(122,158,142,0.2);
+  color: #4a7a6a;
+}
+.fact:nth-child(2) span {
+  background: rgba(188,126,126,0.18);
+  color: #9a5a5a;
 }
 
 .fact strong {
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.5;
+  display: block;
+  font-family: var(--case-ff-serif);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.45;
+  font-style: italic;
+  color: var(--case-text);
 }
 
 .steps {
@@ -406,33 +461,59 @@ h1 {
 }
 
 .impact-metric {
-  background: var(--case-bg-soft);
-  border: 1px solid var(--case-border);
-  border-radius: var(--case-radius-md);
-  padding: 22px 16px 18px;
+  border: none;
+  border-radius: 20px;
+  padding: 28px 22px 22px;
   text-align: center;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+/* Individual color per card */
+.impact-metric:nth-child(1) { background: var(--case-sage-soft); }
+.impact-metric:nth-child(2) { background: rgba(188,126,126,0.12); }
+.impact-metric:nth-child(3) { background: rgba(196,164,122,0.15); }
+
+/* Ghost number watermark */
+.impact-metric::before {
+  content: attr(data-ghost);
+  position: absolute;
+  bottom: -16px; right: 8px;
+  font-family: var(--case-ff-serif);
+  font-size: 72px;
+  line-height: 1;
+  opacity: 0.07;
+  color: var(--case-text);
+  pointer-events: none;
+  user-select: none;
 }
 
 .impact-metric:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(38, 33, 29, 0.08);
+  box-shadow: 0 16px 44px rgba(38,33,29,0.10);
 }
 
 .metric-num {
   display: block;
   font-family: var(--case-ff-serif);
-  font-size: clamp(22px, 3.5vw, 34px);
-  color: var(--case-text);
-  line-height: 1.1;
-  margin-bottom: 8px;
+  font-size: clamp(26px, 4.5vw, 44px);
+  font-style: italic;
+  line-height: 1.0;
+  margin-bottom: 10px;
 }
+.impact-metric:nth-child(1) .metric-num { color: #3d7060; }
+.impact-metric:nth-child(2) .metric-num { color: #8a4a4a; }
+.impact-metric:nth-child(3) .metric-num { color: #7a5a2a; }
 
 .metric-label {
   display: block;
-  font-size: 12px;
+  font-size: 11.5px;
+  font-weight: 500;
   color: var(--case-muted);
   line-height: 1.4;
+  letter-spacing: 0.01em;
 }
 
 .impact-points {
@@ -1230,4 +1311,25 @@ body:not(.cs-animate) .cs-reveal  { opacity: 1; transform: none; transition: non
   color: rgba(255,255,255,0.75);
   background: linear-gradient(to top, rgba(38,33,29,0.55), transparent);
   letter-spacing: 0.02em;
+}
+
+/* ── Fact card wiggle (on click) ─────────────────────── */
+@keyframes factWiggle {
+  0%,100% { transform: rotate(var(--base-rot, 0deg)); }
+  20%  { transform: rotate(calc(var(--base-rot, 0deg) - 4deg)) scale(1.05); }
+  40%  { transform: rotate(calc(var(--base-rot, 0deg) + 3deg)) scale(1.03); }
+  60%  { transform: rotate(calc(var(--base-rot, 0deg) - 2deg)); }
+  80%  { transform: rotate(calc(var(--base-rot, 0deg) + 1deg)); }
+}
+
+/* Also remove the enhanced fact hover that was added earlier (conflicts) */
+.fact:hover {
+  border-left: none;
+  box-shadow: 0 20px 48px rgba(38,33,29,0.12);
+}
+
+@media (max-width: 540px) {
+  .fact { flex: 1 1 100%; }
+  .fact:nth-child(1) { transform: rotate(-1deg); }
+  .fact:nth-child(2) { transform: rotate(.8deg); }
 }
