@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f2ec" />
+  <title>Voice of Customer Intelligence System - Yutzu Chen</title>
+  <meta
+    name="description"
+    content="How Yutzu Chen built a Voice of Customer intelligence system to turn scattered reviews into searchable, actionable product insights."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../../styles/case-study.css" />
+</head>
+<body class="case-study-page">
+  <div class="case-page">
+    <div class="topbar">
+      <a class="back-link" href="../../index.html">
+        <span>&larr;</span>
+        <span>Back to portfolio</span>
+      </a>
+      <div class="top-actions">
+        <a class="btn btn-primary" href="../../index.html#contact">Contact me</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-intro">
+        <p class="eyebrow cs-fade-in">Case Study 03</p>
+        <h1 class="cs-fade-in cs-fade-in-d1">Building a Voice of Customer intelligence system</h1>
+        <p class="hero-copy cs-fade-in cs-fade-in-d2">
+          I built a system that collected review signals from multiple channels, translated them
+          into one language, grouped recurring themes, and turned a noisy pile of feedback into
+          something product managers could actually use.
+        </p>
+        <div class="hero-meta cs-fade-in cs-fade-in-d3">
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span class="hero-meta-value">Dashboard Building</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span class="hero-meta-value">Data Analysis</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span class="hero-meta-value">Customer Insights</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span class="hero-meta-value">AI / LLM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content">
+      <section class="section" id="sec-context">
+        <h2 class="section-title">Context</h2>
+        <p>
+          Customer feedback was coming in from several places at once: NPS feedback, Trustpilot,
+          Google Play, and the Apple App Store. The problem was not a lack of feedback. It was
+          that the feedback was fragmented, multilingual, and difficult to compare.
+        </p>
+        <p>
+          Product teams were spending time manually looking through individual reviews, which made
+          it hard to spot repeated issues, emerging bugs, or trends in what users actually felt.
+        </p>
+        <blockquote class="pull-quote">
+          <p>We had plenty of feedback, but not enough visibility into the patterns behind it.</p>
+        </blockquote>
+      </section>
+
+      <section class="section" id="sec-users">
+        <h2 class="section-title">Treating PMs as the users</h2>
+        <p>
+          I approached the project by treating product managers as the primary users of the
+          system. The workflow had to answer practical questions quickly: what customers complain
+          about most, what they praise, and which themes are getting stronger after a release.
+        </p>
+        <p>
+          That framing shaped the requirements. The system needed to aggregate feedback from
+          multiple sources, normalize the data, translate it, detect recurring themes, and make
+          the underlying reviews searchable.
+        </p>
+        <figure class="launch-photo is-document">
+          <img src="../../img/voc_dashboard.png" alt="Voice of Customer dashboard showing searchable insights and review summaries" />
+        </figure>
+      </section>
+
+      <section class="section" id="sec-workflow">
+        <h2 class="section-title">Designing the user flow</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-no">01</div>
+            <div class="step-body">
+              <h3>Weekly summary first</h3>
+              <p>
+                The user flow starts with a weekly customer feedback summary so PMs can get a quick
+                read on what is happening before diving into individual reviews.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-no">02</div>
+            <div class="step-body">
+              <h3>Themes and examples</h3>
+              <p>
+                The report highlights recurring positive and negative themes, then links each
+                theme back to real review examples so the team can validate the signal.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-no">03</div>
+            <div class="step-body">
+              <h3>From theme to product area</h3>
+              <p>
+                Insights are mapped to specific journey points like search, booking, or checkout
+                so teams can move from sentiment to a concrete area of investigation.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-no">04</div>
+            <div class="step-body">
+              <h3>Top-down and bottom-up analysis</h3>
+              <p>
+                They can check top-down from the sentiment / AI summary of the themes, or drill down into individual reviews via the dashboard or the AI chat feature. It shortens the distance between raw reviews and the next product decision.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="sec-system">
+        <h2 class="section-title">Building the system</h2>
+        <p>
+          I designed a pipeline that collected customer feedback from different platforms, brought
+          it into a unified dataset, translated it into English, and used OpenAI API for theme detection and sentiment analysis.
+        </p>
+        <p>
+          That dataset then fed a searchable review database, insight summaries, and a weekly VoC
+          report that gave the team a single place to explore feedback.
+        </p>
+        <figure class="launch-photo is-document">
+          <img src="../../img/voc_diagram.jpg" alt="Voice of Customer system diagram showing feedback sources, AI processing, and reporting" />
+          <figcaption>Feedback flows from multiple sources into a single system for analysis and reporting.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section" id="sec-impact">
+        <h2 class="section-title">Impact</h2>
+        <div class="impact-metrics">
+          <div class="impact-metric" data-ghost="20k">
+            <span class="metric-num">20k+</span>
+            <span class="metric-label">Reviews centralized</span>
+          </div>
+          <div class="impact-metric" data-ghost="Weekly">
+            <span class="metric-num">Weekly</span>
+            <span class="metric-label">Reporting automated</span>
+          </div>
+          <div class="impact-metric" data-ghost="Faster">
+            <span class="metric-num">Faster</span>
+            <span class="metric-label">Recurring bugs surfaced</span>
+          </div>
+        </div>
+        <ul class="impact-points">
+          <li>Found issues and bugs early in the development process</li>
+          <li>Reduced the manual effort needed to review feedback across platforms</li>
+          <li>Improved visibility into sentiment across the product journey</li>
+          <li>Made customer feedback a regular input into product discussions</li>
+        </ul>
+      </section>
+
+      <section class="section" id="sec-learnings">
+        <h2 class="section-title">Lessons learned</h2>
+        <p>
+          Customer feedback becomes much more valuable when it is structured and centralized.
+          Raw reviews are easy to collect, but they are hard to use without an internal system
+          that keeps them organized.
+        </p>
+        <p>
+          I also learned that internal tools benefit from the same product thinking as user-facing
+          features. When you design for the real weekly workflow of the people using the tool, the
+          system becomes easier to adopt and more useful in practice.
+        </p>
+      </section>
+
+      <section class="section" id="sec-reflection">
+        <h2 class="section-title">Reflection</h2>
+        <p>
+          This project was about closing the gap between customer feedback and product decisions.
+          Instead of relying on scattered signals, the team gained a structured view of how users
+          were actually experiencing the product.
+        </p>
+      </section>
+
+      <section class="section" id="sec-tools">
+        <h2 class="section-title">Tools used</h2>
+        <div class="case-chip-list">
+          <span class="chip">LLM / prompt design</span>
+          <span class="chip">Dashboard building</span>
+          <span class="chip">Sentiment analysis</span>
+          <span class="chip">Theme detection</span>
+          <span class="chip">Cursor</span>
+          <span class="chip">Claude Code</span>
+          <span class="chip">Python</span>
+          <span class="chip">OpenAI API</span>
+          <span class="chip">Trustpilot API</span>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script defer src="../../scripts/case-study.js"></script>
+</body>
+</html>

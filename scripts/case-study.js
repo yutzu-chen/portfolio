@@ -10,7 +10,10 @@ function initCaseStudyHeroVisuals() {
       const rect = heroVisual.getBoundingClientRect();
       const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
       const progress = 1 - Math.min(Math.max(rect.top / (viewportHeight * 0.9), 0), 1);
-      const scale = 1.03 + progress * 0.11;
+      const isContainHero = heroVisual.classList.contains("is-contain");
+      const scale = isContainHero
+        ? 1 + progress * 0.04
+        : 1.03 + progress * 0.11;
       heroVisual.style.setProperty("--hero-scale", scale.toFixed(3));
       heroVisual.classList.toggle(
         "is-inview",
@@ -26,6 +29,94 @@ function initCaseStudyHeroVisuals() {
     requestUpdate();
     window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate);
+  });
+}
+
+/* ─── Image zoom / lightbox ───────────────────────────── */
+function initCaseStudyImageZoom() {
+  const zoomableSelectors = [
+    ".hero-visual",
+    ".launch-photo.is-document",
+    ".case-gallery-screen",
+  ];
+  const zoomable = Array.from(document.querySelectorAll(zoomableSelectors.join(", ")));
+  if (zoomable.length === 0) return;
+
+  const overlay = document.createElement("div");
+  overlay.className = "case-image-zoom";
+  overlay.innerHTML = `
+    <button class="case-image-zoom-close" type="button" aria-label="Close zoomed image">×</button>
+    <figure class="case-image-zoom-frame" role="dialog" aria-modal="true" aria-label="Zoomed image">
+      <img class="case-image-zoom-img" alt="" />
+      <figcaption class="case-image-zoom-caption"></figcaption>
+    </figure>
+  `;
+  document.body.appendChild(overlay);
+
+  const img = overlay.querySelector(".case-image-zoom-img");
+  const caption = overlay.querySelector(".case-image-zoom-caption");
+  const closeBtn = overlay.querySelector(".case-image-zoom-close");
+
+  let lastFocused = null;
+
+  function closeZoom() {
+    overlay.classList.remove("is-open");
+    document.body.classList.remove("is-zoom-locked");
+    if (lastFocused && typeof lastFocused.focus === "function") {
+      lastFocused.focus();
+    }
+    lastFocused = null;
+  }
+
+  function openZoomFrom(trigger) {
+    const sourceImg = trigger.querySelector("img");
+    if (!sourceImg) return;
+
+    lastFocused = trigger;
+    img.src = sourceImg.currentSrc || sourceImg.src;
+    img.alt = sourceImg.alt || "";
+
+    const figcaption = trigger.querySelector("figcaption");
+    caption.textContent = figcaption ? figcaption.textContent.trim() : sourceImg.alt || "";
+
+    document.body.classList.add("is-zoom-locked");
+    overlay.classList.add("is-open");
+    window.requestAnimationFrame(() => closeBtn.focus());
+  }
+
+  zoomable.forEach((trigger) => {
+    const hasInteractiveDescendant = trigger.matches("figure") || trigger.matches(".hero-visual") || trigger.matches(".case-gallery-screen");
+    if (!hasInteractiveDescendant) return;
+
+    trigger.classList.add("is-zoomable");
+    trigger.setAttribute("role", "button");
+    trigger.setAttribute("tabindex", "0");
+    trigger.setAttribute("aria-label", "Open image in zoomed view");
+
+    trigger.addEventListener("click", (e) => {
+      if (e.target.closest(".case-gallery-btn")) return;
+      if (e.target.closest("button")) return;
+      openZoomFrom(trigger);
+    });
+
+    trigger.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openZoomFrom(trigger);
+      }
+    });
+  });
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      closeZoom();
+    }
+  });
+  closeBtn.addEventListener("click", closeZoom);
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.classList.contains("is-open")) {
+      closeZoom();
+    }
   });
 }
 
@@ -132,9 +223,9 @@ function initScrollReveal() {
   // Add reveal class to key elements
   const targets = [
     ".section",
-    ".fact",
     ".step",
-    // .impact-metric excluded — handled by initImpactMetrics with its own animation
+    ".impact-metric",
+    ".impact-quote",
     ".pull-quote",
     ".case-gallery",
     ".case-chip-list",
@@ -182,7 +273,6 @@ function initImpactMetrics() {
             ?.querySelectorAll(".impact-metric");
           if (cards) {
             cards.forEach((card, i) => {
-              // Don't set inline opacity — let the animation handle it
               setTimeout(() => {
                 card.classList.add("cs-popped");
                 if (i === 1) card.classList.add("cs-delay-1");
@@ -281,18 +371,6 @@ function initMetricTilt() {
   });
 }
 
-/* ─── Wiggle on fact cards ──────────────────────────────── */
-function initFactWiggle() {
-  document.querySelectorAll('.fact').forEach(card => {
-    card.addEventListener('click', () => {
-      card.style.animation = 'none';
-      void card.offsetWidth; // reflow
-      card.style.animation = 'factWiggle 0.4s cubic-bezier(0.36,0.07,0.19,0.97)';
-      setTimeout(() => { card.style.animation = ''; }, 400);
-    });
-  });
-}
-
 /* ─── Back button magnetic hover ───────────────────────── */
 function initMagneticBack() {
   const btn = document.querySelector(".back-link");
@@ -308,6 +386,7 @@ function initMagneticBack() {
 
 /* ─── Init all ──────────────────────────────────────────── */
 initCaseStudyHeroVisuals();
+initCaseStudyImageZoom();
 initCaseStudyGalleries();
 initReadingProgress();
 initMiniHeader();
@@ -316,4 +395,3 @@ initImpactMetrics();
 initToc();
 initMagneticBack();
 initMetricTilt();
-initFactWiggle();

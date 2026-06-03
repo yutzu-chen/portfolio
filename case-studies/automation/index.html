@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f2ec" />
+  <title>Scaling Product Operations with Automation - Yutzu Chen</title>
+  <meta
+    name="description"
+    content="How Yutzu Chen reduced product operations overhead by automating translation, experiment documentation, Jira workflows, and internal troubleshooting."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../../styles/case-study.css" />
+</head>
+<body class="case-study-page">
+  <div class="case-page">
+    <div class="topbar">
+      <a class="back-link" href="../../index.html">
+        <span>&larr;</span>
+        <span>Back to portfolio</span>
+      </a>
+      <div class="top-actions">
+        <a class="btn btn-primary" href="../../index.html#contact">Contact me</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-intro">
+        <p class="eyebrow cs-fade-in">Case Study 02</p>
+        <h1 class="cs-fade-in cs-fade-in-d1">Scaling product operations with automation</h1>
+        <p class="hero-copy cs-fade-in cs-fade-in-d2">
+          I reduced manual coordination work by turning repetitive product operations into
+          automations: translations, A/B test documentation, stale-ticket handling, and internal
+          troubleshooting all became faster and more consistent.
+        </p>
+        <div class="hero-meta cs-fade-in cs-fade-in-d3">
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span class="hero-meta-value">Jira + APIs</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span class="hero-meta-value">Product Ops</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span class="hero-meta-value">Workflow Automation</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span class="hero-meta-value">OpenAI API</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content">
+      <section class="section" id="sec-context">
+        <h2 class="section-title">Context</h2>
+        <p>
+          At my previous company, product and engineering teams were spending too much time on
+          operational work that should have been routine. Copy translation, experiment
+          documentation, ticket cleanup, and internal support all relied on manual steps.
+        </p>
+        <p>
+          The problem was not just speed. The bigger issue was consistency. Each workflow was
+          handled slightly differently, which made it harder to keep records clean and keep the
+          team focused on actual product work.
+        </p>
+        <blockquote class="pull-quote">
+          <p>My goal was to reduce operational overhead without making the workflows harder to use.</p>
+        </blockquote>
+      </section>
+
+      <section class="section" id="sec-users">
+        <h2 class="section-title">Understanding the users</h2>
+        <p>
+          I approached the work by finding the core needs of the primary users.
+          The workflows had to answer practical questions quickly: what needed translation, what
+          experiments were live, which tickets had gone stale, and where internal requests were
+          getting stuck.
+        </p>
+        <p>
+          That framing shaped the requirements. The automations needed to remove manual work,
+          keep information in the right tools, and make the underlying processes easier to follow.
+        </p>
+        <figure class="launch-photo is-document">
+          <img src="../../img/automation_diagram.jpg" alt="Automation workflow diagram showing translation, Jira, Slack, and troubleshooting automations" />
+          <figcaption>Automation flows connect product operations tools so the team can move faster with less manual work.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section" id="sec-workflow">
+        <h2 class="section-title">4 projects were delivered</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-no">01</div>
+            <div class="step-body">
+              <h3>Translation automation pipeline</h3>
+              <p>
+                I connected source text to the OpenAI API, generated translations automatically,
+                and pushed the output directly into the translation system. That removed a
+                repetitive back-and-forth, copy-paste process that had previously slowed down multilingual
+                releases.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-no">02</div>
+            <div class="step-body">
+              <h3>Automated A/B test documentation and announcements</h3>
+              <p>
+                I set up Jira Automation so that when a JIRA ticket moved into development, a
+                structured Confluence documentation page would be created automatically. When the work was
+                done, a Slack announcement would be posted without repeating copy-paste steps.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-no">03</div>
+            <div class="step-body">
+              <h3>Jira ticket lifecycle automation</h3>
+              <p>
+                I built a lightweight lifecycle flow for stale tickets. Inactive items triggered
+                reminders, and if there was still no response, they could be closed or marked for
+                follow-up. That kept the board cleaner and easier to prioritize.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-no">04</div>
+            <div class="step-body">
+              <h3>Self-service troubleshooting for internal requests</h3>
+              <p>
+                I wrote self-service docs that guided cross-team members through common fixes when they
+                opened a ticket. The documentation itself was enough to resolve 70% of the specific issues and avoid extra support work.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="sec-impact">
+        <h2 class="section-title">Impact</h2>
+        <div class="impact-metrics">
+          <div class="impact-metric" data-ghost="80%">
+            <span class="metric-num">80%</span>
+            <span class="metric-label">Time saved on translation work</span>
+          </div>
+          <div class="impact-metric" data-ghost="Cleaner">
+            <span class="metric-num">Cleaner</span>
+            <span class="metric-label">Jira boards with fewer stale tickets</span>
+          </div>
+          <div class="impact-metric" data-ghost="Faster">
+            <span class="metric-num">70%</span>
+            <span class="metric-label">Tickets resolved through self-service</span>
+          </div>
+        </div>
+        <ul class="impact-points">
+          <li>Removed repetitive manual work from PM and engineering workflows</li>
+          <li>Improved transparency across launch, documentation, and support processes</li>
+        </ul>
+      </section>
+
+      <section class="section" id="sec-learnings">
+        <h2 class="section-title">Lessons learned</h2>
+        <p>
+          Product management is not only about building features for users. It also includes
+          improving the internal systems that help teams move faster and stay organized.
+        </p>
+        <p>
+          The strongest improvements came from automating repeatable work, keeping workflows
+          maintainable, and designing for the people who actually use the process every week.
+        </p>
+      </section>
+
+      <section class="section" id="sec-reflection">
+        <h2 class="section-title">Reflection</h2>
+        <p>
+          This project showed me that the best automation work is usually invisible when it is
+          done well. The goal was to remove low-value coordination
+          so the team could spend more time on the product itself.
+        </p>
+      </section>
+
+      <section class="section" id="sec-tools">
+        <h2 class="section-title">Tools used</h2>
+        <div class="case-chip-list">
+          <span class="chip">Jira Automation</span>
+          <span class="chip">Slack API / Webhooks</span>
+          <span class="chip">OpenAI API</span>
+          <span class="chip">Confluence</span>
+          <span class="chip">Internal translation system</span>
+          <span class="chip">Workflow design</span>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script defer src="../../scripts/case-study.js"></script>
+</body>
+</html>
