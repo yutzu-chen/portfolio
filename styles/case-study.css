@@ -260,85 +260,40 @@ h1 {
   margin-top: 14px;
 }
 
-/* ── Fact sticker cards ─────────────────────────────── */
+/* ── Facts — plain typographic treatment ────────────── */
 .facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+  display: grid;
+  gap: 20px;
   margin-top: 24px;
 }
 
 .fact {
-  flex: 1 1 220px;
-  padding: 22px 20px 20px;
-  border-radius: 18px;
   border: none;
-  border-left: none;
-  position: relative;
-  overflow: hidden;
-  cursor: default;
-  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1),
-              box-shadow 0.3s ease;
+  background: none;
+  padding: 0;
+  padding-left: 16px;
+  border-left: 2px solid var(--case-sage);
 }
 
-.fact:nth-child(1) {
-  background: var(--case-sage-soft);
-  transform: rotate(-2deg);
-}
 .fact:nth-child(2) {
-  background: rgba(188, 126, 126, 0.12);
-  transform: rotate(1.5deg);
+  border-left-color: var(--case-rose);
 }
-
-.fact:hover {
-  transform: rotate(0deg) scale(1.04) translateY(-5px) !important;
-  box-shadow: 0 20px 48px rgba(38,33,29,0.12);
-  z-index: 2;
-}
-
-/* Ghost big text behind each card */
-.fact::after {
-  content: '';
-  position: absolute;
-  bottom: -14px; right: 12px;
-  font-family: var(--case-ff-serif);
-  font-size: 80px;
-  opacity: 0.06;
-  line-height: 1;
-  pointer-events: none;
-  color: var(--case-text);
-}
-.fact:nth-child(1)::after { content: '70%'; }
-.fact:nth-child(2)::after { content: '↗'; }
 
 .fact span {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+  display: block;
   font-size: 9.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 700;
-  margin-bottom: 10px;
-  padding: 4px 10px;
-  border-radius: 99px;
-}
-.fact:nth-child(1) span {
-  background: rgba(122,158,142,0.2);
-  color: #4a7a6a;
-}
-.fact:nth-child(2) span {
-  background: rgba(188,126,126,0.18);
-  color: #9a5a5a;
+  color: var(--case-muted);
+  margin-bottom: 5px;
 }
 
 .fact strong {
   display: block;
-  font-family: var(--case-ff-serif);
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.45;
-  font-style: italic;
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.5;
   color: var(--case-text);
 }
 
@@ -1175,56 +1130,25 @@ body:not(.cs-animate) .cs-reveal  { opacity: 1; transform: none; transition: non
   color: var(--case-text);
 }
 
-/* ── Pull quote ─────────────────────────────────────── */
+/* ── Pull quote — plain typographic ─────────────────── */
 .pull-quote {
-  margin: 36px 0;
-  padding: 28px 32px 28px 28px;
-  background: var(--case-sage-soft);
-  border-radius: var(--case-radius-lg);
-  border-left: 3px solid var(--case-sage);
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.28s ease, box-shadow 0.28s ease;
-}
-.pull-quote:hover {
-  transform: translateX(4px);
-  box-shadow: -4px 0 0 var(--case-sage), 0 12px 32px rgba(122,158,142,0.12);
-}
-.pull-quote::before {
-  content: '\201C';
-  font-family: var(--case-ff-serif);
-  font-size: 120px;
-  color: var(--case-sage);
-  opacity: 0.15;
-  position: absolute;
-  top: -20px; left: 12px;
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
+  margin: 32px 0;
+  padding: 0 0 0 18px;
+  border-left: 2px solid var(--case-sage);
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 .pull-quote p {
   font-family: var(--case-ff-serif) !important;
-  font-size: 19px !important;
-  color: var(--case-text) !important;
-  line-height: 1.5 !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
   font-style: italic;
-  position: relative;
-  z-index: 1;
+  color: var(--case-text) !important;
+  line-height: 1.55 !important;
 }
 
-/* ── Enhanced facts ─────────────────────────────────── */
-.fact {
-  border-left: 3px solid var(--case-sage);
-  padding: 14px 14px 14px 16px;
-  border-radius: 0 10px 10px 0;
-  background: var(--case-bg-soft);
-  transition: transform 0.25s ease, border-left-color 0.25s ease, box-shadow 0.25s ease;
-}
-.fact:hover {
-  transform: translateX(5px);
-  border-left-color: var(--case-rose);
-  box-shadow: -3px 0 0 var(--case-rose);
-}
+/* ── Enhanced facts (overrides removed — now plain text) ── */
 
 /* ── Impact metric pop animation ────────────────────── */
 @keyframes metricPop {
