@@ -393,7 +393,7 @@ h1 {
   color: var(--case-muted);
 }
 
-/* ── Impact metrics — colored cards ─────────────────── */
+/* ── Impact metric cards (colored, with tilt) ────────── */
 .impact-metrics {
   display: grid;
   grid-template-columns: 1fr;
@@ -409,7 +409,6 @@ h1 {
   .impact-metrics { grid-template-columns: repeat(3, 1fr); }
   .impact-metrics .impact-metric:last-child { grid-column: auto; }
 }
-
 .impact-metric {
   border: none;
   border-radius: 20px;
@@ -424,13 +423,12 @@ h1 {
 .impact-metric:nth-child(1) { background: var(--case-sage-soft); }
 .impact-metric:nth-child(2) { background: rgba(188,126,126,0.12); }
 .impact-metric:nth-child(3) { background: rgba(196,164,122,0.15); }
-
 .impact-metric::before {
   content: attr(data-ghost);
   position: absolute;
-  bottom: -16px; right: 8px;
+  bottom: -12px; right: 10px;
   font-family: var(--case-ff-serif);
-  font-size: 72px;
+  font-size: 64px;
   line-height: 1;
   opacity: 0.07;
   color: var(--case-text);
@@ -438,19 +436,17 @@ h1 {
   user-select: none;
 }
 .impact-metric:hover { box-shadow: 0 16px 44px rgba(38,33,29,0.10); }
-
 .metric-num {
   display: block;
   font-family: var(--case-ff-serif);
-  font-size: clamp(26px, 4.5vw, 44px);
+  font-size: clamp(24px, 4vw, 40px);
   font-style: italic;
-  line-height: 1.0;
+  line-height: 1.05;
   margin-bottom: 10px;
 }
 .impact-metric:nth-child(1) .metric-num { color: #3d7060; }
 .impact-metric:nth-child(2) .metric-num { color: #8a4a4a; }
 .impact-metric:nth-child(3) .metric-num { color: #7a5a2a; }
-
 .metric-label {
   display: block;
   font-size: 11.5px;
@@ -762,7 +758,7 @@ h1 {
   }
 
   .impact-metric { padding: 20px 16px 16px; }
-  .metric-num { font-size: clamp(22px, 6vw, 32px); }
+  .metric-num { font-size: clamp(20px, 6vw, 30px); }
 
   body.case-study-page {
     padding: 18px var(--case-page-pad-x) 56px;
