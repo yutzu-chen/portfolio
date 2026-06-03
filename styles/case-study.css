@@ -378,10 +378,31 @@ h1 {
 /* ── Impact metrics ─────────────────────────────────── */
 .impact-metrics {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  grid-template-columns: 1fr;   /* mobile-first: single column */
+  gap: 12px;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+/* 2 columns from 480px */
+@media (min-width: 480px) {
+  .impact-metrics {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .impact-metrics .impact-metric:last-child {
+    grid-column: span 2;
+  }
+}
+
+/* 3 columns from 760px */
+@media (min-width: 760px) {
+  .impact-metrics {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .impact-metrics .impact-metric:last-child {
+    grid-column: auto;
+  }
 }
 
 .impact-metric {
@@ -688,10 +709,6 @@ h1 {
     padding: 4px 0;
   }
 
-  /* Impact metrics: 3 columns on large screens */
-  .impact-metrics {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 @media (max-width: 920px) {
@@ -718,16 +735,6 @@ h1 {
     width: 40px;
     height: 40px;
     font-size: 16px;
-  }
-
-  /* Impact: 2-col on medium-small */
-  .impact-metrics {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .impact-metrics .impact-metric:last-child {
-    grid-column: span 2;
   }
 
   .impact-metric {
@@ -789,16 +796,6 @@ h1 {
   }
 }
 
-@media (max-width: 420px) {
-  /* Single column impact metrics at very narrow */
-  .impact-metrics {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-  .impact-metrics .impact-metric:last-child {
-    grid-column: 1;
-  }
-}
 
 @media (max-width: 480px) {
   :root {
