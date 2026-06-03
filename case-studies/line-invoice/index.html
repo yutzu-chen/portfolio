@@ -15,383 +15,50 @@
     href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet"
   />
-  <style>
-    :root {
-      --bg: #f6f2ec;
-      --bg-soft: #fbf8f4;
-      --surface: rgba(255, 255, 255, 0.8);
-      --border: #e4ddd2;
-      --text: #26211d;
-      --muted: #746a61;
-      --sage: #7a9e8e;
-      --sage-soft: #e6f0eb;
-      --sand: #c4a47a;
-      --rose: #bc7e7e;
-      --shadow: 0 20px 50px rgba(38, 33, 29, 0.08);
-      --radius-lg: 28px;
-      --radius-md: 18px;
-      --radius-sm: 12px;
-      --ff-serif: "Fraunces", Georgia, serif;
-      --ff-sans: "Inter", system-ui, sans-serif;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--ff-sans);
-      background:
-        radial-gradient(circle at top left, rgba(122, 158, 142, 0.12), transparent 32%),
-        radial-gradient(circle at 85% 15%, rgba(196, 164, 122, 0.14), transparent 30%),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      padding: 32px 20px 80px;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    .page {
-      max-width: 1040px;
-      margin: 0 auto;
-    }
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-    }
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 500;
-    }
-    .back-link:hover { color: var(--text); }
-    .top-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 18px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.72);
-      box-shadow: 0 8px 20px rgba(38, 33, 29, 0.04);
-    }
-    .btn-primary {
-      background: var(--text);
-      color: #fff;
-      border-color: var(--text);
-    }
-
-    .hero {
-      background: var(--surface);
-      border: 1px solid rgba(255, 255, 255, 0.65);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      border-radius: var(--radius-lg);
-      padding: 44px;
-      margin-bottom: 24px;
-    }
-    .eyebrow {
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 11px;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-    h1, h2 {
-      font-family: var(--ff-serif);
-      font-weight: 400;
-      line-height: 1.08;
-    }
-    h1 {
-      font-size: clamp(38px, 6vw, 72px);
-      max-width: 10ch;
-      margin-bottom: 18px;
-    }
-    .hero-copy {
-      max-width: 60ch;
-      color: var(--muted);
-      font-size: 17px;
-      margin-bottom: 28px;
-    }
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .meta-card {
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 16px;
-    }
-    .meta-card span {
-      display: block;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 10px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .meta-card strong {
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.5;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.9fr);
-      gap: 24px;
-      align-items: start;
-    }
-    .content,
-    .sidebar-card {
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid rgba(255, 255, 255, 0.72);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-    }
-    .content { padding: 36px; }
-    .sidebar {
-      display: grid;
-      gap: 18px;
-      position: sticky;
-      top: 20px;
-    }
-    .sidebar-card { padding: 24px; }
-    .section + .section {
-      margin-top: 38px;
-      padding-top: 34px;
-      border-top: 1px solid var(--border);
-    }
-    .section-title {
-      font-size: 27px;
-      margin-bottom: 14px;
-    }
-    .section p {
-      color: var(--muted);
-      font-size: 15px;
-    }
-    .section p + p {
-      margin-top: 14px;
-    }
-    .facts {
-      display: grid;
-      gap: 14px;
-      margin-top: 16px;
-    }
-    .fact {
-      border-left: 3px solid var(--sage);
-      padding-left: 14px;
-    }
-    .fact span {
-      display: block;
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .fact strong {
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.5;
-    }
-    .steps {
-      display: grid;
-      gap: 14px;
-      margin-top: 16px;
-    }
-    .step {
-      display: grid;
-      grid-template-columns: 46px 1fr;
-      gap: 14px;
-      align-items: start;
-      padding: 16px;
-      border-radius: var(--radius-md);
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-    }
-    .step-no {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-family: var(--ff-serif);
-      font-size: 18px;
-      color: var(--sage);
-      background: var(--sage-soft);
-    }
-    .step h3 {
-      font-size: 16px;
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
-    .step p {
-      margin: 0;
-    }
-    .impact-list,
-    .tool-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
-    }
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      background: var(--bg-soft);
-      color: var(--muted);
-    }
-    .impact-points {
-      display: grid;
-      gap: 10px;
-      margin-top: 16px;
-    }
-    .impact-points li {
-      list-style: none;
-      color: var(--muted);
-      font-size: 15px;
-      padding-left: 18px;
-      position: relative;
-    }
-    .impact-points li::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--rose);
-      position: absolute;
-      left: 0;
-      top: 11px;
-    }
-    .sidebar-title {
-      font-size: 14px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-    .sidebar-list {
-      display: grid;
-      gap: 10px;
-    }
-    .sidebar-list li {
-      list-style: none;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .quote {
-      font-family: var(--ff-serif);
-      font-size: 26px;
-      line-height: 1.25;
-      margin-bottom: 10px;
-    }
-
-    @media (max-width: 920px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-      .sidebar {
-        position: static;
-      }
-      .meta-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 18px 14px 56px;
-      }
-      .hero,
-      .content,
-      .sidebar-card {
-        padding: 24px;
-      }
-      .meta-grid {
-        grid-template-columns: 1fr;
-      }
-      .step {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../../styles/case-study.css" />
 </head>
-<body>
-  <div class="page">
+<body class="case-study-page">
+  <div class="case-page">
     <div class="topbar">
       <a class="back-link" href="../../index.html">
         <span>&larr;</span>
         <span>Back to portfolio</span>
       </a>
       <div class="top-actions">
-        <a class="btn" href="../../data/product_strategy.pdf" target="_blank" rel="noopener">Open original PDF</a>
         <a class="btn btn-primary" href="../../index.html#contact">Contact me</a>
       </div>
     </div>
 
     <section class="hero">
-      <p class="eyebrow">Case Study 01</p>
-      <h1>Designing a financial tool inside a messaging app</h1>
-      <p class="hero-copy">
-        LINE Invoice grew from zero to 700k+ users in one year by focusing on the real problem:
-        adoption. The challenge was not beating competitors. It was helping first-time users
-        understand how to start.
-      </p>
-      <div class="meta-grid">
-        <div class="meta-card">
-          <span>Role</span>
-          <strong>PM end-to-end: research, positioning, roadmap, launch, growth</strong>
-        </div>
-        <div class="meta-card">
-          <span>Market</span>
-          <strong>Taiwan digital invoicing</strong>
-        </div>
-        <div class="meta-card">
-          <span>Core challenge</span>
-          <strong>Adoption and onboarding friction</strong>
-        </div>
-        <div class="meta-card">
-          <span>Outcome</span>
-          <strong>700k+ users in the first year</strong>
-        </div>
+      <div class="hero-intro">
+        <p class="eyebrow">Case Study 01</p>
+        <h1>Designing a financial tool inside a messaging app</h1>
+        <p class="hero-copy">
+          LINE Invoice grew from zero to 700k+ users in one year by focusing on the real problem:
+          adoption. The challenge was not beating competitors. It was helping first-time users
+          understand how to start.
+        </p>
       </div>
+      <div class="hero-visual" data-hero-visual>
+        <img src="../../img/invoice_me.jpeg" alt="Yutzu Chen presenting or working on LINE Invoice" />
+      </div>
+      <p class="hero-note">
+        My first end-to-end product ownership project — from validating whether we should build it to launching something people actually used.
+      </p>
     </section>
 
-    <div class="layout">
-      <article class="content">
-        <section class="section">
+      <main class="content">
+        <section class="section" id="sec-problem">
           <h2 class="section-title">The problem</h2>
           <p>
             Taiwan's digital invoice adoption was stuck at 30% despite years of government
             promotion. The user experience was fragmented, confusing, and intimidating for
             people who had never tried an existing solution.
+          </p>
+          <p>
+            In Taiwan, invoices are part of daily life because of tax rules and the invoice lottery.
+            People were motivated to collect them, but the digital system had still stalled after
+            more than 10 years of government promotion.
           </p>
           <p>
             Early on, the key insight was that adoption mattered more than competition. If users
@@ -409,12 +76,31 @@
           </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="sec-discovery">
+          <h2 class="section-title">How we knew we could solve it</h2>
+          <p>
+            We looked at the existing invoice tools in Taiwan through market sizing, UX teardown,
+            and 1-on-1 user interviews. Functional competitors already existed, but they required
+            users to download another app and figure out a complicated setup flow on their own.
+          </p>
+          <p>
+            Interviewing eight users for about an hour each helped us understand how little
+            awareness people had around cloud invoices, how confusing the government flow felt,
+            and why many users were reluctant to install a separate app at all.
+          </p>
+          <p>
+            The turning point was simple: more than 90% of Taiwanese users already had LINE
+            installed. That made LINE not just a distribution channel, but the actual product
+            advantage.
+          </p>
+        </section>
+
+        <section class="section" id="sec-process">
           <h2 class="section-title">What I did</h2>
           <div class="steps">
             <div class="step">
               <div class="step-no">01</div>
-              <div>
+              <div class="step-body">
                 <h3>Researched the adoption problem</h3>
                 <p>
                   Combined market analysis and user interviews to understand why existing tools
@@ -424,7 +110,7 @@
             </div>
             <div class="step">
               <div class="step-no">02</div>
-              <div>
+              <div class="step-body">
                 <h3>Built a two-track strategy</h3>
                 <p>
                   Simplified onboarding for new users while designing differentiated value for
@@ -434,17 +120,18 @@
             </div>
             <div class="step">
               <div class="step-no">03</div>
-              <div>
+              <div class="step-body">
                 <h3>Used LINE's ecosystem to lower friction</h3>
                 <p>
-                  Positioned the product inside a familiar messaging environment to remove the
-                  "download another app" barrier.
+                  Positioned the product as a simple web-based service inside LINE so users did
+                  not need to download another app, create another account, or worry about phone
+                  storage.
                 </p>
               </div>
             </div>
             <div class="step">
               <div class="step-no">04</div>
-              <div>
+              <div class="step-body">
                 <h3>Led launch and cross-functional execution</h3>
                 <p>
                   Coordinated 10+ local and international teams across strategy, product, design,
@@ -455,19 +142,144 @@
           </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="sec-shipped">
+          <h2 class="section-title">What we shipped</h2>
+          <p>
+            The MVP focused on removing friction for first-time users and stripping the experience
+            down to what actually mattered. We let users sign up for a cloud invoice account
+            directly within LINE Invoice instead of sending them out to the Ministry of Finance site.
+          </p>
+          <p>
+            We also simplified the interface to the essentials, made invoice records easier to
+            recognize with merchant names and purchased items, and added auto-bookkeeping so
+            users could instantly see where their money went each month.
+          </p>
+          <p>
+            On top of that, I added a Bingo-style gamification feature to increase engagement
+            around invoice checking. It was intentionally small, budget-aware, and distinctive
+            enough to help differentiate the product.
+          </p>
+          <div class="case-gallery" data-case-gallery>
+            <div class="case-gallery-head">
+              <div class="case-gallery-copy">
+                <p class="case-gallery-label">Product glimpse</p>
+                <p class="case-gallery-title">A few key LINE Invoice screens from the shipped experience</p>
+              </div>
+              <div class="case-gallery-nav">
+                <button class="case-gallery-btn" type="button" data-gallery-prev aria-label="Previous screen">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 3L5 8l5 5"/></svg>
+                </button>
+                <button class="case-gallery-btn" type="button" data-gallery-next aria-label="Next screen">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3l5 5-5 5"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="case-gallery-stage">
+              <div class="case-gallery-device">
+                <div class="case-gallery-screen">
+                  <img data-gallery-image src="../../img/invoice_home.png" alt="LINE Invoice home screen" />
+                </div>
+              </div>
+              <div class="case-gallery-caption" data-gallery-caption aria-live="polite">
+                <strong>Home dashboard</strong>
+                Spending overview, barcode access, and a quick financial snapshot.
+              </div>
+            </div>
+            <script type="application/json" class="case-gallery-data">
+              [
+                {
+                  "src": "../../img/invoice_home.png",
+                  "alt": "LINE Invoice home screen",
+                  "title": "Home dashboard",
+                  "desc": "Spending overview, barcode access, and a quick financial snapshot."
+                },
+                {
+                  "src": "../../img/invoice_scan.png",
+                  "alt": "LINE Invoice scan screen",
+                  "title": "Invoice scan",
+                  "desc": "A guided flow that makes the first step into cloud invoices much less intimidating."
+                },
+                {
+                  "src": "../../img/invoice_record.png",
+                  "alt": "LINE Invoice records screen",
+                  "title": "Records",
+                  "desc": "Merchant names and purchased items make receipts easier to recognize at a glance."
+                },
+                {
+                  "src": "../../img/invoice_spending.png",
+                  "alt": "LINE Invoice spending breakdown",
+                  "title": "Auto-bookkeeping",
+                  "desc": "Category breakdowns helped users see value beyond storage and scanning."
+                },
+                {
+                  "src": "../../img/invoice_details.png",
+                  "alt": "LINE Invoice details screen",
+                  "title": "Invoice details",
+                  "desc": "Detailed information is presented in a cleaner, easier-to-read structure."
+                },
+                {
+                  "src": "../../img/invoice_bingo.png",
+                  "alt": "LINE Invoice bingo feature screen",
+                  "title": "Bingo feature",
+                  "desc": "A lightweight game mechanic that encouraged return usage and differentiated the product."
+                }
+              ]
+            </script>
+          </div>
+        </section>
+
+        <section class="section" id="sec-impact">
           <h2 class="section-title">Impact</h2>
+          <div class="impact-metrics">
+            <div class="impact-metric">
+              <span class="metric-num">700k+</span>
+              <span class="metric-label">Users in the first year</span>
+            </div>
+            <div class="impact-metric">
+              <span class="metric-num">64%→20%</span>
+              <span class="metric-label">Onboarding drop-off</span>
+            </div>
+            <div class="impact-metric">
+              <span class="metric-num">70%</span>
+              <span class="metric-label">User satisfaction rate</span>
+            </div>
+          </div>
           <ul class="impact-points">
-            <li>0 to 700k+ users in one year</li>
-            <li>Onboarding drop-off reduced from 64% to 20%</li>
-            <li>Web-first approach removed the extra app barrier</li>
-            <li>Created a product strategy grounded in actual first-time user behavior</li>
+            <li>Web-first approach removed the extra app barrier entirely</li>
+            <li>Product strategy grounded in actual first-time user behaviour, not assumptions</li>
           </ul>
         </section>
 
-        <section class="section">
+        <section class="section" id="sec-after">
+          <h2 class="section-title">After launch</h2>
+          <p>
+            After months of research, iteration, and cross-functional execution, LINE Invoice
+            launched and resonated far beyond our expectations. In the first year it attracted
+            hundreds of thousands of users and reached a 70% user satisfaction rate.
+          </p>
+          <p>
+            For us, that validated two things: we were solving a real problem users had struggled
+            with for years, and we had found a genuinely strong position in the market.
+          </p>
+        </section>
+
+        <section class="section" id="sec-learned">
+          <h2 class="section-title">What I learned</h2>
+          <p>
+            This was my first true end-to-end product ownership experience, and it taught me that
+            product management is as much about empathy and alignment as it is about features or
+            roadmaps.
+          </p>
+          <p>
+            I learned how to work with designers, engineers, marketers, legal teams, security
+            stakeholders, executives, and international collaborators by understanding what each
+            group values and translating the problem into their language.
+          </p>
+        </section>
+
+        <section class="section" id="sec-tools">
           <h2 class="section-title">Tools and methods</h2>
-          <div class="tool-list">
+          <div class="case-chip-list">
             <span class="chip">Market research</span>
             <span class="chip">50+ user interviews</span>
             <span class="chip">Product positioning</span>
@@ -478,31 +290,8 @@
             <span class="chip">R</span>
           </div>
         </section>
-      </article>
-
-      <aside class="sidebar">
-        <div class="sidebar-card">
-          <p class="sidebar-title">Snapshot</p>
-          <ul class="sidebar-list">
-            <li><strong>Company:</strong> LINE Corp</li>
-            <li><strong>Market:</strong> Taiwan</li>
-            <li><strong>Focus:</strong> Product management + user research</li>
-            <li><strong>Main win:</strong> Solved adoption, not just features</li>
-          </ul>
-        </div>
-
-        <div class="sidebar-card">
-          <p class="sidebar-title">Why it matters</p>
-          <p class="quote">
-            The product worked because it met users where they already were.
-          </p>
-          <p style="color: var(--muted); font-size: 14px;">
-            This project is a good example of how product strategy gets stronger when research,
-            positioning, and distribution are treated as one system.
-          </p>
-        </div>
-      </aside>
-    </div>
+      </main>
   </div>
+  <script defer src="../../scripts/case-study.js"></script>
 </body>
 </html>
