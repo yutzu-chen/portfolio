@@ -35,7 +35,8 @@ body.case-study-page {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   padding: 32px var(--case-page-pad-x) 80px;
-  overflow-x: hidden;
+  overflow-x: clip; /* clip instead of hidden — avoids sticky positioning issues */
+  max-width: 100vw;
 }
 
 .case-study-page a {
@@ -47,6 +48,13 @@ body.case-study-page {
   width: min(1040px, 100%);
   max-width: 1040px;
   margin: 0 auto;
+  overflow-x: clip;
+}
+
+/* Layout wrapper injected by JS */
+.content-layout {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .topbar {
@@ -155,6 +163,7 @@ h1 {
 
 .hero-visual {
   width: calc(100% + (var(--case-page-pad-x) * 2));
+  max-width: calc(100vw - 0px); /* never exceed viewport */
   margin-top: 38px;
   margin-left: calc(var(--case-page-pad-x) * -1);
   overflow: hidden;
@@ -694,12 +703,27 @@ h1 {
     --case-page-pad-x: 14px;
   }
 
+  /* Steps: slim down on mobile */
+  .steps::before {
+    left: 19px;
+  }
+
+  /* Impact: 2-col on medium-small */
   .impact-metrics {
     grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
 
   .impact-metrics .impact-metric:last-child {
     grid-column: span 2;
+  }
+
+  .impact-metric {
+    padding: 16px 12px;
+  }
+
+  .metric-num {
+    font-size: clamp(20px, 5vw, 28px);
   }
 
   body.case-study-page {
@@ -748,6 +772,17 @@ h1 {
   .case-gallery {
     padding: 16px 14px;
     border-radius: 24px;
+  }
+}
+
+@media (max-width: 420px) {
+  /* Single column impact metrics at very narrow */
+  .impact-metrics {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .impact-metrics .impact-metric:last-child {
+    grid-column: 1;
   }
 }
 
