@@ -297,6 +297,14 @@ h1 {
   color: var(--case-text);
 }
 
+.fact,
+.fact:hover,
+.fact:nth-child(1),
+.fact:nth-child(2) {
+  transform: none;
+  box-shadow: none;
+}
+
 .steps {
   display: grid;
   gap: 0;
@@ -385,34 +393,21 @@ h1 {
   color: var(--case-muted);
 }
 
-/* ── Impact metrics ─────────────────────────────────── */
+/* ── Impact metrics — colored cards ─────────────────── */
 .impact-metrics {
   display: grid;
-  grid-template-columns: 1fr;   /* mobile-first: single column */
+  grid-template-columns: 1fr;
   gap: 12px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
-/* 2 columns from 480px */
 @media (min-width: 480px) {
-  .impact-metrics {
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  .impact-metrics .impact-metric:last-child {
-    grid-column: span 2;
-  }
+  .impact-metrics { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .impact-metrics .impact-metric:last-child { grid-column: span 2; }
 }
-
-/* 3 columns from 760px */
 @media (min-width: 760px) {
-  .impact-metrics {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .impact-metrics .impact-metric:last-child {
-    grid-column: auto;
-  }
+  .impact-metrics { grid-template-columns: repeat(3, 1fr); }
+  .impact-metrics .impact-metric:last-child { grid-column: auto; }
 }
 
 .impact-metric {
@@ -426,13 +421,10 @@ h1 {
   transition: box-shadow 0.3s ease;
   transform-style: preserve-3d;
 }
-
-/* Individual color per card */
 .impact-metric:nth-child(1) { background: var(--case-sage-soft); }
 .impact-metric:nth-child(2) { background: rgba(188,126,126,0.12); }
 .impact-metric:nth-child(3) { background: rgba(196,164,122,0.15); }
 
-/* Ghost number watermark */
 .impact-metric::before {
   content: attr(data-ghost);
   position: absolute;
@@ -445,10 +437,7 @@ h1 {
   pointer-events: none;
   user-select: none;
 }
-
-.impact-metric:hover {
-  box-shadow: 0 16px 44px rgba(38,33,29,0.10);
-}
+.impact-metric:hover { box-shadow: 0 16px 44px rgba(38,33,29,0.10); }
 
 .metric-num {
   display: block;
@@ -468,7 +457,6 @@ h1 {
   font-weight: 500;
   color: var(--case-muted);
   line-height: 1.4;
-  letter-spacing: 0.01em;
 }
 
 .impact-points {
@@ -773,13 +761,8 @@ h1 {
     font-size: 16px;
   }
 
-  .impact-metric {
-    padding: 16px 12px;
-  }
-
-  .metric-num {
-    font-size: clamp(20px, 5vw, 28px);
-  }
+  .impact-metric { padding: 20px 16px 16px; }
+  .metric-num { font-size: clamp(22px, 6vw, 32px); }
 
   body.case-study-page {
     padding: 18px var(--case-page-pad-x) 56px;
@@ -1150,18 +1133,6 @@ body:not(.cs-animate) .cs-reveal  { opacity: 1; transform: none; transition: non
 
 /* ── Enhanced facts (overrides removed — now plain text) ── */
 
-/* ── Impact metric pop animation ────────────────────── */
-@keyframes metricPop {
-  0%   { transform: scale(0.88) translateY(10px); }
-  70%  { transform: scale(1.03) translateY(-2px); }
-  100% { transform: none; }
-}
-/* Cards are always visible; pop adds a spring entrance on scroll */
-.impact-metric.cs-popped {
-  animation: metricPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-.impact-metric.cs-delay-3 { animation-delay: 0.28s; }
-
 /* ── Gallery crossfade ──────────────────────────────── */
 .case-gallery-screen img {
   transition: opacity 0.32s ease;
@@ -1250,23 +1221,8 @@ body:not(.cs-animate) .cs-reveal  { opacity: 1; transform: none; transition: non
   letter-spacing: 0.02em;
 }
 
-/* ── Fact card wiggle (on click) ─────────────────────── */
-@keyframes factWiggle {
-  0%,100% { transform: rotate(var(--base-rot, 0deg)); }
-  20%  { transform: rotate(calc(var(--base-rot, 0deg) - 4deg)) scale(1.05); }
-  40%  { transform: rotate(calc(var(--base-rot, 0deg) + 3deg)) scale(1.03); }
-  60%  { transform: rotate(calc(var(--base-rot, 0deg) - 2deg)); }
-  80%  { transform: rotate(calc(var(--base-rot, 0deg) + 1deg)); }
-}
-
-/* Also remove the enhanced fact hover that was added earlier (conflicts) */
-.fact:hover {
-  border-left: none;
-  box-shadow: 0 20px 48px rgba(38,33,29,0.12);
-}
-
 @media (max-width: 540px) {
-  .fact { flex: 1 1 100%; }
-  .fact:nth-child(1) { transform: rotate(-1deg); }
-  .fact:nth-child(2) { transform: rotate(.8deg); }
+  .facts {
+    gap: 16px;
+  }
 }
