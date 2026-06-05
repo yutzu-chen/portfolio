@@ -306,6 +306,60 @@ h1 {
   margin-top: 14px;
 }
 
+.section-rich-text .section-subtitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-top: 10px;
+  margin-bottom: 12px;
+}
+
+.section-rich-text .list-label {
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.section-rich-text .content-list {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.section-rich-text .content-list li {
+  list-style: none;
+  color: var(--case-muted);
+  font-size: 15px;
+  padding-left: 18px;
+  position: relative;
+}
+
+.section-rich-text .content-list li::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--case-rose);
+  position: absolute;
+  left: 0;
+  top: 11px;
+}
+
+.section-rich-text .content-list + p {
+  margin-top: 0;
+}
+
+.section-rich-text .pull-quote {
+  margin: 16px 0 18px;
+}
+
+.section-rich-text .section-divider {
+  border: 0;
+  border-top: 1px solid var(--case-border);
+  margin: 28px 0;
+}
+
 /* ── Facts — plain typographic treatment ────────────── */
 .facts {
   display: grid;
@@ -704,42 +758,61 @@ h1 {
 .toc-label {
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--case-muted);
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   display: block;
+  opacity: 0.6;
 }
 
 .toc-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0;
+  border-left: 1.5px solid color-mix(in srgb, var(--case-muted) 20%, transparent);
 }
 
 .toc-link {
   display: block;
-  font-size: 12.5px;
+  position: relative;
+  font-size: 12px;
   color: var(--case-muted);
-  padding: 6px 10px 6px 12px;
-  border-radius: 8px;
-  border-left: 2px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-  line-height: 1.45;
+  padding: 5px 0 5px 14px;
+  line-height: 1.5;
+  transition:
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.toc-link::before {
+  content: '';
+  position: absolute;
+  left: -1.5px;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: var(--case-text);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 2px;
 }
 
 .toc-link:hover {
   color: var(--case-text);
-  background: var(--case-sage-soft);
-  border-left-color: rgba(122, 158, 142, 0.4);
+  transform: translateX(2px);
 }
 
 .toc-link.is-active {
   color: var(--case-text);
-  border-left-color: var(--case-sage);
-  background: var(--case-sage-soft);
   font-weight: 500;
+  transform: translateX(2px);
+}
+
+.toc-link.is-active::before {
+  transform: scaleY(1);
 }
 
 /* ── Facts two-column on md+ ────────────────────────── */
@@ -1084,9 +1157,11 @@ body:not(.cs-animate) .cs-reveal  { opacity: 1; transform: none; transition: non
 /* Scroll-reveal (added by JS) */
 .cs-reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1),
-              transform 0.6s cubic-bezier(0.22,1,0.36,1);
+  transform: translateY(12px);
+  will-change: opacity, transform;
+  transition:
+    opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .cs-reveal.cs-visible { opacity: 1; transform: none; }
 .cs-reveal.cs-delay-1 { transition-delay: 0.08s; }
@@ -1233,22 +1308,6 @@ body:not(.cs-animate) .cs-reveal  { opacity: 1; transform: none; transition: non
 /* ── TOC polish ─────────────────────────────────────── */
 .toc-link {
   position: relative;
-  padding-left: 14px;
-}
-.toc-link::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 50%;
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: var(--case-sage);
-  transform: translateY(-50%) scale(0);
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  opacity: 0;
-}
-.toc-link.is-active::before {
-  transform: translateY(-50%) scale(1);
-  opacity: 1;
 }
 
 /* ── Section reveal accent ──────────────────────────── */

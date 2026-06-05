@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f2ec" />
+  <title>Conversion Uplift Through Experimentation - Yutzu Chen</title>
+  <meta
+    name="description"
+    content="How Yutzu Chen designed experimentation programs for conversion uplift by choosing the right test type, defining hypotheses, setting tracking, and turning results into product decisions."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../../styles/case-study.css" />
+</head>
+<body class="case-study-page">
+  <div class="case-page">
+    <div class="topbar">
+      <a class="back-link" href="../../index.html">
+        <span>&larr;</span>
+        <span>Back to portfolio</span>
+      </a>
+      <div class="top-actions">
+        <a class="btn btn-primary" href="../../index.html#contact">Contact me</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-intro">
+        <p class="eyebrow cs-fade-in">Case Study 02</p>
+        <h1 class="cs-fade-in cs-fade-in-d1">Experimentation design: from hypothesis to impact</h1>
+        <p class="hero-copy cs-fade-in cs-fade-in-d2">
+          I used experimentation to validate product decisions.
+          Some tests improved clarity through small UI changes. Others validated larger product
+          directions before the team committed more design and engineering effort.
+        </p>
+        <div class="hero-meta cs-fade-in cs-fade-in-d3">
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span class="hero-meta-value">A/B Testing</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span class="hero-meta-value">Conversion Optimization</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span class="hero-meta-value">Experiment Design</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span class="hero-meta-value">KPI Metrics and Data tracking</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content">
+      <section class="section" id="sec-context">
+        <h2 class="section-title">Overview</h2>
+        <p>
+          In product work, not every A/B test has the same purpose or level of complexity. Some experiments are small UI adjustments that help users understand the page faster. Others are strategic tests that validate whether a larger product direction is worth investing in.
+        </p>
+        <p>
+          In this case study, I explain how I approached experimentation design: from setting the right hypothesis, defining success metrics, setting up tracking, launching the experiment, and using dashboards to evaluate the result.
+        </p>
+        <blockquote class="pull-quote">
+          <p>The best experiments do more than measure uplift. They clarify what kind of product decision should happen next.</p>
+        </blockquote>
+      </section>
+
+      <section class="section section-rich-text" id="sec-types">
+        <h2 class="section-title">Two types of experiments</h2>
+        <h3 class="section-subtitle">1. Small UI adjustments</h3>
+        <p>
+          Some conversion improvements can come from small changes in the interface. These tests usually focus on making an existing message, action, or value proposition easier to notice and understand.
+        </p>
+        <p class="list-label">Examples include:</p>
+        <ul class="content-list">
+          <li>Changing button text to make the action more direct</li>
+          <li>Making important information more prominent</li>
+          <li>Adjusting layout, font size, or visual hierarchy</li>
+          <li>Rewriting copy so users understand the benefit faster</li>
+        </ul>
+        <p>
+          These experiments are usually lightweight. The implementation can often be done within a short time because the change is limited to one page or one component.
+        </p>
+        <p>The product question behind this type of test is usually:</p>
+        <blockquote class="pull-quote">
+          <p>Can we improve conversion by making the existing experience easier to act on?</p>
+        </blockquote>
+        <p>
+          These tests are useful when user behavior suggests that people may not notice important information, feel unsure about the next step, or need a clearer reason to continue.
+        </p>
+
+        <hr class="section-divider" />
+
+        <h3 class="section-subtitle">2. Strategic product tests</h3>
+        <p>
+          Other experiments are bigger. They are not just about improving one button or one text, but about testing a broader product direction.
+        </p>
+        <p>
+          These tests are useful when the team wants to explore a feature or concept that could become part of the product strategy. Because the change may affect multiple pages or parts of the user journey, it usually requires more planning and collaboration with design, engineering, data, and sometimes other product teams.
+        </p>
+        <p class="list-label">Examples include:</p>
+        <ul class="content-list">
+          <li>Testing whether a new feature concept creates enough user value</li>
+          <li>Testing a new way to guide users through decision-making</li>
+          <li>Adding new information across several pages</li>
+        </ul>
+        <p>
+          For these tests, the goal is usually bigger than one single experiment. The team may have a broader vision, but instead of building everything at once, we break it down into smaller testable steps.
+        </p>
+        <p>The product question behind this type of test is usually:</p>
+        <blockquote class="pull-quote">
+          <p>Is this product direction valuable enough that we should continue investing in it?</p>
+        </blockquote>
+        <p>
+          If the first experiment works, we can move to the next step. If it does not work, we can use the result and user feedback to adjust the direction before investing more time.
+        </p>
+      </section>
+
+      <section class="section" id="sec-process">
+        <h2 class="section-title">Designing the experiment</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-no">01</div>
+            <div class="step-body">
+              <h3>Define the real user problem</h3>
+              <p>
+                I first clarified what was blocking users: missing information, uncertainty about
+                the next step, weak feature discovery, or a broader mismatch between the current
+                journey and user needs.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-no">02</div>
+            <div class="step-body">
+              <h3>Write a testable hypothesis</h3>
+              <p>
+                Each experiment needed a clear expectation. I framed hypotheses around the
+                element being changed, the behavior we expected, and the reason that behavior
+                should improve from a user perspective.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-no">03</div>
+            <div class="step-body">
+              <h3>Define primary and secondary metrics</h3>
+              <p>
+                I separated the main success metric from the supporting signals. Conversion or
+                booking completion told us whether the test worked, while click behavior, funnel
+                progression, and interaction events explained why.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-no">04</div>
+            <div class="step-body">
+              <h3>Set up tracking and analyze the result</h3>
+              <p>
+                Before launch, I worked with design, engineering, and data to make sure the right
+                events were tracked. After release, I used dashboards to check uplift, side
+                effects, and whether the result was strong enough to ship, iterate, or stop.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="section" id="sec-impact">
+        <h2 class="section-title">Impact</h2>
+        <div class="impact-metrics">
+          <div class="impact-metric" data-ghost="7%">
+            <span class="metric-num">&gt;7%</span>
+            <span class="metric-label">Conversion uplift across multiple feature iterations</span>
+          </div>
+          <div class="impact-metric" data-ghost="300+">
+            <span class="metric-num">10+</span>
+            <span class="metric-label">A/B testing winners delivered</span>
+          </div>
+          <div class="impact-metric" data-ghost="2k">
+            <span class="metric-num">Weekly</span>
+            <span class="metric-label">A/B tests rolling out to users</span>
+          </div>
+        </div>
+        <ul class="impact-points">
+          <li>Made experiment decisions easier to explain across product, design, engineering, and data teams</li>
+          <li>Analyzed data and built dashboards that helped the team judge whether to ship, iterate, or stop</li>
+        </ul>
+      </section>
+
+      <section class="section" id="sec-learnings">
+        <h2 class="section-title">Lessons learned</h2>
+        <p>
+          Good experimentation starts before the test is launched. The hardest part is usually not
+          implementation. It is defining the right problem, designing the right solutions, and setting up KPI metrics so the result
+          actually teaches the team something useful.
+        </p>
+        <p>
+          I also learned that experiments become much more valuable when the team treats them as
+          product decisions. A good result can support further
+          investment. A weak result can save the team from building the wrong thing at larger
+          scale.
+        </p>
+      </section>
+
+      <section class="section" id="sec-tools">
+        <h2 class="section-title">Tools used</h2>
+        <div class="case-chip-list">
+          <span class="chip">A/B testing</span>
+          <span class="chip">Hypothesis design</span>
+          <span class="chip">Funnel analysis</span>
+          <span class="chip">Dashboard building</span>
+          <span class="chip">Tracking events</span>
+          <span class="chip">Google Analytics</span>
+          <span class="chip">Looker</span>
+          <span class="chip">Python</span>
+          <span class="chip">SQL</span>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script defer src="../../scripts/case-study.js"></script>
+</body>
+</html>

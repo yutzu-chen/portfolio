@@ -532,6 +532,16 @@ function initAlbumBoard() {
   if (!board) return;
 
   const cards = qsa('.album-card', board);
+  let activeDragCard = null;
+  let topZ = cards.reduce((maxZ, card) => {
+    const zIndex = parseInt(card.style.zIndex || '1', 10);
+    return Number.isNaN(zIndex) ? maxZ : Math.max(maxZ, zIndex);
+  }, 1);
+
+  function bringToFront(card) {
+    topZ += 1;
+    card.style.zIndex = String(topZ);
+  }
 
   cards.forEach((card) => {
     let dragging = false;
@@ -548,7 +558,8 @@ function initAlbumBoard() {
       startY = event.clientY;
       ox = parseInt(card.style.left, 10);
       oy = parseInt(card.style.top, 10);
-      card.style.zIndex = '10';
+      activeDragCard = card;
+      bringToFront(card);
       card.style.transition = 'none';
       document.body.style.userSelect = 'none';
     });
@@ -572,7 +583,7 @@ function initAlbumBoard() {
       if (!dragging) return;
 
       dragging = false;
-      card.style.zIndex = '';
+      activeDragCard = null;
       card.style.transition = 'transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .2s';
       card.style.transform = `rotate(${baseRot}deg)`;
       document.body.style.userSelect = '';
@@ -585,7 +596,8 @@ function initAlbumBoard() {
       startY = touch.clientY;
       ox = parseInt(card.style.left, 10);
       oy = parseInt(card.style.top, 10);
-      card.style.zIndex = '10';
+      activeDragCard = card;
+      bringToFront(card);
     }, { passive: true });
 
     document.addEventListener('touchmove', (event) => {
@@ -604,7 +616,7 @@ function initAlbumBoard() {
 
     document.addEventListener('touchend', () => {
       dragging = false;
-      card.style.zIndex = '';
+      activeDragCard = null;
     });
   });
 
@@ -614,7 +626,7 @@ function initAlbumBoard() {
     const my = event.clientY - boardRect.top;
 
     cards.forEach((card) => {
-      if (parseInt(card.style.zIndex, 10) === 10) return;
+      if (card === activeDragCard) return;
 
       const cx = parseInt(card.style.left, 10) + card.offsetWidth / 2;
       const cy = parseInt(card.style.top, 10) + card.offsetHeight / 2;
