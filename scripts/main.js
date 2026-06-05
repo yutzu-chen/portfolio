@@ -375,6 +375,22 @@ function initInvoicePreview() {
     });
   }
 
+  // Touch swipe support for mobile
+  let touchStartX = 0;
+  let touchStartY = 0;
+  preview.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  preview.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) { renderSlide(currentIndex + 1); pulsePreview(); }
+      else        { renderSlide(currentIndex - 1); pulsePreview(); }
+    }
+  }, { passive: true });
+
   renderSlide(0);
 }
 

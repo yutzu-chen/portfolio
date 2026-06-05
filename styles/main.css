@@ -1100,6 +1100,9 @@
   /* Extra bottom padding on last section so content clears floating button */
   #contact { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 
+  /* Gallery: hide arrow buttons on mobile, use swipe instead */
+  .case-preview-btn { display: none; }
+
   /* ── Floating contact pill (mobile) ─────────────────────── */
   .cs-float-contact {
     display: none;
