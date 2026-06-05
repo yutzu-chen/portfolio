@@ -985,6 +985,11 @@ h1 {
     padding: 16px var(--case-page-pad-x) 48px;
   }
 
+  /* Extra bottom padding so content clears the floating Contact me button */
+  body.case-study-page {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+
   .topbar {
     margin-bottom: 28px;
     flex-direction: row;

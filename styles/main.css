@@ -1097,6 +1097,9 @@
     .about-cards, .creator-cards { grid-template-columns: 1fr; }
   }
 
+  /* Extra bottom padding on last section so content clears floating button */
+  #contact { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
+
   /* ── Floating contact pill (mobile) ─────────────────────── */
   .cs-float-contact {
     display: none;
