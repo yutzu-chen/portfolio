@@ -740,18 +740,29 @@ function initScrollRestore() {
     }
   });
 
-  // Restore scroll position if we came back from a case study,
-  // but skip if the URL has a hash (e.g. #contact) — let the browser handle that
+  // If URL has a hash (e.g. #contact), scroll to that element after layout
+  if (window.location.hash) {
+    sessionStorage.removeItem('portfolioScrollY');
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          target.scrollIntoView({ behavior: 'instant' });
+        });
+      });
+    }
+    return;
+  }
+
+  // Otherwise restore saved scroll position from before entering a case study
   const savedY = sessionStorage.getItem('portfolioScrollY');
-  if (savedY !== null && !window.location.hash) {
+  if (savedY !== null) {
     sessionStorage.removeItem('portfolioScrollY');
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         window.scrollTo({ top: parseInt(savedY, 10), behavior: 'instant' });
       });
     });
-  } else {
-    sessionStorage.removeItem('portfolioScrollY');
   }
 }
 
