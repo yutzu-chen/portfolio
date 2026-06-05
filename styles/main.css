@@ -914,6 +914,9 @@
     .nav-burger { display: flex; }
     .hero-ctas { flex-direction: column; }
     .work-approach { grid-template-columns: 1fr; }
+    /* Tighten heading gap — no parallax offset on mobile */
+    #work .sec-title { margin-bottom: 20px; }
+    .work-approach { margin-top: 0; }
     .case-card {
       padding: 26px 22px;
     }

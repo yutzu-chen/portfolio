@@ -862,7 +862,7 @@ h1 {
 
 @media (max-width: 640px) {
   :root {
-    --case-page-pad-x: 14px;
+    --case-page-pad-x: 22px;
   }
 
   /* Steps: slim down on mobile — center the line in the 40px column */
@@ -942,7 +942,7 @@ h1 {
 
 @media (max-width: 480px) {
   :root {
-    --case-page-pad-x: 10px;
+    --case-page-pad-x: 18px;
   }
 
   body.case-study-page {
@@ -1025,6 +1025,11 @@ h1 {
   .step {
     padding: 14px;
     gap: 12px;
+  }
+
+  /* Line center = step padding-left (14px) + circle radius (20px) */
+  .steps::before {
+    left: 34px;
   }
 
   .step-no {

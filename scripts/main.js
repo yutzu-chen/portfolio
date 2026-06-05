@@ -74,6 +74,10 @@ function initScrollChrome() {
 }
 
 function initParallax() {
+  // Skip parallax on mobile — the translateY offset pushes headings
+  // off-screen when sections aren't yet near the viewport center.
+  if (window.innerWidth < 768) return;
+
   const heroBlobs = qsa('.blob[data-speed]');
   const sections = qsa('section:not(#hero)');
 
@@ -113,6 +117,7 @@ function initParallax() {
   let rafId = null;
 
   function doParallax() {
+    if (window.innerWidth < 768) return;
     const scrollY = window.scrollY;
     const viewportHeight = window.innerHeight;
 
@@ -443,10 +448,14 @@ function initRevealObserver() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-      entry.target.classList.add('vis');
+      // rAF ensures the element is painted in its hidden state first,
+      // so the CSS transition actually plays (fixes mobile instant-show bug)
+      requestAnimationFrame(() => {
+        entry.target.classList.add('vis');
+      });
       observer.unobserve(entry.target);
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
   revealElements.forEach((element) => observer.observe(element));
 }
