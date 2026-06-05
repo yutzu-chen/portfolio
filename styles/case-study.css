@@ -1097,7 +1097,7 @@ h1 {
   }
 
   .case-gallery-nav {
-    display: none; /* replaced by swipe gesture on mobile */
+    display: none;
   }
 
   .case-gallery-title {
@@ -1105,15 +1105,37 @@ h1 {
     max-width: 100%;
   }
 
-  /* Swipe hint dots shown instead of buttons */
-  .case-gallery-head::after {
-    content: 'swipe to navigate';
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    color: var(--case-muted);
-    opacity: 0.6;
-    text-transform: uppercase;
-    align-self: center;
+  /* Transparent overlay arrows on left/right of the stage */
+  .case-gallery-stage {
+    position: relative;
+  }
+
+  [data-gallery-prev],
+  [data-gallery-next] {
+    display: grid !important;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    border: none;
+    backdrop-filter: blur(6px);
+    color: var(--case-text);
+    place-items: center;
+    cursor: pointer;
+  }
+
+  [data-gallery-prev] { left: 8px; }
+  [data-gallery-next] { right: 8px; }
+
+  [data-gallery-prev] svg,
+  [data-gallery-next] svg {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
   }
 
   .case-image-zoom {
