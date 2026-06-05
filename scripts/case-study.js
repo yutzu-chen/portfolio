@@ -129,7 +129,14 @@ function initCaseStudyGalleries() {
     const prev    = gallery.querySelector("[data-gallery-prev]");
     const next    = gallery.querySelector("[data-gallery-next]");
     const dataNode = gallery.querySelector(".case-gallery-data");
+    const stage    = gallery.querySelector(".case-gallery-stage");
     if (!image || !caption || !prev || !next || !dataNode) return;
+
+    // On mobile: move arrow buttons into the stage so they overlay the image
+    if (window.innerWidth < 768 && stage) {
+      stage.appendChild(prev);
+      stage.appendChild(next);
+    }
 
     let slides;
     try { slides = JSON.parse(dataNode.textContent); }
