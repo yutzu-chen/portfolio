@@ -474,6 +474,42 @@ h1 {
   margin: 0;
 }
 
+/* ── Independent project cards (non-sequential) ─────── */
+.project-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.project-card {
+  background: var(--case-surface, #f9f6f2);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--case-radius-lg);
+  padding: 20px 22px 22px;
+}
+
+.project-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.project-card p {
+  font-size: 13.5px;
+  color: var(--case-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .project-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
 .case-chip-list {
   display: flex;
   flex-wrap: wrap;

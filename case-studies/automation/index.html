@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF2MZT30Q0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JF2MZT30Q0');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f6f2ec" />
@@ -106,50 +114,38 @@
 
       <section class="section" id="sec-workflow">
         <h2 class="section-title">Four projects were delivered</h2>
-        <div class="steps">
-          <div class="step">
-            <div class="step-no">01</div>
-            <div class="step-body">
-              <h3>Translation automation pipeline</h3>
-              <p>
-                I connected source text to the OpenAI API, generated translations automatically,
-                and pushed the output directly into the translation system. That removed a
-                repetitive back-and-forth, copy-paste process that had previously slowed down multilingual
-                releases.
-              </p>
-            </div>
+        <div class="project-cards">
+          <div class="project-card">
+            <h3>Translation automation pipeline</h3>
+            <p>
+              I connected source text to the OpenAI API, generated translations automatically,
+              and pushed the output directly into the translation system. That removed a
+              repetitive back-and-forth, copy-paste process that had previously slowed down multilingual
+              releases.
+            </p>
           </div>
-          <div class="step">
-            <div class="step-no">02</div>
-            <div class="step-body">
-              <h3>Automated A/B test documentation and announcements</h3>
-              <p>
-                I set up Jira Automation so that when a JIRA ticket moved into development, a
-                structured Confluence documentation page would be created automatically. When the work was
-                done, a Slack announcement would be posted without repeating copy-paste steps.
-              </p>
-            </div>
+          <div class="project-card">
+            <h3>Automated A/B test documentation and announcements</h3>
+            <p>
+              I set up Jira Automation so that when a JIRA ticket moved into development, a
+              structured Confluence documentation page would be created automatically. When the work was
+              done, a Slack announcement would be posted without repeating copy-paste steps.
+            </p>
           </div>
-          <div class="step">
-            <div class="step-no">03</div>
-            <div class="step-body">
-              <h3>Jira ticket lifecycle automation</h3>
-              <p>
-                I built a lightweight lifecycle flow for stale tickets. Inactive items triggered
-                reminders, and if there was still no response, they could be closed or marked for
-                follow-up. That kept the board cleaner and easier to prioritize.
-              </p>
-            </div>
+          <div class="project-card">
+            <h3>Jira ticket lifecycle automation</h3>
+            <p>
+              I built a lightweight lifecycle flow for stale tickets. Inactive items triggered
+              reminders, and if there was still no response, they could be closed or marked for
+              follow-up. That kept the board cleaner and easier to prioritize.
+            </p>
           </div>
-          <div class="step">
-            <div class="step-no">04</div>
-            <div class="step-body">
-              <h3>Self-service troubleshooting for internal requests</h3>
-              <p>
-                I wrote self-service docs that guided cross-team members through common fixes when they
-                opened a ticket. The documentation itself was enough to resolve 70% of the specific issues and avoid extra support work.
-              </p>
-            </div>
+          <div class="project-card">
+            <h3>Self-service troubleshooting for internal requests</h3>
+            <p>
+              I wrote self-service docs that guided cross-team members through common fixes when they
+              opened a ticket. The documentation itself was enough to resolve 70% of the specific issues and avoid extra support work.
+            </p>
           </div>
         </div>
       </section>

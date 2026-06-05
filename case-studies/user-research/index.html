@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF2MZT30Q0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JF2MZT30Q0');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f6f2ec" />
@@ -71,7 +79,7 @@
           development, before final design decisions, and before release.
         </p>
         <blockquote class="pull-quote">
-          <p>The goal was not just to collect feedback. It was to support better product decisions with real user insight.</p>
+          <p>The goal was to support better product decisions with real user insight.</p>
         </blockquote>
       </section>
 
@@ -83,7 +91,7 @@
           team already has a concept or design and needs to validate whether it makes sense to users.
         </p>
         <p>
-          The challenge was choosing the right research method for the right question. A method
+          It's important to choose the right research method for the right question. A method
           that works for early discovery is not always the right one for comparing final designs
           or testing whether users can complete a task.
         </p>
@@ -134,8 +142,6 @@
           <li>Who are the users?</li>
           <li>What are their current habits?</li>
           <li>What problems do they already experience?</li>
-          <li>Why do some people use the existing solution while others do not?</li>
-          <li>Where could a new product create value?</li>
         </ul>
         <p class="list-label">Example: Understanding digital receipt behavior</p>
         <p>
@@ -144,18 +150,9 @@
         </p>
         <p>
           The research included both users and non-users of digital receipts. That mattered because
-          we did not only want to understand current adoption, but also the barriers that stopped
+          we wanted to understand current adoption and the barriers that stopped
           people from switching.
         </p>
-        <p class="list-label">Research focus:</p>
-        <ul class="content-list">
-          <li>Why users started using digital receipts</li>
-          <li>How often they used them</li>
-          <li>How they managed receipts</li>
-          <li>What they liked or disliked about digital receipts</li>
-          <li>Why some people still preferred printed receipts</li>
-          <li>What would make digital receipts easier to adopt</li>
-        </ul>
         <p>
           The outcome was a clearer understanding of user personas, current behaviors, barriers to
           adoption, and possible opportunities for product-market fit.
@@ -173,8 +170,6 @@
         <ul class="content-list">
           <li>How do users actually use the product?</li>
           <li>What do they like or dislike?</li>
-          <li>Which parts are confusing?</li>
-          <li>Why do users drop off at a certain step?</li>
           <li>Why are some features not being used?</li>
         </ul>
         <p class="list-label">Example: Investigating product usage after launch</p>
@@ -184,14 +179,6 @@
           such as significant drop-offs in the sign-up flow, and interviews helped explain what
           users experienced during those steps.
         </p>
-        <p class="list-label">Research focus:</p>
-        <ul class="content-list">
-          <li>How often users opened the product</li>
-          <li>What they liked or disliked</li>
-          <li>Which features they wished to have</li>
-          <li>Whether users noticed and understood existing features</li>
-          <li>What happened during steps with high drop-off</li>
-        </ul>
         <p>
           The outcome was a better view of product strengths, pain points, and improvement
           opportunities that were not obvious from data alone.
@@ -212,8 +199,6 @@
         <ul class="content-list">
           <li>Does the concept solve a real user need?</li>
           <li>Do users understand the idea?</li>
-          <li>In what situation would users use this feature?</li>
-          <li>What concerns or missing parts do users mention?</li>
           <li>Which features should be prioritized?</li>
         </ul>
         <p class="list-label">Example: Validating new feature ideas with wireframes</p>
@@ -222,14 +207,6 @@
           concepts with users. Instead of directly building the features, we showed wireframes and
           user flows first so feedback could arrive early, when changes were still cheap and easy to make.
         </p>
-        <p class="list-label">Research focus:</p>
-        <ul class="content-list">
-          <li>What users thought about each feature</li>
-          <li>When they would use it</li>
-          <li>How they would improve it</li>
-          <li>Whether the feature was better or worse than alternative solutions</li>
-          <li>Which feature ideas felt most valuable</li>
-        </ul>
         <p>
           The outcome was a clearer view of the strengths and weaknesses of each concept, and
           better prioritization of which improvements should move forward.
@@ -246,10 +223,7 @@
         <p class="list-label">This method helps answer questions like:</p>
         <ul class="content-list">
           <li>Which design do users prefer?</li>
-          <li>Which version is easier to understand?</li>
           <li>Which concept feels more useful?</li>
-          <li>Are there clear preference patterns across many users?</li>
-          <li>Which design should move forward?</li>
         </ul>
         <p class="list-label">Example: Comparing high-fidelity design options</p>
         <p>
@@ -257,14 +231,6 @@
           them through a questionnaire. Users were shown different design versions and asked which
           one they preferred, what they thought about the feature, and in what situations they would use it.
         </p>
-        <p class="list-label">Research focus:</p>
-        <ul class="content-list">
-          <li>Preference between design versions</li>
-          <li>Understanding of the information display</li>
-          <li>Understanding of the user flow</li>
-          <li>Perceived usefulness of the feature</li>
-          <li>Aesthetic and usability feedback</li>
-        </ul>
         <p>
           The outcome was broader comparison data that helped the team make a more confident
           design decision.
@@ -283,8 +249,6 @@
           <li>Can users complete the task?</li>
           <li>Where do they get stuck?</li>
           <li>Which parts of the UI are unclear?</li>
-          <li>What do users expect to happen?</li>
-          <li>What should be improved before development or launch?</li>
         </ul>
         <p class="list-label">Example: Testing a redesigned app flow</p>
         <p>
@@ -295,14 +259,6 @@
         <blockquote class="pull-quote">
           <p>You are at a convenience store and want to collect points for your purchase. You need to show the barcode from the app at the checkout counter. What would you do?</p>
         </blockquote>
-        <p class="list-label">Research focus:</p>
-        <ul class="content-list">
-          <li>Whether users could complete the task</li>
-          <li>Where they hesitated</li>
-          <li>Which UI elements were unclear</li>
-          <li>How users interpreted the flow</li>
-          <li>Which issues appeared repeatedly</li>
-        </ul>
         <p>
           The outcome was a clearer view of usability issues, their frequency and severity, and
           the improvements needed before moving forward.

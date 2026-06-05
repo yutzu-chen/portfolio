@@ -117,7 +117,16 @@ function initParallax() {
   let rafId = null;
 
   function doParallax() {
-    if (window.innerWidth < 768) return;
+    if (window.innerWidth < 768) {
+      // Clear any transforms set at a wider viewport
+      heroBlobs.forEach((blob) => { blob.style.transform = ''; });
+      sectionDots.forEach(({ dot, section }) => {
+        dot.style.transform = '';
+        const heading = section.querySelector('.sec-title, .contact-headline');
+        if (heading) heading.style.transform = '';
+      });
+      return;
+    }
     const scrollY = window.scrollY;
     const viewportHeight = window.innerHeight;
 
@@ -541,6 +550,26 @@ function initAlbumBoard() {
   if (!board) return;
 
   const cards = qsa('.album-card', board);
+
+  // On mobile, override positions to match a stacked-fan layout
+  if (window.innerWidth < 768) {
+    const mobileLayouts = [
+      { left: 70,  top: 30,  rotate: -4,  z: 5 }, // "How I got into Tech" — front & center
+      { left: 215, top: 15,  rotate:  8,  z: 3 }, // "A Day in My Life" — right, peeking
+      { left: -15, top: 230, rotate: -10, z: 2 }, // Course card — bottom-left, behind
+      { left: 185, top: 240, rotate:  6,  z: 3 }, // AI card — bottom-right
+      { left: 285, top: 140, rotate:  13, z: 1 }, // QR — far right, partially visible
+    ];
+    cards.forEach((card, i) => {
+      const p = mobileLayouts[i];
+      if (!p) return;
+      card.style.left      = p.left + 'px';
+      card.style.top       = p.top  + 'px';
+      card.style.transform = `rotate(${p.rotate}deg)`;
+      card.style.zIndex    = String(p.z);
+    });
+  }
+
   let activeDragCard = null;
   let topZ = cards.reduce((maxZ, card) => {
     const zIndex = parseInt(card.style.zIndex || '1', 10);
@@ -699,6 +728,31 @@ function initNavLogoWiggle() {
   });
 }
 
+/* ── Scroll restoration: save position when leaving to a case study ── */
+function initScrollRestore() {
+  // Save scroll position when clicking any link to a case study
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href && href.includes('case-studies')) {
+      sessionStorage.setItem('portfolioScrollY', String(window.scrollY));
+    }
+  });
+
+  // Restore scroll position if we came back from a case study
+  const savedY = sessionStorage.getItem('portfolioScrollY');
+  if (savedY !== null) {
+    sessionStorage.removeItem('portfolioScrollY');
+    // Use requestAnimationFrame to wait for layout before scrolling
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: parseInt(savedY, 10), behavior: 'instant' });
+      });
+    });
+  }
+}
+
 function initPage() {
   initCursor();
   initScrollChrome();
@@ -716,6 +770,7 @@ function initPage() {
   initAlbumBoard();
   initMobileNav();
   initNavLogoWiggle();
+  initScrollRestore();
 }
 
 initPage();

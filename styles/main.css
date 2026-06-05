@@ -899,7 +899,7 @@
     .cases-grid { grid-template-columns: 1fr; }
     .work-approach { grid-template-columns: 1fr 1fr; }
     .exp-section-label { padding-left: 24px; }
-    .album-board { height: 320px; }
+    .album-board { height: 480px; overflow-x: clip; overflow-y: visible; width: 100vw; margin-left: -28px; }
   }
   @media(max-width:680px) {
     section { padding: 64px 0; }
