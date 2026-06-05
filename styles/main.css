@@ -1111,6 +1111,8 @@
       bottom: 0;
       left: 0;
       right: 0;
+      width: 100%;
+      margin: 0;
       z-index: 999;
       background: var(--text, #1e1c1a);
       color: #fff;
