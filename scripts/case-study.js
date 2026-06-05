@@ -169,6 +169,23 @@ function initCaseStudyGalleries() {
 
     prev.addEventListener("click", () => { renderSlide(galleryIndex - 1); pulseGallery(); });
     next.addEventListener("click", () => { renderSlide(galleryIndex + 1); pulseGallery(); });
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    gallery.addEventListener("touchstart", (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    gallery.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      // Only trigger if horizontal swipe is dominant and long enough
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        if (dx < 0) { renderSlide(galleryIndex + 1); pulseGallery(); }
+        else        { renderSlide(galleryIndex - 1); pulseGallery(); }
+      }
+    }, { passive: true });
   });
 }
 

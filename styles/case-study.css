@@ -1097,7 +1097,7 @@ h1 {
   }
 
   .case-gallery-nav {
-    justify-content: flex-start;
+    display: none; /* replaced by swipe gesture on mobile */
   }
 
   .case-gallery-title {
@@ -1105,9 +1105,15 @@ h1 {
     max-width: 100%;
   }
 
-  .case-gallery-btn {
-    width: 32px;
-    height: 32px;
+  /* Swipe hint dots shown instead of buttons */
+  .case-gallery-head::after {
+    content: 'swipe to navigate';
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--case-muted);
+    opacity: 0.6;
+    text-transform: uppercase;
+    align-self: center;
   }
 
   .case-image-zoom {
