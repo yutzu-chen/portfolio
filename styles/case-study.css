@@ -987,18 +987,19 @@ h1 {
 
   .topbar {
     margin-bottom: 28px;
-    gap: 12px;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .top-actions {
-    width: 100%;
+    width: auto;
   }
 
   .top-actions .btn {
-    width: 100%;
-    justify-content: center;
+    width: auto;
+    font-size: 12px;
+    padding: 8px 16px;
   }
 
   .hero {
@@ -1513,28 +1514,33 @@ body:not(.cs-animate) .cs-reveal  { opacity: 1; transform: none; transition: non
     align-items: center;
     justify-content: center;
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    margin: 0;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    left: var(--case-page-pad-x);
+    right: var(--case-page-pad-x);
+    transform: translateY(100px);
     z-index: 999;
     background: var(--case-text, #2a2420);
     color: #fff;
-    font-size: 15px;
+    font-family: var(--case-ff-sans);
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.02em;
     text-decoration: none;
-    padding: 18px 24px;
-    padding-bottom: calc(18px + env(safe-area-inset-bottom));
-    box-shadow: 0 -1px 0 rgba(255,255,255,0.06), 0 -8px 32px rgba(0,0,0,0.18);
-    transform: translateY(100%);
-    transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    padding: 14px 24px;
+    border-radius: 99px;
+    box-shadow:
+      0 8px 32px rgba(42, 36, 32, 0.25),
+      0 2px 8px rgba(42, 36, 32, 0.10);
+    transition:
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s ease;
+    opacity: 0;
     pointer-events: none;
   }
 
   .cs-float-contact.is-visible {
     transform: translateY(0);
+    opacity: 1;
     pointer-events: auto;
   }
 }
