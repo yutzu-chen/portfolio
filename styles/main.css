@@ -1096,3 +1096,39 @@
   @media(max-width:400px) {
     .about-cards, .creator-cards { grid-template-columns: 1fr; }
   }
+
+  /* ── Floating contact bar (mobile) ──────────────────────── */
+  .cs-float-contact {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .cs-float-contact {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: var(--text, #1e1c1a);
+      color: #fff;
+      font-family: var(--ff-sans);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      padding: 18px 24px;
+      padding-bottom: calc(18px + env(safe-area-inset-bottom));
+      box-shadow: 0 -1px 0 rgba(255,255,255,0.06), 0 -8px 32px rgba(0,0,0,0.18);
+      transform: translateY(100%);
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    .cs-float-contact.is-visible {
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }

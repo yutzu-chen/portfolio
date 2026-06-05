@@ -1509,31 +1509,30 @@ body:not(.cs-animate) .cs-reveal  { opacity: 1; transform: none; transition: non
 
 @media (max-width: 767px) {
   .cs-float-contact {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(80px);
+    bottom: 0;
+    left: 0;
+    right: 0;
     z-index: 999;
     background: var(--case-text, #2a2420);
     color: #fff;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    padding: 13px 32px;
-    border-radius: 99px;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.22);
-    transition:
-      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 0.35s ease;
-    opacity: 0;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    padding: 18px 24px;
+    padding-bottom: calc(18px + env(safe-area-inset-bottom));
+    box-shadow: 0 -1px 0 rgba(255,255,255,0.06), 0 -8px 32px rgba(0,0,0,0.18);
+    transform: translateY(100%);
+    transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
     pointer-events: none;
-    white-space: nowrap;
   }
 
   .cs-float-contact.is-visible {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
+    transform: translateY(0);
     pointer-events: auto;
   }
 }

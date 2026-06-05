@@ -766,6 +766,43 @@ function initScrollRestore() {
   }
 }
 
+/* ── Floating "Contact me" bar on mobile (main page) ──────── */
+function initFloatingContact() {
+  if (window.innerWidth >= 768) return;
+
+  // Don't show on the contact section itself
+  const contactSection = document.getElementById('contact');
+  if (!contactSection) return;
+
+  const btn = document.createElement('a');
+  btn.className = 'cs-float-contact';
+  btn.href = '#contact';
+  btn.textContent = 'Contact me';
+  document.documentElement.appendChild(btn);
+
+  let lastY = window.scrollY;
+  let visible = false;
+
+  function update() {
+    const currentY = window.scrollY;
+    const scrollingUp = currentY < lastY;
+    const pastHero = currentY > 300;
+    const nearContact = contactSection.getBoundingClientRect().top < window.innerHeight * 0.8;
+
+    if (scrollingUp && pastHero && !nearContact && !visible) {
+      btn.classList.add('is-visible');
+      visible = true;
+    } else if ((!scrollingUp || !pastHero || nearContact) && visible) {
+      btn.classList.remove('is-visible');
+      visible = false;
+    }
+
+    lastY = currentY;
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+}
+
 function initPage() {
   initCursor();
   initScrollChrome();
@@ -784,6 +821,7 @@ function initPage() {
   initMobileNav();
   initNavLogoWiggle();
   initScrollRestore();
+  initFloatingContact();
 }
 
 initPage();

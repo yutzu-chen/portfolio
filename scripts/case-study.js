@@ -405,7 +405,6 @@ function initFloatingContact() {
   btn.className = 'cs-float-contact';
   btn.href = '../../index.html#contact';
   btn.textContent = 'Contact me';
-  // Append to <html> so body's overflow-x:clip doesn't cut the fixed element
   document.documentElement.appendChild(btn);
 
   let lastY = window.scrollY;
