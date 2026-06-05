@@ -1501,3 +1501,39 @@ body:not(.cs-animate) .cs-reveal  { opacity: 1; transform: none; transition: non
     gap: 16px;
   }
 }
+
+/* ── Floating contact button (mobile only) ───────────────── */
+.cs-float-contact {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .cs-float-contact {
+    display: block;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    z-index: 999;
+    background: var(--case-text, #2a2420);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    padding: 13px 32px;
+    border-radius: 99px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.35s ease;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .cs-float-contact.is-visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

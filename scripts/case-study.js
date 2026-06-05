@@ -395,3 +395,37 @@ initImpactMetrics();
 initToc();
 initMagneticBack();
 initMetricTilt();
+initFloatingContact();
+
+/* ─── Floating "Contact me" button on mobile ─────────────── */
+function initFloatingContact() {
+  if (window.innerWidth >= 768) return;
+
+  const btn = document.createElement('a');
+  btn.className = 'cs-float-contact';
+  btn.href = '../../index.html#contact';
+  btn.textContent = 'Contact me';
+  // Append to <html> so body's overflow-x:clip doesn't cut the fixed element
+  document.documentElement.appendChild(btn);
+
+  let lastY = window.scrollY;
+  let visible = false;
+
+  function update() {
+    const currentY = window.scrollY;
+    const scrollingUp = currentY < lastY;
+    const pastHero = currentY > 200;
+
+    if (scrollingUp && pastHero && !visible) {
+      btn.classList.add('is-visible');
+      visible = true;
+    } else if ((!scrollingUp || !pastHero) && visible) {
+      btn.classList.remove('is-visible');
+      visible = false;
+    }
+
+    lastY = currentY;
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+}
