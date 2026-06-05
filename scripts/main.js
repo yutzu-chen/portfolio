@@ -740,16 +740,18 @@ function initScrollRestore() {
     }
   });
 
-  // Restore scroll position if we came back from a case study
+  // Restore scroll position if we came back from a case study,
+  // but skip if the URL has a hash (e.g. #contact) — let the browser handle that
   const savedY = sessionStorage.getItem('portfolioScrollY');
-  if (savedY !== null) {
+  if (savedY !== null && !window.location.hash) {
     sessionStorage.removeItem('portfolioScrollY');
-    // Use requestAnimationFrame to wait for layout before scrolling
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         window.scrollTo({ top: parseInt(savedY, 10), behavior: 'instant' });
       });
     });
+  } else {
+    sessionStorage.removeItem('portfolioScrollY');
   }
 }
 
