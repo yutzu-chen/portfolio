@@ -1100,26 +1100,16 @@
   /* Extra bottom padding on last section so content clears floating button */
   #contact { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 
-  /* Gallery: transparent overlay arrows moved into .case-phone-stage via JS */
+  /* Gallery: overlay arrows — same style as desktop, just repositioned */
   .case-phone-stage { position: relative; }
   .case-preview-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.22);
-    backdrop-filter: blur(6px);
-    border: none;
-    display: grid;
-    place-items: center;
-    cursor: pointer;
   }
   #invoicePrev { left: 8px; }
   #invoiceNext { right: 8px; }
-  .case-preview-btn svg { width: 16px; height: 16px; opacity: 0.75; }
 
   /* ── Floating contact pill (mobile) ─────────────────────── */
   .cs-float-contact {

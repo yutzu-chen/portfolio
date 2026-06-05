@@ -1105,38 +1105,21 @@ h1 {
     max-width: 100%;
   }
 
-  /* Transparent overlay arrows on left/right of the stage */
+  /* Overlay arrows on left/right of the stage — same style as desktop, different position */
   .case-gallery-stage {
     position: relative;
   }
 
   [data-gallery-prev],
   [data-gallery-next] {
-    display: grid !important;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.18);
-    border: none;
-    backdrop-filter: blur(6px);
-    color: var(--case-text);
-    place-items: center;
-    cursor: pointer;
   }
 
   [data-gallery-prev] { left: 8px; }
   [data-gallery-next] { right: 8px; }
-
-  [data-gallery-prev] svg,
-  [data-gallery-next] svg {
-    width: 16px;
-    height: 16px;
-    opacity: 0.7;
-  }
 
   .case-image-zoom {
     padding: 18px 12px;
