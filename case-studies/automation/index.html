@@ -40,11 +40,9 @@
     <section class="hero">
       <div class="hero-intro">
         <p class="eyebrow cs-fade-in">Case Study 06</p>
-        <h1 class="cs-fade-in cs-fade-in-d1">Scaling product operations with automation</h1>
+        <h1 class="cs-fade-in cs-fade-in-d1">Scaling product workflows with automation</h1>
         <p class="hero-copy cs-fade-in cs-fade-in-d2">
-          I reduced manual coordination work by turning repetitive product operations into
-          automations: translations, A/B test documentation, stale-ticket handling, and internal
-          troubleshooting all became faster and more consistent.
+          I improved repeated product operations by turning manual coordination work into clearer, more scalable workflows. The goal was to save time and help product, engineering, and design teams work with more consistency across translations, experiment documentation, ticket follow-up, and internal troubleshooting.
         </p>
         <div class="hero-meta cs-fade-in cs-fade-in-d3">
           <div class="hero-meta-item">
@@ -88,23 +86,16 @@
       <section class="section" id="sec-users">
         <h2 class="section-title">Choosing the right tool for the right users</h2>
         <p>
-          I approached the work by finding the core needs of the primary users.
-          The workflows had to answer practical questions quickly: what needed translation, what
-          experiments were live, which tickets had gone stale, and where internal requests were
-          getting stuck.
+          I started by looking at who used each workflow and where the friction happened.
+        </p>
+        <p> 
+          For example, the translation workflow involved PMs, engineers, and designers, so the solution could not depend on a tool that only one group understood. It had to fit into a shared workflow, keep information in the right place, and be easy to update when source text changed.
         </p>
         <p>
-
-    The translation workflow was used by engineers, product managers, and designers, so the solution
-
-    could not be too technical or depend on a tool only one group knew how to use.
-
-    It needed to fit into a shared workflow and be easy for everyone to access, understand, and update.
-
-  </p>
+          The same logic applied to experiment documentation and ticket handling. The goal was to remove repeated decisions, reduce copy-paste work, and make the process easier to follow for everyone involved.
+        </p>
         <p>
-          That framing shaped the requirements. The automations needed to remove manual work,
-          keep information in the right tools, and make the underlying processes easier to follow.
+          This shaped the requirements: each automation had to be lightweight, maintainable, visible to the team, and connected to the tools people already used.
         </p>
         <figure class="launch-photo is-document">
           <img src="../../img/automation_diagram.jpg" alt="Automation workflow diagram showing translation, Jira, Slack, and troubleshooting automations" />
@@ -118,33 +109,25 @@
           <div class="project-card">
             <h3>Translation automation pipeline</h3>
             <p>
-              I connected source text to the OpenAI API, generated translations automatically,
-              and pushed the output directly into the translation system. That removed a
-              repetitive back-and-forth, copy-paste process that had previously slowed down multilingual
-              releases.
+              I connected source text with OpenAI API and the translation system so multilingual copy could be generated and prepared faster. This reduced the manual back-and-forth between PMs, engineers, and localization work, and helped support faster multilingual releases.
             </p>
           </div>
           <div class="project-card">
             <h3>Automated A/B test documentation and announcements</h3>
             <p>
-              I set up Jira Automation so that when a JIRA ticket moved into development, a
-              structured Confluence documentation page would be created automatically. When the work was
-              done, a Slack announcement would be posted without repeating copy-paste steps.
+              I set up Jira Automation to create structured Confluence documentation when an experiment moved into development, and to post Slack updates when the work was ready. This made experiment records more consistent and reduced repeated coordination during launch preparation.
             </p>
           </div>
           <div class="project-card">
             <h3>Jira ticket lifecycle automation</h3>
             <p>
-              I built a lightweight lifecycle flow for stale tickets. Inactive items triggered
-              reminders, and if there was still no response, they could be closed or marked for
-              follow-up. That kept the board cleaner and easier to prioritize.
+              I built a lightweight flow for stale tickets. Inactive tickets triggered reminders and could then be closed or marked for follow-up. This helped keep the board cleaner and made prioritization easier.
             </p>
           </div>
           <div class="project-card">
             <h3>Self-service troubleshooting for internal requests</h3>
             <p>
-              I wrote self-service docs that guided cross-team members through common fixes when they
-              opened a ticket. The documentation itself was enough to resolve 70% of the specific issues and avoid extra support work.
+              I created self-service documentation for common internal requests, so cross-functional team members could resolve frequent issues before escalating tickets. This reduced support work and made the process clearer for non-technical users.
             </p>
           </div>
         </div>
@@ -167,8 +150,8 @@
           </div>
         </div>
         <ul class="impact-points">
-          <li>Removed repetitive manual work from PM and engineering workflows</li>
-          <li>Improved transparency across launch, documentation, and support processes</li>
+          <li>Reduced repeated coordination work for PMs, engineers, designers, and cross-functional teams</li>
+          <li>Helped teams maintain cleaner product records and easier-to-prioritize Jira boards</li>
         </ul>
       </section>
 
@@ -179,25 +162,25 @@
           improving the internal systems that help teams move faster and stay organized.
         </p>
         <p>
-          The strongest improvements came from automating repeatable work, keeping workflows
-          maintainable, and designing for the people who actually use the process every week.
+          This project taught me that small workflow problems become expensive when they repeat across teams. The best automation starts with understanding the users of the workflow, then choosing the simplest tool that removes friction without creating a new process people need to manage.
         </p>
       </section>
 
       <section class="section" id="sec-reflection">
         <h2 class="section-title">Reflection</h2>
         <p>
-          This project showed me that the best automation work is usually invisible when it is
-          done well. The goal was to remove low-value coordination
-          so the team could spend more time on the product itself.
+          This project showed me that product operations can create real leverage when it is treated like a product. The users were internal teams, the pain points were repeated manual steps, and the impact came from making everyday workflows clearer, faster, and easier to maintain.
+        </p>
+        <p> 
+          The strongest lesson was that automation should quietly remove friction so teams can spend more time on product work that actually needs human judgment.
         </p>
       </section>
 
       <section class="section" id="sec-tools">
         <h2 class="section-title">Tools used</h2>
         <div class="case-chip-list">
+          <span class="chip">Internal user discovery</span>
           <span class="chip">Jira Automation</span>
-          <span class="chip">Confluence</span>
           <span class="chip">Slack API / Webhooks</span>
           <span class="chip">OpenAI API</span>
           <span class="chip">Workflow design</span>

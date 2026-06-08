@@ -616,6 +616,11 @@ h1 {
   top: 11px;
 }
 
+.iteration-points {
+  gap: 6px;
+  margin: 8px 0 16px;
+}
+
 .case-gallery {
   position: relative;
   margin-top: 18px;

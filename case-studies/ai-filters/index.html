@@ -40,7 +40,7 @@
     <section class="hero">
       <div class="hero-intro">
         <p class="eyebrow cs-fade-in">Case Study 03</p>
-        <h1 class="cs-fade-in cs-fade-in-d1">Shipping an AI feature: natural language filters</h1>
+        <h1 class="cs-fade-in cs-fade-in-d1">Shipping a measurable AI feature: natural language filters</h1>
         <p class="hero-copy cs-fade-in cs-fade-in-d2">
           I worked on an AI-powered filtering experience that lets users describe what they are
           looking for in natural language. My main contribution was building the evaluation,
@@ -93,9 +93,10 @@
           "romantic apartment with sea view."
         </p>
         <p>
-          The challenge was translating those natural language requests into the right filter
-          combinations. If the AI misunderstood the request, users could see irrelevant results
-          and lose trust in the feature.
+          The PM challenge was not only whether the feature could work once. It was whether we could measure if it worked well, understand where it failed, and improve it without breaking previous cases.
+        </p>
+        <p> 
+          Without a clear evaluation loop, prompt changes would be hard to compare, quality issues would be easy to miss, and users could lose trust if the system applied irrelevant filters.
         </p>
       </section>
 
@@ -105,6 +106,9 @@
           We built a flow where users type what they are looking for, the AI interprets the
           request, the system maps it to available filters, and relevant filters are applied to
           update the results.
+        </p>
+        <p> 
+          My focus was on the product quality loop around the feature: defining what “good output” means, preparing expected answers for representative cases, comparing prompt versions, and monitoring real user input after rollout.
         </p>
         <div class="steps">
           <div class="step">
@@ -132,7 +136,7 @@
       </section>
 
       <section class="section" id="sec-testing">
-        <h2 class="section-title">Making AI output easier to test</h2>
+        <h2 class="section-title">Making AI output easier to evaluate</h2>
         <p>
           Prompt testing was one of the biggest challenges. Checking AI outputs manually was slow
           and inconsistent, especially when testing many user inputs across prompt versions.
@@ -147,8 +151,7 @@
         </figure>
         <p>
           I also prepared benchmark answers for representative test cases. These worked as the
-          expected outputs, so we could evaluate whether the model was mapping user intent
-          correctly.
+          expected outputs, so the team could evaluate whether the model understood user intent correctly and whether a prompt change improved or damaged the result.
         </p>
       </section>
 
@@ -197,13 +200,16 @@
       <section class="section" id="sec-iteration">
         <h2 class="section-title">Iteration</h2>
         <p>
-          Based on the analysis, we improved the feature in three main ways: adding or prioritizing
-          filters users frequently asked for, adjusting the prompt when the model misunderstood
-          intent, and using match quality monitoring to detect systematic issues faster.
+          Based on the analysis, we improved the feature in three ways:
         </p>
+        <ul class="impact-points iteration-points">
+          <li>Added or prioritized filters that users frequently asked for</li>
+          <li>Adjusted the prompt when the model misunderstood intent</li>
+          <li>Used quality monitoring to detect repeated matching issues faster</li>
+        </ul>
         <p>
           Before each update, the prompt comparison workflow helped validate whether the change
-          improved the output without breaking existing cases.
+          improved the output without creating regressions.
         </p>
       </section>
 
@@ -224,10 +230,9 @@
           </div>
         </div>
         <ul class="impact-points">
-          <li>Created a structured prompt evaluation workflow</li>
-          <li>Compared prompt versions more objectively and spotted regressions earlier</li>
-          <li>Built a dashboard to monitor user input patterns and match quality</li>
-          <li>Identified missing filters and recurring user needs</li>
+          <li>Created an evaluation workflow for an AI-powered product feature</li>
+          <li>Defined product metrics and AI quality metrics to measure success</li>
+          <li>Identified recurring user needs by analyzing user input logs</li>
         </ul>
       </section>
 
