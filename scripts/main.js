@@ -574,6 +574,18 @@ function initAlbumBoard() {
 
   const cards = qsa('.album-card', board);
 
+  // Secret card: tap to reveal the photo
+  const secretCard = board.querySelector('.album-card.is-secret');
+  if (secretCard) {
+    secretCard.addEventListener('click', () => {
+      secretCard.classList.add('is-revealed');
+    });
+    secretCard.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      secretCard.classList.add('is-revealed');
+    });
+  }
+
   // On mobile, override positions to match a stacked-fan layout
   if (window.innerWidth < 768) {
     const mobileLayouts = [
@@ -582,6 +594,7 @@ function initAlbumBoard() {
       { left: -15, top: 230, rotate: -10, z: 2 }, // Course card — bottom-left, behind
       { left: 185, top: 240, rotate:  6,  z: 3 }, // AI card — bottom-right
       { left: 285, top: 140, rotate:  13, z: 1 }, // QR — far right, partially visible
+      { left: 80,  top: 80,  rotate:  1,  z: 0 }, // Secret card — buried under all others
     ];
     cards.forEach((card, i) => {
       const p = mobileLayouts[i];

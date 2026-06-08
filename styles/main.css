@@ -886,6 +886,32 @@
     padding: 10px;
     background: #fff;
   }
+
+  /* ── Secret card ─────────────────────────────── */
+  .album-card.is-secret { cursor: pointer; position: relative; }
+
+  /* Black overlay covers the image until tapped */
+  .album-card.is-secret::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 170px; /* matches album-card img height */
+    background: #111;
+    z-index: 1;
+    border-radius: var(--r-md) var(--r-md) 0 0;
+    transition: opacity 1s ease;
+    pointer-events: none;
+  }
+  .album-card.is-secret .secret-img {
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .album-card.is-secret.is-revealed::before {
+    opacity: 0;
+  }
+  .album-card.is-secret.is-revealed .secret-img {
+    opacity: 1;
+  }
   .album-card-body {
     background: var(--surface); padding: 12px 14px 14px;
   }
