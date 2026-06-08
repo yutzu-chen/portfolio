@@ -375,12 +375,13 @@ function initInvoicePreview() {
 
   if ("IntersectionObserver" in window) {
     const previewObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          preview.classList.toggle("is-inview", entry.isIntersecting);
-        });
+      (entries, observer) => {
+        if (entries[0].isIntersecting) {
+          preview.classList.add("is-inview");
+          observer.disconnect();
+        }
       },
-      { threshold: 0.45 },
+      { threshold: 0.2 },
     );
     previewObserver.observe(preview);
   } else {
@@ -950,10 +951,16 @@ function initLaptopPreview(opts) {
   }
 
   if ("IntersectionObserver" in window) {
-    new IntersectionObserver(
-      (entries) => entries.forEach((e) => preview.classList.toggle("is-inview", e.isIntersecting)),
-      { threshold: 0.35 }
-    ).observe(preview);
+    const obs = new IntersectionObserver(
+      (entries, observer) => {
+        if (entries[0].isIntersecting) {
+          preview.classList.add("is-inview");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    obs.observe(preview);
   } else {
     preview.classList.add("is-inview");
   }
