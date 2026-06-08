@@ -514,8 +514,14 @@
     transform: translateY(-50%);
     z-index: 10;
   }
-  #invoicePrev { left: 10px; }
-  #invoiceNext { right: 10px; }
+  #invoicePrev { left: 4px; }
+  #invoiceNext { right: 4px; }
+
+  /* Shrink buttons on mobile so they fit in the narrow margins beside the phone */
+  @media (max-width: 767px) {
+    .case-preview-btn { width: 26px; height: 26px; }
+    .case-preview-btn svg { width: 11px; height: 11px; }
+  }
   .case-preview-btn:hover {
     transform: translateY(calc(-50% - 1px));
     border-color: var(--sage);

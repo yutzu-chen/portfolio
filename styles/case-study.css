@@ -710,8 +710,21 @@ h1 {
   z-index: 10;
 }
 
-[data-gallery-prev] { left: 10px; }
-[data-gallery-next] { right: 10px; }
+[data-gallery-prev] { left: 4px; }
+[data-gallery-next] { right: 4px; }
+
+@media (max-width: 767px) {
+  [data-gallery-prev],
+  [data-gallery-next] {
+    width: 26px;
+    height: 26px;
+  }
+  [data-gallery-prev] svg,
+  [data-gallery-next] svg {
+    width: 11px;
+    height: 11px;
+  }
+}
 
 .case-gallery-btn:hover {
   transform: translateY(calc(-50% - 1px));
