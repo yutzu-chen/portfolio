@@ -589,12 +589,12 @@ function initAlbumBoard() {
   // On mobile, override positions to match a stacked-fan layout
   if (window.innerWidth < 768) {
     const mobileLayouts = [
-      { left: 70,  top: 30,  rotate: -4,  z: 5 }, // "How I got into Tech" — front & center
-      { left: 215, top: 15,  rotate:  8,  z: 3 }, // "A Day in My Life" — right, peeking
-      { left: -15, top: 230, rotate: -10, z: 2 }, // Course card — bottom-left, behind
-      { left: 185, top: 240, rotate:  6,  z: 3 }, // AI card — bottom-right
-      { left: 285, top: 140, rotate:  13, z: 1 }, // QR — far right, partially visible
-      { left: 80,  top: 80,  rotate:  1,  z: 0 }, // Secret card — buried under all others
+      { left: 20,  top: 20,  rotate: -4,  z: 5 }, // "How I got into Tech" — left col, top
+      { left: 160, top: 8,   rotate:  7,  z: 3 }, // "A Day in My Life" — right col, top
+      { left: 10,  top: 220, rotate: -8,  z: 2 }, // Course card — left col, bottom
+      { left: 155, top: 208, rotate:  5,  z: 3 }, // AI card — right col, bottom
+      { left: 185, top: 118, rotate:  11, z: 1 }, // QR — right edge, peeking
+      { left: 70,  top: 80,  rotate:  1,  z: 0 }, // Secret card — buried under all others
     ];
     cards.forEach((card, i) => {
       const p = mobileLayouts[i];
