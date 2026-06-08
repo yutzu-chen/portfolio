@@ -911,6 +911,74 @@ function initFloatingContact() {
   window.addEventListener("scroll", update, { passive: true });
 }
 
+function initLaptopPreview(opts) {
+  const { previewId, imageId, captionId, prevId, nextId, slides } = opts;
+  const preview = document.getElementById(previewId);
+  if (!preview) return;
+  const img = imageId ? document.getElementById(imageId) : null;
+  const caption = captionId ? document.getElementById(captionId) : null;
+  const prevBtn = prevId ? document.getElementById(prevId) : null;
+  const nextBtn = nextId ? document.getElementById(nextId) : null;
+
+  let current = 0;
+  let expandTimer = null;
+
+  function renderSlide(index) {
+    current = (index + slides.length) % slides.length;
+    const slide = slides[current];
+    if (!img) return;
+    img.classList.add("is-leaving");
+    setTimeout(() => {
+      img.src = slide.src;
+      img.alt = slide.alt;
+      if (caption) caption.innerHTML = `<strong>${slide.title}</strong>${slide.desc}`;
+      img.classList.remove("is-leaving");
+    }, 200);
+  }
+
+  function pulse() {
+    preview.classList.add("is-expanded");
+    if (expandTimer) clearTimeout(expandTimer);
+    expandTimer = setTimeout(() => preview.classList.remove("is-expanded"), 900);
+  }
+
+  // Move arrow buttons into the laptop stage so they overlay the image
+  const laptopStage = preview.querySelector(".case-laptop-stage");
+  if (laptopStage && prevBtn && nextBtn) {
+    laptopStage.appendChild(prevBtn);
+    laptopStage.appendChild(nextBtn);
+  }
+
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(
+      (entries) => entries.forEach((e) => preview.classList.toggle("is-inview", e.isIntersecting)),
+      { threshold: 0.35 }
+    ).observe(preview);
+  } else {
+    preview.classList.add("is-inview");
+  }
+
+  if (prevBtn) prevBtn.addEventListener("click", () => { renderSlide(current - 1); pulse(); });
+  if (nextBtn) nextBtn.addEventListener("click", () => { renderSlide(current + 1); pulse(); });
+
+  let touchStartX = 0, touchStartY = 0;
+  preview.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  preview.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      renderSlide(dx < 0 ? current + 1 : current - 1);
+      pulse();
+    }
+  }, { passive: true });
+
+  // Set initial caption text
+  if (caption) caption.innerHTML = `<strong>${slides[0].title}</strong>${slides[0].desc}`;
+}
+
 function initPage() {
   initCursor();
   initScrollChrome();
@@ -920,6 +988,32 @@ function initPage() {
   initHeroInterestCard();
   initCaseFilters();
   initInvoicePreview();
+  initLaptopPreview({
+    previewId: "vocPreview",
+    imageId: "vocPreviewImage",
+    captionId: "vocPreviewCaption",
+    prevId: "vocPrev",
+    nextId: "vocNext",
+    slides: [
+      { src: "img/voc_dashboard.png", alt: "VoC dashboard with searchable review insights", title: "Dashboard view", desc: "Searchable review insights by theme and sentiment." },
+      { src: "img/voc_diagram.jpg", alt: "VoC system architecture and data flow diagram", title: "System design", desc: "How customer feedback flows from raw data to structured insights." },
+    ],
+  });
+  initLaptopPreview({
+    previewId: "aiFiltersPreview",
+    imageId: "aiFiltersPreviewImage",
+    captionId: "aiFiltersPreviewCaption",
+    prevId: "aiFiltersPrev",
+    nextId: "aiFiltersNext",
+    slides: [
+      { src: "img/ai_prompt.png", alt: "Prompt comparison workflow for natural language filter evaluation", title: "Prompt comparison", desc: "Side-by-side evaluation of prompt versions." },
+      { src: "img/ai_dashboard.png", alt: "AI quality metrics dashboard", title: "Quality dashboard", desc: "Metrics that track AI output accuracy after launch." },
+    ],
+  });
+  initLaptopPreview({
+    previewId: "automationPreview",
+    slides: [{ src: "img/automation_diagram.jpg", alt: "Automation workflow diagram", title: "Workflow overview", desc: "How automations connect tools and reduce manual handoffs." }],
+  });
   initAboutCards();
   initMagneticButtons();
   initRevealObserver();

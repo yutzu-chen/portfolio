@@ -316,45 +316,77 @@
       </div>
 
       <!-- Case 5: VoC Platform -->
-      <div class="case-card reveal" data-cats="ai data" style="order: 5;">
-        <div class="case-cats">
-          <span class="c-cat ai">AI &amp; Automation</span>
-          <span class="c-cat data">Data-driven</span>
-        </div>
-        <h3><a href="case-studies/voc-platform/" class="case-title-link">Building a Voice of Customer System for Product Decision-Making</a></h3>
-        <div class="case-row vertical">
-          <div class="cf">
-            <label>Problem</label>
-            <p>Hundreds of customer reviews arrived weekly across multiple platforms - multilingual, fragmented, and largely unread.</p>
+      <div class="case-card has-preview reveal" data-cats="ai data" style="order: 5;">
+        <div class="case-card-main">
+          <div class="case-cats">
+            <span class="c-cat ai">AI &amp; Automation</span>
+            <span class="c-cat data">Data-driven</span>
           </div>
-          <div class="cf">
-            <label>My role</label>
-            <p>Scoped and built an internal product intelligence system for PMs, from workflow discovery to data structure, AI summarization, dashboard design, and rollout.</p>
+          <h3><a href="case-studies/voc-platform/" class="case-title-link">Building a Voice of Customer System for Product Decision-Making</a></h3>
+          <div class="case-row vertical">
+            <div class="cf">
+              <label>Problem</label>
+              <p>Hundreds of customer reviews arrived weekly across multiple platforms - multilingual, fragmented, and largely unread.</p>
+            </div>
+            <div class="cf">
+              <label>My role</label>
+              <p>Scoped and built an internal product intelligence system for PMs, from workflow discovery to data structure, AI summarization, dashboard design, and rollout.</p>
+            </div>
+          </div>
+          <div class="case-impact">
+            <label>Impact</label>
+            <ul class="impact-points">
+              <li>Turned scattered feedback into a structured input for product discussions and prioritization</li>
+              <li>Helped PMs identify recurring issues, emerging bugs, and release-related feedback faster</li>
+              <li>Made customer sentiment easier to compare across user journey</li>
+            </ul>
+          </div>
+          <div class="case-tools">
+            <span class="c-tool">LLM / prompt design</span>
+            <span class="c-tool">Dashboard building</span>
+            <span class="c-tool">Sentiment analysis</span>
+            <span class="c-tool">Theme detection</span>
+            <span class="c-tool">Python</span>
+            <span class="c-tool">OpenAI API</span>
           </div>
         </div>
-        <div class="case-impact">
-          <label>Impact</label>
-          <ul class="impact-points">
-            <li>Turned scattered feedback into a structured input for product discussions and prioritization</li>
-            <li>Helped PMs identify recurring issues, emerging bugs, and release-related feedback faster</li>
-            <li>Made customer sentiment easier to compare across user journey</li>
-          </ul>
+        <div class="case-preview case-laptop-preview" id="vocPreview">
+          <div class="case-preview-head">
+            <div class="case-preview-copy">
+              <div class="case-preview-kicker">Product glimpse</div>
+              <div class="case-preview-title">VoC intelligence dashboard</div>
+            </div>
+            <div class="case-preview-nav">
+              <button class="case-preview-btn" type="button" id="vocPrev" aria-label="Previous screen">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 3L5 8l5 5"/></svg>
+              </button>
+              <button class="case-preview-btn" type="button" id="vocNext" aria-label="Next screen">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3l5 5-5 5"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="case-laptop-stage">
+            <div class="case-laptop">
+              <div class="case-laptop-lid">
+                <div class="case-laptop-screen">
+                  <img id="vocPreviewImage" src="img/voc_dashboard.png" alt="VoC dashboard" />
+                </div>
+              </div>
+              <div class="case-laptop-base"></div>
+              <div class="case-laptop-foot"></div>
+            </div>
+            <div class="case-preview-caption" id="vocPreviewCaption">
+              <strong>Dashboard view</strong>
+              Searchable review insights by theme and sentiment.
+            </div>
+          </div>
         </div>
-        <div class="case-tools">
-          <span class="c-tool">LLM / prompt design</span>
-          <span class="c-tool">Dashboard building</span>
-          <span class="c-tool">Sentiment analysis</span>
-          <span class="c-tool">Theme detection</span>
-          <span class="c-tool">Cursor</span>
-          <span class="c-tool">Claude Code</span>
-          <span class="c-tool">Python</span>
-          <span class="c-tool">OpenAI API</span>
-          <span class="c-tool">Trustpilot API</span>
+        <div class="case-card-footer">
+          <a href="case-studies/voc-platform/" class="case-link">
+            Read full case study
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+          </a>
         </div>
-        <a href="case-studies/voc-platform/" class="case-link">
-          Read full case study
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
-        </a>
       </div>
 
       <!-- Case 2: Holidu A/B Testing -->
@@ -371,7 +403,7 @@
           </div>
           <div class="cf">
             <label>My role</label>
-            <p>Led experiment framing, hypothesis definition, KPI setup, tracking design, result analysis, and iteration recommendations across customer-facing journeys.</p>
+            <p>Led experiment framing, hypothesis definition,PRD writing, KPI setup, tracking design, result analysis, and iteration recommendations across customer-facing journeys.</p>
           </div>
         </div>
         <div class="case-impact">
@@ -443,84 +475,146 @@
       </div>
 
       <!-- Case 3: Natural Language Filters -->
-      <div class="case-card reveal" data-cats="ai data pm" style="order: 3;">
-        <div class="case-cats">
-          <span class="c-cat pm">Product Management</span>
-          <span class="c-cat data">Data-driven</span>
-          <span class="c-cat ai">AI &amp; Automation</span>
-        </div>
-        <h3><a href="case-studies/ai-filters/" class="case-title-link">Shipping a Measurable AI Feature: Natural Language Filters</a></h3>
-        <div class="case-row vertical">
-          <div class="cf">
-            <label>Problem</label>
-            <p>Users describe what they want in flexible language, but website filters are fixed and structured. The challenge was to translate messy user intent into accurate filter combinations, while making the AI output measurable, trustworthy, and safe to improve after launch.</p>
+      <div class="case-card has-preview reveal" data-cats="ai data pm" style="order: 3;">
+        <div class="case-card-main">
+          <div class="case-cats">
+            <span class="c-cat pm">Product Management</span>
+            <span class="c-cat data">Data-driven</span>
+            <span class="c-cat ai">AI &amp; Automation</span>
           </div>
-          <div class="cf">
-            <label>My role</label>
-            <p>Built the AI quality loop around the feature: expected outputs, prompt evaluation, quality metrics, monitoring dashboard, and post-launch iteration insights.</p>
+          <h3><a href="case-studies/ai-filters/" class="case-title-link">Shipping a Measurable AI Feature: Natural Language Filters</a></h3>
+          <div class="case-row vertical">
+            <div class="cf">
+              <label>Problem</label>
+              <p>Users describe what they want in flexible language, but website filters are fixed and structured. The challenge was to translate messy user intent into accurate filter combinations, while making the AI output measurable, trustworthy, and safe to improve after launch.</p>
+            </div>
+            <div class="cf">
+              <label>My role</label>
+              <p>Built the AI quality loop around the feature: expected outputs, prompt evaluation, quality metrics, monitoring dashboard, and post-launch iteration insights.</p>
+            </div>
+          </div>
+          <div class="case-impact">
+            <label>Impact</label>
+            <ul class="impact-points">
+              <li>Reduced prompt testing time by around 80%</li>
+              <li>Created an evaluation workflow for an AI-powered product feature</li>
+              <li>Defined product metrics and AI quality metrics to measure success</li>
+              <li>Turned the launch into a continuous improvement loop</li>
+            </ul>
+          </div>
+          <div class="case-tools">
+            <span class="c-tool">AI product</span>
+            <span class="c-tool">Prompt testing</span>
+            <span class="c-tool">Benchmark design</span>
+            <span class="c-tool">LLM evaluation</span>
+            <span class="c-tool">Similarity scoring</span>
+            <span class="c-tool">Quality metrics</span>
+            <span class="c-tool">Dashboard building</span>
+            <span class="c-tool">Product analytics</span>
           </div>
         </div>
-        <div class="case-impact">
-          <label>Impact</label>
-          <ul>
-            <li>Reduced prompt testing time by around 80%</li>
-            <li>Created an evaluation workflow for an AI-powered product feature</li>
-            <li>Defined product metrics and AI quality metrics to measure success</li>
-            <li>Turned the launch into a continuous improvement loop</li>
-          </ul>
+        <div class="case-preview case-laptop-preview" id="aiFiltersPreview">
+          <div class="case-preview-head">
+            <div class="case-preview-copy">
+              <div class="case-preview-kicker">Product glimpse</div>
+              <div class="case-preview-title">AI quality loop for natural language filters</div>
+            </div>
+            <div class="case-preview-nav">
+              <button class="case-preview-btn" type="button" id="aiFiltersPrev" aria-label="Previous screen">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 3L5 8l5 5"/></svg>
+              </button>
+              <button class="case-preview-btn" type="button" id="aiFiltersNext" aria-label="Next screen">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3l5 5-5 5"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="case-laptop-stage">
+            <div class="case-laptop">
+              <div class="case-laptop-lid">
+                <div class="case-laptop-screen">
+                  <img id="aiFiltersPreviewImage" src="img/ai_prompt.png" alt="Prompt evaluation workflow" />
+                </div>
+              </div>
+              <div class="case-laptop-base"></div>
+              <div class="case-laptop-foot"></div>
+            </div>
+            <div class="case-preview-caption" id="aiFiltersPreviewCaption">
+              <strong>Prompt comparison</strong>
+              Side-by-side evaluation of prompt versions.
+            </div>
+          </div>
         </div>
-        <div class="case-tools">
-          <span class="c-tool">AI product</span>
-          <span class="c-tool">Prompt testing</span>
-          <span class="c-tool">Benchmark design</span>
-          <span class="c-tool">LLM evaluation</span>
-          <span class="c-tool">Similarity scoring</span>
-          <span class="c-tool">Quality metrics</span>
-          <span class="c-tool">Dashboard building</span>
-          <span class="c-tool">Product analytics</span>
+        <div class="case-card-footer">
+          <a href="case-studies/ai-filters/" class="case-link">
+            Read full case study
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+          </a>
         </div>
-        <a href="case-studies/ai-filters/" class="case-link">
-          Read full case study
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
-        </a>
       </div>
 
       <!-- Case 6: Operations Automation -->
-      <div class="case-card reveal" data-cats="ai" style="order: 6;">
-        <div class="case-cats">
-          <span class="c-cat ai">AI &amp; Automation</span>
-        </div>
-        <h3><a href="case-studies/automation/" class="case-title-link">Scaling Product Workflows with Automation</a></h3>
-        <div class="case-row vertical">
-          <div class="cf">
-            <label>Problem</label>
-            <p>Manual translation, A/B test documentation, and Jira backlog noise consumed PM and engineering time that should have gone to actual product work.</p>
+      <div class="case-card has-preview reveal" data-cats="ai" style="order: 6;">
+        <div class="case-card-main">
+          <div class="case-cats">
+            <span class="c-cat ai">AI &amp; Automation</span>
           </div>
-          <div class="cf">
-            <label>My role</label>
-            <p>Identified recurring product operations bottlenecks, scoped internal workflow improvements, and built lightweight automations that reduced coordination work across teams.</p>
+          <h3><a href="case-studies/automation/" class="case-title-link">Scaling Product Workflows with Automation</a></h3>
+          <div class="case-row vertical">
+            <div class="cf">
+              <label>Problem</label>
+              <p>Manual translation, A/B test documentation, and Jira backlog noise consumed PM and engineering time that should have gone to actual product work.</p>
+            </div>
+            <div class="cf">
+              <label>My role</label>
+              <p>Identified recurring product operations bottlenecks, scoped internal workflow improvements, and built lightweight automations that reduced coordination work across teams.</p>
+            </div>
+          </div>
+          <div class="case-impact">
+            <label>Impact</label>
+            <ul class="impact-points">
+              <li>80% reduction in translation processing time</li>
+              <li>70% of the ticket volume resolved through self-service</li>
+              <li>Reduced repeated coordination work for PMs, engineers, designers, and cross-functional teams</li>
+              <li>Helped teams maintain cleaner product records and easier-to-prioritize Jira boards</li>
+            </ul>
+          </div>
+          <div class="case-tools">
+            <span class="c-tool">Jira Automation</span>
+            <span class="c-tool">Confluence</span>
+            <span class="c-tool">Slack API / Webhooks</span>
+            <span class="c-tool">OpenAI API</span>
+            <span class="c-tool">Workflow design</span>
           </div>
         </div>
-        <div class="case-impact">
-          <label>Impact</label>
-          <ul>
-            <li>80% reduction in translation processing time</li>
-            <li>70% of the ticket volume resolved through self-service</li>
-            <li>Reduced repeated coordination work for PMs, engineers, designers, and cross-functional teams</li>
-            <li>Helped teams maintain cleaner product records and easier-to-prioritize Jira boards</li>
-          </ul>
+        <div class="case-preview case-laptop-preview" id="automationPreview">
+          <div class="case-preview-head">
+            <div class="case-preview-copy">
+              <div class="case-preview-kicker">Product glimpse</div>
+              <div class="case-preview-title">Automation workflow diagram</div>
+            </div>
+          </div>
+          <div class="case-laptop-stage">
+            <div class="case-laptop">
+              <div class="case-laptop-lid">
+                <div class="case-laptop-screen">
+                  <img src="img/automation_diagram.jpg" alt="Automation workflow diagram for product operations" />
+                </div>
+              </div>
+              <div class="case-laptop-base"></div>
+              <div class="case-laptop-foot"></div>
+            </div>
+            <div class="case-preview-caption">
+              <strong>Workflow overview</strong>
+              How automations connect tools and reduce manual effort.
+            </div>
+          </div>
         </div>
-        <div class="case-tools">
-          <span class="c-tool">Jira Automation</span>
-          <span class="c-tool">Confluence</span>
-          <span class="c-tool">Slack API / Webhooks</span>
-          <span class="c-tool">OpenAI API</span>
-          <span class="c-tool">Workflow design</span>
+        <div class="case-card-footer">
+          <a href="case-studies/automation/" class="case-link">
+            Read full case study
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+          </a>
         </div>
-        <a href="case-studies/automation/" class="case-link">
-          Read full case study
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
-        </a>
       </div>
 
     </div>
