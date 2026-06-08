@@ -593,7 +593,7 @@ function initAlbumBoard() {
       { left: 160, top: 8,   rotate:  7,  z: 3 }, // "A Day in My Life" — right col, top
       { left: 10,  top: 220, rotate: -8,  z: 2 }, // Course card — left col, bottom
       { left: 155, top: 208, rotate:  5,  z: 3 }, // AI card — right col, bottom
-      { left: 185, top: 118, rotate:  11, z: 1 }, // QR — right edge, peeking
+      { left: 210, top: 118, rotate:  11, z: 1 }, // QR — right edge, peeking
       { left: 70,  top: 80,  rotate:  1,  z: 0 }, // Secret card — buried under all others
     ];
     cards.forEach((card, i) => {
