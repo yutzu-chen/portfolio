@@ -132,8 +132,8 @@ function initCaseStudyGalleries() {
     const stage    = gallery.querySelector(".case-gallery-stage");
     if (!image || !caption || !prev || !next || !dataNode) return;
 
-    // On mobile: move arrow buttons into the stage so they overlay the image
-    if (window.innerWidth < 768 && stage) {
+    // Move arrow buttons into the stage so they overlay the image (all viewports)
+    if (stage) {
       stage.appendChild(prev);
       stage.appendChild(next);
     }

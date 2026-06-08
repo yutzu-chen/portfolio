@@ -703,10 +703,18 @@ h1 {
   place-items: center;
   cursor: pointer;
   transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+  /* Overlay on stage left/right, vertically centered */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
 }
 
+[data-gallery-prev] { left: 10px; }
+[data-gallery-next] { right: 10px; }
+
 .case-gallery-btn:hover {
-  transform: translateY(-1px);
+  transform: translateY(calc(-50% - 1px));
   border-color: var(--case-sage);
   background: #fff;
 }
@@ -1105,21 +1113,6 @@ h1 {
     max-width: 100%;
   }
 
-  /* Overlay arrows on left/right of the stage — same style as desktop, different position */
-  .case-gallery-stage {
-    position: relative;
-  }
-
-  [data-gallery-prev],
-  [data-gallery-next] {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-  }
-
-  [data-gallery-prev] { left: 8px; }
-  [data-gallery-next] { right: 8px; }
 
   .case-image-zoom {
     padding: 18px 12px;
