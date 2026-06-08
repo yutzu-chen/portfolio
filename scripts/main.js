@@ -235,19 +235,19 @@ function initHeroInterestCard() {
 
   const tabData = {
     saas: {
-      text: "<strong>B2B / B2C SaaS</strong>I like products where user needs, business goals, and measurable outcomes all need to line up.",
+      text: "<strong>B2B / B2C SaaS</strong>I like products where business goals, user needs, data, and technical possibilities need to be connected.",
       tags: ["SaaS", "User experience", "Experimentation", "AI / LLM"],
     },
     ux: {
-      text: "<strong>User experience</strong>Conducted 50+ user interviews and used UX research to find the real problem before building.",
+      text: "<strong>User experience</strong>I conduct user interviews and use UX research to find the real problem before building.",
       tags: ["Interviews", "User journey mapping", "Discovery", "UX"],
     },
     data: {
-      text: "<strong>Data / experimentation</strong>Reduce gut feel by connecting product decisions to trackable metrics and experiments.",
+      text: "<strong>Data / experimentation</strong>I'm strong in connecting product decisions to trackable metrics and experiments.",
       tags: ["A/B testing", "Funnels", "Dashboards", "Data analysis"],
     },
     ai: {
-      text: "<strong>AI / LLM</strong>Built LLM workflows that automate manual work and help teams move faster.",
+      text: "<strong>AI / LLM</strong>I can identify opportunities to automate manual work and help teams move faster.",
       tags: ["LLM", "Automation", "Prompt design", "Model evaluation"],
     },
   };
