@@ -508,9 +508,16 @@
     background: rgba(255,255,255,.88);
     color: var(--text);
     transition: transform var(--ease), border-color var(--ease), background var(--ease);
+    /* Overlay on phone stage, vertically centered */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
   }
+  #invoicePrev { left: 10px; }
+  #invoiceNext { right: 10px; }
   .case-preview-btn:hover {
-    transform: translateY(-1px);
+    transform: translateY(calc(-50% - 1px));
     border-color: var(--sage);
     background: #fff;
   }
@@ -1100,16 +1107,6 @@
   /* Extra bottom padding on last section so content clears floating button */
   #contact { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 
-  /* Gallery: overlay arrows — same style as desktop, just repositioned */
-  .case-phone-stage { position: relative; }
-  .case-preview-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-  }
-  #invoicePrev { left: 8px; }
-  #invoiceNext { right: 8px; }
 
   /* ── Floating contact pill (mobile) ─────────────────────── */
   .cs-float-contact {

@@ -292,13 +292,11 @@ function initInvoicePreview() {
 
   if (!previewImage || !previewCaption || !preview) return;
 
-  // On mobile: move arrow buttons into the phone stage so they overlay the image
-  if (window.innerWidth < 768) {
-    const phoneStage = document.querySelector('.case-phone-stage');
-    if (phoneStage && prevButton && nextButton) {
-      phoneStage.appendChild(prevButton);
-      phoneStage.appendChild(nextButton);
-    }
+  // Move arrow buttons into the phone stage so they overlay the image (all viewports)
+  const phoneStage = document.querySelector('.case-phone-stage');
+  if (phoneStage && prevButton && nextButton) {
+    phoneStage.appendChild(prevButton);
+    phoneStage.appendChild(nextButton);
   }
 
   const slides = [
