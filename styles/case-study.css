@@ -503,6 +503,32 @@ h1 {
   margin: 0;
 }
 
+.project-card ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+}
+
+.project-card li {
+  list-style: none;
+  color: var(--case-muted);
+  font-size: 13.5px;
+  line-height: 1.55;
+  padding-left: 16px;
+  position: relative;
+}
+
+.project-card li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--case-sage);
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+
 @media (max-width: 640px) {
   .project-cards {
     grid-template-columns: 1fr;
