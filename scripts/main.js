@@ -1003,6 +1003,7 @@ function initPage() {
     nextId: "vocNext",
     slides: [
       { src: "img/voc_dashboard.png", alt: "VoC dashboard with searchable review insights", title: "Dashboard view", desc: "Searchable review insights by theme and sentiment." },
+      { src: "img/voc_chat.jpg", alt: "VoC AI chat interface for exploring customer feedback", title: "AI chat", desc: "Ask follow-up questions and drill into customer feedback faster." },
       { src: "img/voc_diagram.jpg", alt: "VoC system architecture and data flow diagram", title: "System design", desc: "How customer feedback flows from raw data to structured insights." },
     ],
   });
