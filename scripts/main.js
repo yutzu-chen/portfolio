@@ -13,13 +13,12 @@ if ('IntersectionObserver' in window && !reducedMotion.matches) {
   }, { threshold: 0.08, rootMargin: '0px 0px -25px 0px' });
   animatedItems.forEach((item) => observer.observe(item));
 }
+if (!('IntersectionObserver' in window) || reducedMotion.matches) {
+  animatedItems.forEach((item) => item.classList.add('is-visible'));
+}
 
 const scenes = document.querySelectorAll('.scene');
 const heroArt = document.querySelector('.hero-art');
-const timeline = document.querySelector('.tl-wrap');
-const timelinePencil = document.querySelector('.timeline-pencil');
-const timelineRows = Array.from(document.querySelectorAll('.tl-item'));
-let lastTimelineRow = null;
 let ticking = false;
 function updateScrollMotion() {
   const height = window.innerHeight;
@@ -30,25 +29,6 @@ function updateScrollMotion() {
     scene.style.setProperty('--scene-shift', `${progress * (index === 1 ? -18 : 18)}px`);
   });
   if (heroArt) heroArt.style.setProperty('--hero-shift', `${Math.min(window.scrollY * 0.09, 45)}px`);
-  if (timeline && timelinePencil && timelineRows.length) {
-    const timelineRect = timeline.getBoundingClientRect();
-    if (timelineRect.bottom >= 0 && timelineRect.top <= height) {
-      const focusLine = height * .48;
-      const activeRow = timelineRows.reduce((closest, row) => {
-        const rect = row.getBoundingClientRect();
-        const distance = Math.abs(rect.top + Math.min(rect.height / 2, 45) - focusLine);
-        return distance < closest.distance ? { row, rect, distance } : closest;
-      }, { row: null, rect: null, distance: Infinity });
-      const pencilY = activeRow.rect.top - timelineRect.top + 10;
-      timelinePencil.style.setProperty('--pencil-y', `${Math.max(0, pencilY)}px`);
-      if (lastTimelineRow !== activeRow.row) {
-        timelinePencil.classList.remove('is-writing');
-        void timelinePencil.offsetWidth;
-        timelinePencil.classList.add('is-writing');
-        lastTimelineRow = activeRow.row;
-      }
-    }
-  }
   ticking = false;
 }
 function requestScrollUpdate() {
@@ -59,8 +39,8 @@ function requestScrollUpdate() {
 }
 window.addEventListener('scroll', requestScrollUpdate, { passive: true });
 window.addEventListener('resize', requestScrollUpdate, { passive: true });
-timelineRows.forEach((row) => row.querySelector('details')?.addEventListener('toggle', requestScrollUpdate));
 requestScrollUpdate();
+if (reducedMotion.matches) updateScrollMotion();
 
 const previewSlides = {
   invoice: [
