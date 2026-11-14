@@ -18,6 +18,26 @@ if (!('IntersectionObserver' in window) || reducedMotion.matches) {
 }
 
 const heroArt = document.querySelector('.hero-art');
+if (heroArt) {
+  const resetDoodles = () => {
+    heroArt.style.setProperty('--doodle-x', '0px');
+    heroArt.style.setProperty('--doodle-y', '0px');
+    heroArt.style.setProperty('--doodle-reverse-x', '0px');
+    heroArt.style.setProperty('--doodle-reverse-y', '0px');
+  };
+  heroArt.addEventListener('pointermove', (event) => {
+    if (reducedMotion.matches || event.pointerType === 'touch') return;
+    const bounds = heroArt.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - .5) * 8;
+    const y = ((event.clientY - bounds.top) / bounds.height - .5) * 7;
+    heroArt.style.setProperty('--doodle-x', `${x.toFixed(1)}px`);
+    heroArt.style.setProperty('--doodle-y', `${y.toFixed(1)}px`);
+    heroArt.style.setProperty('--doodle-reverse-x', `${(-x * .6).toFixed(1)}px`);
+    heroArt.style.setProperty('--doodle-reverse-y', `${(-y * .6).toFixed(1)}px`);
+  });
+  heroArt.addEventListener('pointerleave', resetDoodles);
+  reducedMotion.addEventListener('change', resetDoodles);
+}
 let ticking = false;
 function updateScrollMotion() {
   if (heroArt) heroArt.style.setProperty('--hero-shift', `${Math.min(window.scrollY * 0.09, 45)}px`);
@@ -83,15 +103,28 @@ if (albumBoard) {
   let activeDrag = null;
 
   function layoutAlbum() {
-    const factor = Math.min(1, albumBoard.clientWidth / 485);
+    const compact = window.innerWidth <= 440;
+    const compactPositions = [
+      [20, 25], [185, 16], [20, 235], [185, 228], [188, 445], [18, 440],
+    ];
+    const factor = compact ? albumBoard.clientWidth / 350 : Math.min(1, albumBoard.clientWidth / 485);
     cards.forEach((card, index) => {
       const maxLeft = Math.max(0, albumBoard.clientWidth - card.offsetWidth);
-      card.style.left = `${Math.min(maxLeft, originalPositions[index].left * factor)}px`;
-      card.style.top = `${originalPositions[index].top}px`;
+      const [left, top] = compact ? compactPositions[index] : [originalPositions[index].left, originalPositions[index].top];
+      card.style.left = `${Math.min(maxLeft, left * factor)}px`;
+      card.style.top = `${top}px`;
     });
   }
   layoutAlbum();
   window.addEventListener('resize', layoutAlbum, { passive: true });
+
+  function revealSecret(card) {
+    if (!card.classList.contains('is-secret') || card.classList.contains('is-revealed')) return;
+    card.classList.add('is-revealed');
+    card.querySelector('.album-card-tag').textContent = 'You found it';
+    card.querySelector('.album-card-title').textContent = 'Congratulations, you discovered the easter egg!';
+    card.setAttribute('aria-label', 'A little extra from my notebook. Move with arrow keys.');
+  }
 
   cards.forEach((card) => {
     card.tabIndex = 0;
@@ -111,13 +144,13 @@ if (albumBoard) {
       card.style.top = `${Math.max(0, Math.min(albumBoard.clientHeight - card.offsetHeight, activeDrag.top + dy))}px`;
     });
     card.addEventListener('pointerup', () => {
-      if (activeDrag && !activeDrag.moved && card.classList.contains('is-secret')) card.classList.add('is-revealed');
+      if (activeDrag && !activeDrag.moved) revealSecret(card);
       activeDrag = null;
     });
     card.addEventListener('pointercancel', () => { activeDrag = null; });
     card.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
-        if (card.classList.contains('is-secret')) card.classList.add('is-revealed');
+        revealSecret(card);
         return;
       }
       const moves = { ArrowLeft: [-10, 0], ArrowRight: [10, 0], ArrowUp: [0, -10], ArrowDown: [0, 10] };

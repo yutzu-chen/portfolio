@@ -214,11 +214,12 @@ function initReadingProgress() {
 function initMiniHeader() {
   const titleText = document.querySelector("h1")?.textContent?.trim() || "";
 
-  const header = document.createElement("div");
+  const header = document.createElement("nav");
   header.className = "case-mini-header";
+  header.setAttribute("aria-label", "Case study navigation");
   header.innerHTML = `
     <a class="case-mini-header-back" href="../../index.html">← Back</a>
-    <span class="case-mini-header-sep">/</span>
+    <span class="case-mini-header-sep" aria-hidden="true">✦</span>
     <span class="case-mini-header-title">${titleText}</span>
     <div class="case-mini-progress"><div class="case-mini-progress-fill" id="miniProgressFill"></div></div>
   `;
@@ -240,6 +241,7 @@ function initMiniHeader() {
   window.addEventListener("scroll", () => {
     if (!ticking) { ticking = true; requestAnimationFrame(update); }
   }, { passive: true });
+  update();
 }
 
 /* ─── Scroll-reveal with stagger ───────────────────────── */
