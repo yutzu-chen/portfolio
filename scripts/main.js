@@ -37,6 +37,27 @@ if (heroArt) {
   });
   heroArt.addEventListener('pointerleave', resetDoodles);
   reducedMotion.addEventListener('change', resetDoodles);
+
+  const flowerButton = heroArt.querySelector('.portrait-interaction');
+  const flowerWords = heroArt.querySelector('.flower-words');
+  if (flowerButton && flowerWords) {
+    let offering = false;
+    flowerButton.addEventListener('click', () => {
+      if (offering) return;
+      offering = true;
+      flowerButton.setAttribute('aria-disabled', 'true');
+      heroArt.classList.add('is-offering');
+      const showMessage = () => { flowerWords.textContent = 'A little flower for you!'; };
+      if (reducedMotion.matches) showMessage();
+      else window.setTimeout(showMessage, 2050);
+      window.setTimeout(() => {
+        heroArt.classList.remove('is-offering');
+        flowerWords.textContent = '';
+        flowerButton.removeAttribute('aria-disabled');
+        offering = false;
+      }, reducedMotion.matches ? 2600 : 4900);
+    });
+  }
 }
 let ticking = false;
 function updateScrollMotion() {

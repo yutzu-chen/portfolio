@@ -22,12 +22,18 @@ em { font-style: normal; }
 .hero-doodles .doodle-arrow { transform: translate(var(--doodle-reverse-x, 0px), var(--doodle-reverse-y, 0px)); }
 .hero-doodles .doodle-lines { transform: translate(var(--doodle-x, 0px), var(--doodle-reverse-y, 0px)); }
 .portrait { width: min(100%, 500px); height: auto; aspect-ratio: 1312 / 1199; position: relative; z-index: 1; pointer-events: none; animation: portrait-arrive 1s .15s both; transform-origin: 50% 90%; }
-.portrait-hover-target { position: absolute; left: 16%; top: 4%; width: 76%; height: 92%; z-index: 3; border-radius: 38% 38% 27% 27%; pointer-events: auto; }
+.portrait-interaction { position: absolute; left: 16%; top: 4%; width: 76%; height: 92%; z-index: 5; padding: 0; border: 0; border-radius: 38% 38% 27% 27%; background: transparent; cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
+.portrait-interaction:focus-visible { outline: 2px dashed var(--orange); outline-offset: 4px; }
 .hero-art .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: contain; filter: none; animation: none; }
 /* The two copies of the original drawing form an editable body and hand layer. */
 .hero-art .portrait-body { clip-path: polygon(0 0, 67% 0, 67% 33%, 86% 33%, 86% 57%, 67% 57%, 67% 0, 100% 0, 100% 100%, 0 100%); }
 .hero-art .portrait img.portrait-hand { clip-path: polygon(67% 33%, 86% 33%, 86% 57%, 67% 57%); transform-origin: 72% 56%; animation: wave-hand 1.1s 1.05s ease-in-out both; }
 .portrait:hover img.portrait-hand { animation: wave-hand-hover .9s ease-in-out; }
+.flower-offer { position: absolute; left: 70%; top: 28%; z-index: 4; width: 23%; height: auto; opacity: 0; transform: translateY(18px) scale(.7) rotate(-8deg); transform-origin: 50% 90%; pointer-events: none; }
+.hero-art.is-offering .portrait img.portrait-hand { animation: flower-hand 4.9s ease-in-out both; }
+.hero-art.is-offering .flower-offer { animation: flower-offer 4.9s ease-in-out both; }
+@keyframes flower-hand { 0%, 100% { transform: none; } 16% { transform: translateY(5px) rotate(2deg); } 31%, 47% { transform: translateY(1px) rotate(0); } 60%, 76% { transform: translate(-2px, -2px) rotate(-2deg); } 88% { transform: none; } }
+@keyframes flower-offer { 0%, 17%, 100% { opacity: 0; transform: translateY(18px) scale(.7) rotate(-8deg); } 28% { opacity: 1; transform: translateY(7px) scale(.88) rotate(-5deg); } 42% { opacity: 1; transform: none; } 59%, 69% { opacity: 1; transform: translate(-18px, -19px) scale(1.32) rotate(-3deg); } 77% { opacity: 1; transform: translate(-18px, -24px) scale(1.35) rotate(-1deg); } 88% { opacity: 1; transform: translate(-7px, -7px) scale(1.05); } }
 .portrait-blink { position: absolute; top: 25%; width: 2.2%; height: 3%; background: #f3cf9f; border-radius: 45%; opacity: 0; animation: blink-eyes 6s 2.5s infinite; }
 .blink-left { left: 45%; }
 .blink-right { left: 51%; }
@@ -36,6 +42,14 @@ em { font-style: normal; }
 .hero-copy .intro { animation-delay: .25s; }
 .hero-copy .text-link { animation-delay: .38s; }
 .hello-note { top: 1%; right: 0; z-index: 2; width: clamp(175px, 19vw, 230px); height: 80px; display: grid; place-items: center; font-size: clamp(20px, 2.2vw, 25px); white-space: nowrap; animation: none; transform: rotate(4deg); }
+.flower-note { position: absolute; top: 3%; right: -3%; z-index: 3; width: clamp(220px, 24vw, 280px); height: 88px; display: grid; place-items: center; opacity: 0; pointer-events: none; transform: translateY(8px) rotate(3deg); }
+.flower-note svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.flower-note .flower-note-sketch { stroke-width: .8; opacity: .5; }
+.flower-words { position: relative; margin-top: -9px; color: var(--ink); font-family: var(--hand); font-size: clamp(20px, 2vw, 25px); font-weight: 600; white-space: nowrap; }
+.hero-art.is-offering .hello-note { animation: hello-during-flower 4.9s both; }
+.hero-art.is-offering .flower-note { animation: flower-note-appear 4.9s both; }
+@keyframes hello-during-flower { 0%, 7%, 100% { opacity: 1; } 18%, 85% { opacity: 0; } }
+@keyframes flower-note-appear { 0%, 41%, 100% { opacity: 0; transform: translateY(8px) rotate(3deg); } 51%, 79% { opacity: 1; transform: translateY(0) rotate(3deg); } 89% { opacity: 0; transform: translateY(-4px) rotate(3deg); } }
 .hello-bubble { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .hello-bubble path { fill: none; stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
 .hello-bubble .bubble-line { stroke-width: 1.5; stroke-dasharray: 600; stroke-dashoffset: 600; animation: draw-hello-bubble 1s ease-out forwards; }
@@ -272,6 +286,10 @@ em { font-style: normal; }
   .hero-doodles * { transition: none; }
   .hello-bubble .bubble-line, .hello-bubble .bubble-sketch { stroke-dashoffset: 0; animation: none; }
   .hello-words { opacity: 1; animation: none; }
+  .hero-art.is-offering .portrait img.portrait-hand { animation: none; transform: none; }
+  .hero-art.is-offering .flower-offer { animation: none; opacity: 1; transform: none; }
+  .hero-art.is-offering .flower-note { animation: none; opacity: 1; transform: none; }
+  .hero-art.is-offering .hello-note { animation: none; opacity: 0; }
   #invoicePreview.is-visible .case-phone { animation: none; transform: none; }
   #aiFiltersPreview.is-visible .case-laptop,
   #vocPreview.is-visible .case-laptop,
