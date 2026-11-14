@@ -17,17 +17,9 @@ if (!('IntersectionObserver' in window) || reducedMotion.matches) {
   animatedItems.forEach((item) => item.classList.add('is-visible'));
 }
 
-const scenes = document.querySelectorAll('.scene');
 const heroArt = document.querySelector('.hero-art');
 let ticking = false;
 function updateScrollMotion() {
-  const height = window.innerHeight;
-  scenes.forEach((scene, index) => {
-    const bounds = scene.getBoundingClientRect();
-    if (bounds.bottom < 0 || bounds.top > height) return;
-    const progress = Math.max(-1, Math.min(1, (bounds.top + bounds.height / 2 - height / 2) / height));
-    scene.style.setProperty('--scene-shift', `${progress * (index === 1 ? -18 : 18)}px`);
-  });
   if (heroArt) heroArt.style.setProperty('--hero-shift', `${Math.min(window.scrollY * 0.09, 45)}px`);
   ticking = false;
 }
