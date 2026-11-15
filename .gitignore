@@ -1,1 +1,7 @@
 data/
+CV_Yutzu_Chen.pdf
+.claude/
+.env
+.env.*
+*.pem
+*.key
