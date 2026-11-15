@@ -42,20 +42,23 @@ if (heroArt) {
   const flowerWords = heroArt.querySelector('.flower-words');
   if (flowerButton && flowerWords) {
     let offering = false;
-    flowerButton.addEventListener('click', () => {
+    const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
+    flowerButton.addEventListener('click', async () => {
       if (offering) return;
       offering = true;
       flowerButton.setAttribute('aria-disabled', 'true');
-      heroArt.classList.add('is-offering');
-      const showMessage = () => { flowerWords.textContent = 'A little flower for you!'; };
-      if (reducedMotion.matches) showMessage();
-      else window.setTimeout(showMessage, 2050);
-      window.setTimeout(() => {
+      try {
+        heroArt.classList.add('is-offering');
+        flowerWords.textContent = 'A little flower for you!';
+        await wait(reducedMotion.matches ? 2600 : 3000);
+      } catch (error) {
+        console.error('Flower animation could not load', error);
+      } finally {
         heroArt.classList.remove('is-offering');
         flowerWords.textContent = '';
         flowerButton.removeAttribute('aria-disabled');
         offering = false;
-      }, reducedMotion.matches ? 2600 : 4900);
+      }
     });
   }
 }
@@ -126,7 +129,7 @@ if (albumBoard) {
   function layoutAlbum() {
     const compact = window.innerWidth <= 440;
     const compactPositions = [
-      [20, 25], [185, 16], [20, 235], [185, 228], [188, 445], [18, 440],
+      [24, 16], [155, 2], [20, 210], [145, 195], [230, 110], [95, 130],
     ];
     const factor = compact ? albumBoard.clientWidth / 350 : Math.min(1, albumBoard.clientWidth / 485);
     cards.forEach((card, index) => {
